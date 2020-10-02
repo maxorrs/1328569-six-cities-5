@@ -10,6 +10,7 @@ module.exports = {
         contentBase: path.resolve(__dirname, 'public'),
         open: false,
         port: 1337,
+        historyApiFallback: true,
     },
     module: {
         rules: [
@@ -18,6 +19,17 @@ module.exports = {
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
+                },
+            },
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
+            },
+            {
+                test: /\.(png|jpe?g)$/i,
+                loader: 'file-loader',
+                options: {
+                    name: 'img/[name].[ext]',
                 },
             }
         ],
