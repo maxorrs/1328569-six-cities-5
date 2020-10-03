@@ -1,8 +1,6 @@
 import React from 'react';
 
-import './not-found.css';
-
-const NotFound = () => {
+const NotFoundPage = () => {
   return (
     <div className="not-found">
       <h1 className="not-found__title">
@@ -14,4 +12,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default NotFoundPage;

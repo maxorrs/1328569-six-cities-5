@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Room = () => {
+const RoomPage = () => {
   return (
     <div className="page">
       <header className="header">
@@ -326,4 +326,4 @@ const Room = () => {
   );
 };
 
-export default Room;
+export default RoomPage;

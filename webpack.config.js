@@ -21,17 +21,6 @@ module.exports = {
                     loader: 'babel-loader',
                 },
             },
-            {
-                test: /\.css$/i,
-                use: ['style-loader', 'css-loader'],
-            },
-            {
-                test: /\.(png|jpe?g)$/i,
-                loader: 'file-loader',
-                options: {
-                    name: 'img/[name].[ext]',
-                },
-            }
         ],
     },
     resolve: {

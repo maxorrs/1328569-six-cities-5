@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
-import Main from '../main';
-import SignIn from '../sign-in';
-import Favorites from '../favorites';
-import Room from '../room';
-import NotFound from '../not-found';
+import MainPage from '../pages/main-page';
+import SignInPage from '../pages/sign-in-page';
+import FavoritesPage from '../pages/favorites-page';
+import RoomPage from '../pages/room-page';
+import NotFoundPage from '../pages/not-found-page';
 
 const App = (props) => {
   const {offersCount} = props;
@@ -15,19 +15,19 @@ const App = (props) => {
     <BrowserRouter>
       <Switch>
         <Route exact path='/'>
-          <Main offersCount={offersCount} />
+          <MainPage offersCount={offersCount} />
         </Route>
         <Route exact path='/login'>
-          <SignIn />
+          <SignInPage />
         </Route>
         <Route exact path='/favorites'>
-          <Favorites />
+          <FavoritesPage />
         </Route>
         <Route exact path='/offer/:id'>
-          <Room />
+          <RoomPage />
         </Route>
         <Route>
-          <NotFound />
+          <NotFoundPage />
         </Route>
       </Switch>
     </BrowserRouter>
