@@ -9,22 +9,39 @@ import RoomPage from '../pages/room-page';
 import NotFoundPage from '../pages/not-found-page';
 
 const App = (props) => {
-  const {offersCount} = props;
+  const {offers} = props;
 
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path='/'>
-          <MainPage offersCount={offersCount} />
+        <Route exact
+          path='/'
+          render={({history}) => {
+            return <MainPage
+              offers={offers}
+              onCardClick={(id) => history.push(`/offer/${id}`)}
+            />;
+          }}>
         </Route>
         <Route exact path='/login'>
           <SignInPage />
         </Route>
         <Route exact path='/favorites'>
-          <FavoritesPage />
+          <FavoritesPage offers={offers}/>
         </Route>
-        <Route exact path='/offer/:id'>
-          <RoomPage />
+        <Route exact
+          path='/offer/:id'
+          render={({history, match}) => {
+            const {id: idMatch} = match.params;
+            const currentOffer = offers
+              .slice()
+              .filter((offer) => offer.id === idMatch)[0];
+
+            return <RoomPage
+              currentOffer={currentOffer}
+              offers={offers}
+              onCardClick={(id) => history.push(`/offer/${id}`)} />;
+          }}>
         </Route>
         <Route>
           <NotFoundPage />
@@ -35,7 +52,7 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  offersCount: PropTypes.number.isRequired
+  offers: PropTypes.array.isRequired
 };
 
 export default App;
