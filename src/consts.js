@@ -23,6 +23,17 @@ export const ratingInformation = [
 
 export const cities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
-export const housingTypes = [`Apartment`, `Room`];
+export const housingTypes = [`Apartment`, `Room`, `House`, `Hotel`];
 
 export const fieldsType = [`entire`, `bedrooms`, `adults`];
+
+export const SortingType = {
+  POPULAR: `Popular`,
+  LOW: `Price: low to high`,
+  HIGH: `Price: high to low`,
+  TOP: `Top rated first`
+};
+
+export const DEFAULT_SORT_TYPE = `POPULAR`;
+
+export const DEFAULT_LOCATION = `Paris`;

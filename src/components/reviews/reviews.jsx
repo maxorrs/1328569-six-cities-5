@@ -7,21 +7,17 @@ import ReviewsList from '../reviews-list';
 const Reviews = (props) => {
   const {reviews} = props;
 
-  if (!reviews) {
-    return (
-      <section className="property__reviews reviews">
-        <h2 className="reviews__title">No reviews. Write the first!</h2>
-        <ReviewForm />
-      </section>
-    );
-  }
-
-  const reviewsCount = reviews.length;
+  const title = reviews ?
+    <h2 className="reviews__title">
+      Reviews &middot;
+      <span className="reviews__amount">{reviews.length}</span>
+    </h2> :
+    <h2 className="reviews__title">No reviews. Write the first!</h2>;
 
   return (
     <section className="property__reviews reviews">
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviewsCount}</span></h2>
-      <ReviewsList reviews={reviews} />
+      {title}
+      {reviews && <ReviewsList reviews={reviews} />}
       <ReviewForm />
     </section>
   );

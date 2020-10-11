@@ -1,107 +1,69 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
 import {getAverageRating, getRatingAsPercentage} from '../../utils';
 import {housingTypes} from '../../consts';
 
-export default class PlaceCard extends PureComponent {
-  constructor(props) {
-    super(props);
+const PlaceCard = ({offer, onActiveCard}) => {
+  const {id, photos, isPremium, title, type, price, reviews, isBookmarked} = offer;
 
-    this.state = {
-      bookmark: this.props.offer.isBookmarked === `true` ? true : false
-    };
+  const previewPhotoUrl = photos[0];
+  const premiumLabel = (isPremium === `true` &&
+    <div className="place-card__mark">
+      <span>Premium</span>
+    </div>);
 
-    this._handleBookmarked = this._handleBookmarked.bind(this);
-    this._handleCardClick = this._handleCardClick.bind(this);
-  }
+  const classBookmarkButton = isBookmarked === `true` ? `place-card__bookmark-button--active` : ``;
 
-  _handleBookmarked() {
-    this.setState((prevState) => {
-      return {
-        bookmark: !prevState.bookmark
-      };
-    });
-  }
+  const rating = getAverageRating(reviews);
+  const ratingAsPercentage = getRatingAsPercentage(rating);
 
-  _handleCardClick(evt) {
-    if (evt.target.tagName === `svg` ||
-    evt.target.tagName === `use` ||
-    evt.target.tagName === `BUTTON` ||
-    evt.target.tagName === `A` ||
-    evt.target.tagName === `IMG`) {
-      return;
-    }
+  return (
+    <article
+      className="cities__place-card place-card"
+      onMouseOver={() => onActiveCard(id)}>
 
-    this.props.onCardClick(this.props.offer.id);
-  }
+      {premiumLabel}
 
-  render() {
-    const {offer} = this.props;
-    const {bookmark} = this.state;
-
-    const {id, photos, isPremium, title, type, price, reviews} = offer;
-
-    const previewPhotoUrl = photos[0];
-
-    const premiumLabel = (isPremium === `true` &&
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>);
-
-    const classBookmarkButton = bookmark ? `place-card__bookmark-button--active` : ``;
-
-    const rating = reviews ? getAverageRating(reviews) : 0;
-    const ratingAsPercentage = reviews ? getRatingAsPercentage(rating) : 0;
-
-    return (
-      <article
-        className="cities__place-card place-card"
-        onClick={(evt) => this._handleCardClick(evt)}>
-
-        {premiumLabel}
-
-        <div className="cities__image-wrapper place-card__image-wrapper">
-          <Link to={`/offer/${id}`}>
-            <img className="place-card__image" src={previewPhotoUrl} width="260" height="200" alt="Place image" />
-          </Link>
-        </div>
-        <div className="place-card__info">
-          <div className="place-card__price-wrapper">
-            <div className="place-card__price">
-              <b className="place-card__price-value">&euro;{price}</b>
-              <span className="place-card__price-text">&#47;&nbsp;night</span>
-            </div>
-            <button
-              className={`place-card__bookmark-button button ${classBookmarkButton}`}
-              type="button"
-              onClick={this._handleBookmarked}>
-
-              <svg className="place-card__bookmark-icon" width="18" height="19">
-                <use xlinkHref="#icon-bookmark" />
-              </svg>
-              <span className="visually-hidden">To bookmarks</span>
-            </button>
+      <div className="cities__image-wrapper place-card__image-wrapper">
+        <Link to={`/offer/${id}`}>
+          <img className="place-card__image" src={previewPhotoUrl} width="260" height="200" alt="Place image" />
+        </Link>
+      </div>
+      <div className="place-card__info">
+        <div className="place-card__price-wrapper">
+          <div className="place-card__price">
+            <b className="place-card__price-value">&euro;{price}</b>
+            <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <div className="place-card__rating rating">
-            <div className="place-card__stars rating__stars">
-              <span style={{width: `${ratingAsPercentage}`}}></span>
-              <span className="visually-hidden">Rating</span>
-            </div>
-          </div>
-          <h2 className="place-card__name">
-            <Link to={`/offer/${id}`}>{title}</Link>
-          </h2>
-          <p className="place-card__type">{type}</p>
+          <button
+            className={`place-card__bookmark-button button ${classBookmarkButton}`}
+            type="button">
+
+            <svg className="place-card__bookmark-icon" width="18" height="19">
+              <use xlinkHref="#icon-bookmark" />
+            </svg>
+            <span className="visually-hidden">To bookmarks</span>
+          </button>
         </div>
-      </article>
-    );
-  }
-}
+        <div className="place-card__rating rating">
+          <div className="place-card__stars rating__stars">
+            <span style={{width: `${ratingAsPercentage}`}}></span>
+            <span className="visually-hidden">Rating</span>
+          </div>
+        </div>
+        <h2 className="place-card__name">
+          <Link to={`/offer/${id}`}>{title}</Link>
+        </h2>
+        <p className="place-card__type">{type}</p>
+      </div>
+    </article>
+  );
+};
 
 PlaceCard.propTypes = {
-  onCardClick: PropTypes.func.isRequired,
+  onActiveCard: PropTypes.func,
   offer: PropTypes.shape({
     id: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
@@ -113,3 +75,5 @@ PlaceCard.propTypes = {
     reviews: PropTypes.array
   }).isRequired
 };
+
+export default PlaceCard;

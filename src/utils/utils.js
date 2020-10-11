@@ -39,5 +39,20 @@ export const getAverageRating = (reviews) => {
 
   const averageRating = ratingAmount / reviewsCount;
 
-  return averageRating;
+  return Math.round(averageRating);
+};
+
+export const getFavoriteOffers = (offers) => {
+  return offers
+    .filter(({isBookmarked}) => isBookmarked === `true`);
+};
+
+export const getUniqueCities = (favoreiteOffers) => {
+  const cities = favoreiteOffers
+    .map(({city}) => city)
+    .sort();
+
+  const uniqueCities = [...new Set(cities)];
+
+  return uniqueCities;
 };

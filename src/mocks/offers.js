@@ -42,7 +42,7 @@ export default [
   },
   {
     id: `2`,
-    city: `Amsterdam`,
+    city: `Paris`,
     photos: [
       `https://picsum.photos/260/200?random=${Math.random()}`,
       `https://picsum.photos/260/200?random=${Math.random()}`,
@@ -65,7 +65,7 @@ export default [
   },
   {
     id: `3`,
-    city: `Abc`,
+    city: `Brussels`,
     photos: [
       `https://picsum.photos/260/200?random=${Math.random()}`,
       `https://picsum.photos/260/200?random=${Math.random()}`,

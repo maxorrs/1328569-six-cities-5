@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 import {getAverageRating, getRatingAsPercentage} from '../../utils';
 
-const FavoriteCard = ({offer}) => {
-  const {photos, price, reviews, title, type} = offer;
+const FavoriteCard = ({favoriteOffer}) => {
+  const {id, photos, price, reviews, title, type} = favoriteOffer;
   const previewPhoto = photos[0];
 
   const averageRating = getAverageRating(reviews);
@@ -13,9 +14,9 @@ const FavoriteCard = ({offer}) => {
   return (
     <article className="favorites__card place-card">
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewPhoto} width="150" height="110" alt="Place image" />
-        </a>
+        </Link>
       </div>
       <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
@@ -37,7 +38,9 @@ const FavoriteCard = ({offer}) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to={`/offer/${id}`}>
+            {title}
+          </Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -46,10 +49,11 @@ const FavoriteCard = ({offer}) => {
 };
 
 FavoriteCard.propTypes = {
-  offer: PropTypes.shape({
-    photos: PropTypes.string,
+  favoriteOffer: PropTypes.shape({
+    id: PropTypes.string,
+    photos: PropTypes.array,
     price: PropTypes.string,
-    reviews: PropTypes.string,
+    reviews: PropTypes.array,
     title: PropTypes.string,
     type: PropTypes.string
   })

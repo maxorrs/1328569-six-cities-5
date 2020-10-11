@@ -8,39 +8,33 @@ import FavoritesPage from '../pages/favorites-page';
 import RoomPage from '../pages/room-page';
 import NotFoundPage from '../pages/not-found-page';
 
+import {getFavoriteOffers} from '../../utils';
+
 const App = (props) => {
   const {offers} = props;
+  const favoriteOffers = getFavoriteOffers(offers);
 
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact
-          path='/'
-          render={({history}) => {
-            return <MainPage
-              offers={offers}
-              onCardClick={(id) => history.push(`/offer/${id}`)}
-            />;
-          }}>
+        <Route exact path='/'>
+          <MainPage offers={offers} />
         </Route>
         <Route exact path='/login'>
           <SignInPage />
         </Route>
         <Route exact path='/favorites'>
-          <FavoritesPage offers={offers}/>
+          <FavoritesPage favoriteOffers={favoriteOffers}/>
         </Route>
         <Route exact
           path='/offer/:id'
-          render={({history, match}) => {
+          render={({match}) => {
             const {id: idMatch} = match.params;
-            const currentOffer = offers
-              .slice()
-              .filter((offer) => offer.id === idMatch)[0];
+            const [currentOffer] = offers.filter((offer) => offer.id === idMatch);
 
             return <RoomPage
               currentOffer={currentOffer}
-              offers={offers}
-              onCardClick={(id) => history.push(`/offer/${id}`)} />;
+              offers={offers} />;
           }}>
         </Route>
         <Route>

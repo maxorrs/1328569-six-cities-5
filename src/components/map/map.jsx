@@ -1,9 +1,9 @@
 import React from 'react';
 
-const RoomMap = () => {
+const Map = () => {
   return (
     <section className="property__map map"></section>
   );
 };
 
-export default RoomMap;
+export default Map;

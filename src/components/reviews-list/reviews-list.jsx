@@ -5,12 +5,15 @@ import ReviewItem from '../review-item';
 
 import {sortReviewsByTime} from '../../utils';
 
+const MAX_COUNT_REVIEWS = 10;
+
 const ReviewsList = ({reviews}) => {
   return (
     <ul className="reviews__list">
       {reviews
         .slice()
         .sort(sortReviewsByTime)
+        .slice(0, MAX_COUNT_REVIEWS)
         .map((review) =>
           <ReviewItem
             key={review.id}

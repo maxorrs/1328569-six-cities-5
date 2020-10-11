@@ -2,14 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Header from '../../header';
-import NearPlaces from '../../near-places';
+import NearPlacesList from '../../near-places-list';
 import RoomProperty from '../../room-property';
 
 const RoomPage = (props) => {
-  const {currentOffer, offers, onCardClick} = props;
+  const {currentOffer, offers} = props;
 
   const otherOffers = offers
-    .slice()
     .filter((offer) => offer.id !== currentOffer.id);
 
   return (
@@ -17,9 +16,8 @@ const RoomPage = (props) => {
       <Header />
       <RoomProperty
         currentOffer={currentOffer} />
-      <NearPlaces
-        otherOffers={otherOffers}
-        onCardClick={onCardClick} />
+      <NearPlacesList
+        otherOffers={otherOffers} />
     </div>
   );
 };
@@ -28,8 +26,7 @@ RoomPage.propTypes = {
   currentOffer: PropTypes.shape({
     id: PropTypes.string.isRequired
   }).isRequired,
-  offers: PropTypes.array.isRequired,
-  onCardClick: PropTypes.func.isRequired
+  offers: PropTypes.array.isRequired
 };
 
 export default RoomPage;
