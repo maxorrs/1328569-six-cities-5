@@ -8,23 +8,34 @@ import FavoritesPage from '../pages/favorites-page';
 import RoomPage from '../pages/room-page';
 import NotFoundPage from '../pages/not-found-page';
 
+import {getFavoriteOffers} from '../../utils';
+
 const App = (props) => {
-  const {offersCount} = props;
+  const {offers} = props;
+  const favoriteOffers = getFavoriteOffers(offers);
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path='/'>
-          <MainPage offersCount={offersCount} />
+          <MainPage offers={offers} />
         </Route>
         <Route exact path='/login'>
           <SignInPage />
         </Route>
         <Route exact path='/favorites'>
-          <FavoritesPage />
+          <FavoritesPage favoriteOffers={favoriteOffers}/>
         </Route>
-        <Route exact path='/offer/:id'>
-          <RoomPage />
+        <Route exact
+          path='/offer/:id'
+          render={({match}) => {
+            const {id: idMatch} = match.params;
+            const [currentOffer] = offers.filter((offer) => offer.id === idMatch);
+
+            return <RoomPage
+              currentOffer={currentOffer}
+              offers={offers} />;
+          }}>
         </Route>
         <Route>
           <NotFoundPage />
@@ -35,7 +46,7 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  offersCount: PropTypes.number.isRequired
+  offers: PropTypes.array.isRequired
 };
 
 export default App;
