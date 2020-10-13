@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import Reviews from '../reviews';
 import Host from '../host';
-import Map from '../map';
 import InsideList from '../inside-list';
 import FeaturesList from '../features-list';
 import PhotosList from '../photos-list';
@@ -65,7 +64,7 @@ const RoomProperty = ({currentOffer}) => {
             <Reviews reviews={reviews} />
           </div>
         </div>
-        <Map />
+        <section className="property__map map" />
       </section>
     </main>
   );

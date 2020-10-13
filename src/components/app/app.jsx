@@ -30,7 +30,7 @@ const App = (props) => {
           path='/offer/:id'
           render={({match}) => {
             const {id: idMatch} = match.params;
-            const [currentOffer] = offers.filter((offer) => offer.id === idMatch);
+            const currentOffer = offers.find((offer) => offer.id === idMatch);
 
             return <RoomPage
               currentOffer={currentOffer}

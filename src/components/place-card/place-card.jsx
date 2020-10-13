@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 import {getAverageRating, getRatingAsPercentage} from '../../utils';
 import {housingTypes} from '../../consts';
 
-const PlaceCard = ({offer, onActiveCard}) => {
+const PlaceCard = ({offer, onActiveCard, onMouseOutWithCard}) => {
   const {id, photos, isPremium, title, type, price, reviews, isBookmarked} = offer;
 
   const previewPhotoUrl = photos[0];
@@ -22,7 +22,8 @@ const PlaceCard = ({offer, onActiveCard}) => {
   return (
     <article
       className="cities__place-card place-card"
-      onMouseOver={() => onActiveCard(id)}>
+      onMouseOver={() => onActiveCard(id)}
+      onMouseOut={() => onMouseOutWithCard()}>
 
       {premiumLabel}
 
@@ -64,6 +65,7 @@ const PlaceCard = ({offer, onActiveCard}) => {
 
 PlaceCard.propTypes = {
   onActiveCard: PropTypes.func,
+  onMouseOutWithCard: PropTypes.func.isRequired,
   offer: PropTypes.shape({
     id: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,

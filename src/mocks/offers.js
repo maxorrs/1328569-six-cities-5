@@ -2,6 +2,7 @@ export default [
   {
     id: `1`,
     city: `Amsterdam`,
+    coords: [`52.3909553943508`, `4.85309666406198`],
     photos: [
       `https://picsum.photos/260/200?random=${Math.random()}`,
       `https://picsum.photos/260/200?random=${Math.random()}`,
@@ -42,7 +43,8 @@ export default [
   },
   {
     id: `2`,
-    city: `Paris`,
+    city: `Amsterdam`,
+    coords: [`52.369553943508`, `4.85309666406198`],
     photos: [
       `https://picsum.photos/260/200?random=${Math.random()}`,
       `https://picsum.photos/260/200?random=${Math.random()}`,
@@ -65,7 +67,8 @@ export default [
   },
   {
     id: `3`,
-    city: `Brussels`,
+    city: `Amsterdam`,
+    coords: [`52.3909553943508`, `4.929309666406198`],
     photos: [
       `https://picsum.photos/260/200?random=${Math.random()}`,
       `https://picsum.photos/260/200?random=${Math.random()}`,
@@ -107,6 +110,7 @@ export default [
   {
     id: `4`,
     city: `Amsterdam`,
+    coords: [`52.3809553943508`, `4.939309666406198`],
     photos: [
       `https://picsum.photos/260/200?random=${Math.random()}`,
       `https://picsum.photos/260/200?random=${Math.random()}`,
