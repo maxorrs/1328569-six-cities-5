@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 import CitiesNavigationList from '../cities-navigation-list/';
 
-const CitiesNavigation = ({onChangeLocation, currentLocation}) => {
+const CitiesNavigation = ({onChangeLocation, currentLocationCity}) => {
   return (
     <div className="tabs">
       <section className="locations container">
         <CitiesNavigationList
           onChangeLocation={onChangeLocation}
-          currentLocation={currentLocation} />
+          currentLocationCity={currentLocationCity} />
       </section>
     </div>
   );
@@ -17,7 +17,7 @@ const CitiesNavigation = ({onChangeLocation, currentLocation}) => {
 
 CitiesNavigation.propTypes = {
   onChangeLocation: PropTypes.func.isRequired,
-  currentLocation: PropTypes.string.isRequired
+  currentLocationCity: PropTypes.string.isRequired
 };
 
 export default CitiesNavigation;

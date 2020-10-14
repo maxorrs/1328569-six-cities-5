@@ -9,16 +9,20 @@ import RoomPage from '../pages/room-page';
 import NotFoundPage from '../pages/not-found-page';
 
 import {getFavoriteOffers} from '../../utils';
+import {withLocation} from '../hocs';
 
 const App = (props) => {
-  const {offers} = props;
+  const {offers, onChangeLocation, currentLocation} = props;
   const favoriteOffers = getFavoriteOffers(offers);
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path='/'>
-          <MainPage offers={offers} />
+          <MainPage
+            offers={offers}
+            onChangeLocation={onChangeLocation}
+            currentLocation={currentLocation} />
         </Route>
         <Route exact path='/login'>
           <SignInPage />
@@ -33,6 +37,7 @@ const App = (props) => {
             const currentOffer = offers.find((offer) => offer.id === idMatch);
 
             return <RoomPage
+              currentLocation={currentLocation}
               currentOffer={currentOffer}
               offers={offers} />;
           }}>
@@ -46,7 +51,12 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  offers: PropTypes.array.isRequired
+  offers: PropTypes.array.isRequired,
+  onChangeLocation: PropTypes.func.isRequired,
+  currentLocation: PropTypes.shape({
+    city: PropTypes.string.isRequired,
+    coords: PropTypes.arrayOf(PropTypes.number).isRequired
+  })
 };
 
-export default App;
+export default withLocation(App);

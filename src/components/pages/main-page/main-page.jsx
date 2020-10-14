@@ -1,42 +1,25 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
-import PlaceList from '../../place-list';
 import Header from '../../header';
 import CitiesNavigation from '../../cities-navigation';
-import Map from '../../map';
-import Sorting from '../../sorting';
+import Cities from '../../cities';
+import CitiesEmpty from '../../cities-empty';
 
-import {DEFAULT_SORT_TYPE, DEFAULT_LOCATION, cities} from '../../../consts';
+import {DEFAULT_SORT_TYPE, DEFAULT_LOCATION} from '../../../consts';
 import {getOffersCoords} from '../../../utils';
+import {withActiveCard} from '../../hocs';
 
-export default class MainPage extends PureComponent {
+class MainPage extends PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
-      activeCard: null,
       offers: this.props.offers.filter(({city}) => city === DEFAULT_LOCATION),
       currentSortingType: DEFAULT_SORT_TYPE,
-      currentLocation: DEFAULT_LOCATION
     };
 
     this.onChangeSortingType = this.onChangeSortingType.bind(this);
-    this.onChangeLocation = this.onChangeLocation.bind(this);
-    this.onActiveCard = this.onActiveCard.bind(this);
-    this.onMouseOutWithCard = this.onMouseOutWithCard.bind(this);
-  }
-
-  onActiveCard(id) {
-    this.setState({
-      activeCard: id
-    });
-  }
-
-  onMouseOutWithCard() {
-    this.setState({
-      activeCard: null
-    });
   }
 
   onChangeSortingType(type) {
@@ -45,52 +28,47 @@ export default class MainPage extends PureComponent {
     });
   }
 
-  onChangeLocation(location) {
+  onSortingOffers(newLocation) {
     this.setState({
-      currentLocation: location,
-      offers: this.props.offers.filter(({city}) => city === location)
+      offers: this.props.offers.filter(({city}) => city === newLocation)
     });
+    this.props.onChangeLocation(newLocation);
   }
 
   render() {
-    const {currentSortingType, currentLocation, offers, activeCard} = this.state;
-    const offersCount = offers.length;
+    const {activeCard, onActiveCard, onMouseOutWithCard, currentLocation} = this.props;
+    const {city: currentLocationCity} = currentLocation;
+    const {currentSortingType, offers} = this.state;
     const offersCoords = getOffersCoords(offers);
-    const currentLocationInfo = cities.find((item) => item.city === currentLocation);
+    const offersCount = offers.length;
+    const mainClassName = offersCount ? `` : `page__main--index-empty`;
 
     return (
       <div className="page page--gray page--main">
         <Header />
 
-        <main className="page__main page__main--index">
+        <main className={`page__main page__main--index ${mainClassName}`}>
           <h1 className="visually-hidden">Cities</h1>
+
           <CitiesNavigation
-            onChangeLocation={this.onChangeLocation}
-            currentLocation={currentLocation} />
-          <div className="cities">
-            <div className="cities__places-container container">
-              <section className="cities__places places">
-                <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{offersCount} places to stay in {currentLocation}</b>
-                <Sorting
-                  onChangeSortingType={this.onChangeSortingType}
-                  currentSortingType={currentSortingType} />
-                <div className="cities__places-list places__list tabs__content">
-                  <PlaceList
-                    offers={offers}
-                    onActiveCard={this.onActiveCard}
-                    onMouseOutWithCard={this.onMouseOutWithCard} />
-                </div>
-              </section>
-              <div className="cities__right-section">
-                <section className="cities__map map">
-                  <Map currentLocationCoords={currentLocationInfo.coords}
-                    offersCoords={offersCoords}
-                    activeCard={activeCard} />
-                </section>
-              </div>
-            </div>
-          </div>
+            onChangeLocation={(newLocation) => this.onSortingOffers(newLocation)}
+            currentLocationCity={currentLocationCity} />
+          {
+            offersCount
+              ?
+              <Cities
+                activeCard={activeCard}
+                onActiveCard={onActiveCard}
+                onMouseOutWithCard={onMouseOutWithCard}
+                currentLocation={currentLocation}
+                currentSortingType={currentSortingType}
+                offersCoords={offersCoords}
+                offers={offers}
+                onChangeSortingType={this.onChangeSortingType} />
+              :
+              <CitiesEmpty
+                currentLocationCity={currentLocationCity} />
+          }
         </main>
       </div>
     );
@@ -98,5 +76,15 @@ export default class MainPage extends PureComponent {
 }
 
 MainPage.propTypes = {
+  activeCard: PropTypes.string.isRequired,
+  onActiveCard: PropTypes.func.isRequired,
+  onMouseOutWithCard: PropTypes.func.isRequired,
+  onChangeLocation: PropTypes.func.isRequired,
+  currentLocation: PropTypes.shape({
+    city: PropTypes.string.isRequired,
+    coords: PropTypes.arrayOf(PropTypes.number).isRequired
+  }),
   offers: PropTypes.array.isRequired
 };
+
+export default withActiveCard(MainPage);
