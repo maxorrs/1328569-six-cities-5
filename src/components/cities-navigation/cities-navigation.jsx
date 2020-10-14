@@ -7,11 +7,9 @@ const CitiesNavigation = ({onChangeLocation, currentLocation}) => {
   return (
     <div className="tabs">
       <section className="locations container">
-        <ul className="locations__list tabs__list">
-          <CitiesNavigationList
-            onChangeLocation={onChangeLocation}
-            currentLocation={currentLocation} />
-        </ul>
+        <CitiesNavigationList
+          onChangeLocation={onChangeLocation}
+          currentLocation={currentLocation} />
       </section>
     </div>
   );

@@ -1,5 +1,6 @@
 import {getRatingAsPercentage, getTransformDataOffer, getAverageRating, getFavoriteOffers, getUniqueCities} from './utils';
 import {formatDateForReview, formatDateForReviewAttr, sortReviewsByTime} from './date';
+import {getOffersCoords} from './map';
 
 export {
   getRatingAsPercentage,
@@ -9,5 +10,6 @@ export {
   getUniqueCities,
   formatDateForReview,
   formatDateForReviewAttr,
-  sortReviewsByTime
+  sortReviewsByTime,
+  getOffersCoords
 };

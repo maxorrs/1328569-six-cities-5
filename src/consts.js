@@ -21,7 +21,16 @@ export const ratingInformation = [
   }
 ];
 
-export const cities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
+export const citiesProps = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
+
+export const cities = [
+  {city: `Paris`, coords: [``, ``]},
+  {city: `Cologne`, coords: [``, ``]},
+  {city: `Brussels`, coords: [``, ``]},
+  {city: `Amsterdam`, coords: [52.38333, 4.9]},
+  {city: `Hamburg`, coords: [``, ``]},
+  {city: `Dusseldorf`, coords: [``, ``]}
+];
 
 export const housingTypes = [`Apartment`, `Room`, `House`, `Hotel`];
 
@@ -36,4 +45,5 @@ export const SortingType = {
 
 export const DEFAULT_SORT_TYPE = `POPULAR`;
 
-export const DEFAULT_LOCATION = `Paris`;
+export const DEFAULT_LOCATION = `Amsterdam`;
+

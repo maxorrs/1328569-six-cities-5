@@ -25,6 +25,15 @@ module.exports = {
                     loader: 'babel-loader',
                 },
             },
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader']
+            },
+            
+            {
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                loader: 'file-loader?name=img/[name].[ext]'
+            },
         ],
     },
     resolve: {

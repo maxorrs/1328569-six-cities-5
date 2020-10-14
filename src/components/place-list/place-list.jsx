@@ -1,42 +1,26 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import PlaceCard from '../place-card';
 
 import {getTransformDataOffer} from '../../utils';
 
-export default class PlaceList extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activeCard: null
-    };
-
-    this.onActiveCard = this.onActiveCard.bind(this);
-  }
-
-  onActiveCard(id) {
-    this.setState({
-      activeCard: id
-    });
-  }
-
-  render() {
-    const {offers} = this.props;
-
-    return offers.map((offer) => {
-      const transformOffer = getTransformDataOffer(offer);
-      return (
-        <PlaceCard
-          key={transformOffer.id}
-          offer={transformOffer}
-          onActiveCard={this.onActiveCard} />
-      );
-    });
-  }
-}
+const PlaceList = ({offers, onActiveCard, onMouseOutWithCard}) => {
+  return offers.map((offer) => {
+    const transformOffer = getTransformDataOffer(offer);
+    return (
+      <PlaceCard
+        key={transformOffer.id}
+        offer={transformOffer}
+        onActiveCard={onActiveCard}
+        onMouseOutWithCard={onMouseOutWithCard} />
+    );
+  });
+};
 
 PlaceList.propTypes = {
+  onActiveCard: PropTypes.func.isRequired,
   offers: PropTypes.array.isRequired
 };
+
+export default PlaceList;
