@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
-import {getAverageRating, getRatingAsPercentage} from '../../utils';
+import {getAverageRating, getRatingAsPercentage} from '../../utils/common';
 import {housingTypes} from '../../consts';
 
 const PlaceCard = (props) => {

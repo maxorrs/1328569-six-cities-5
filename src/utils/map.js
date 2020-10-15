@@ -4,3 +4,7 @@ export const getOffersCoords = (offers) => {
       return [offer.id, offer.coords];
     });
 };
+
+export const getIconUrl = (id, activeCard) => {
+  return id === activeCard ? `/img/pin-active.svg` : `/img/pin.svg`;
+};

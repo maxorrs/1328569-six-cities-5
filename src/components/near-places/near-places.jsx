@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import PlacesListNear from '../places-list-near';
+import PlacesListNear from '../places-list-near/places-list-near';
 
 const NearPlaces = ({otherOffers}) => {
   const title = otherOffers.length !== 0 ?
@@ -19,7 +19,7 @@ const NearPlaces = ({otherOffers}) => {
 };
 
 NearPlaces.propTypes = {
-  otherOffers: PropTypes.object.isRequired
+  otherOffers: PropTypes.array.isRequired
 };
 
 export default NearPlaces;

@@ -1,89 +1,65 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-import Header from '../../header';
-import CitiesNavigation from '../../cities-navigation';
-import Cities from '../../cities';
-import CitiesEmpty from '../../cities-empty';
+import Header from '../../header/header';
+import CitiesNavigation from '../../cities-navigation/cities-navigation';
+import CitiesEmpty from '../../cities-empty/cities-empty';
+import PlacesListMain from '../../places-list-main/places-list-main';
+import Map from '../../map/map';
+import Sorting from '../../sorting/sorting';
 
-import {DEFAULT_SORT_TYPE, DEFAULT_LOCATION} from '../../../consts';
-import {getOffersCoords} from '../../../utils';
-import {withActiveCard} from '../../hocs';
+import {getOffersCoords} from '../../../utils/map';
+import {withActiveCard} from '../../hocs/with-active-card';
 
-class MainPage extends PureComponent {
-  constructor(props) {
-    super(props);
+const MainPage = (props) => {
+  const {offers, activeCard, onActiveCard, onMouseOutWithCard} = props;
+  const offersCount = offers.length;
 
-    this.state = {
-      offers: this.props.offers.filter(({city}) => city === DEFAULT_LOCATION),
-      currentSortingType: DEFAULT_SORT_TYPE,
-    };
+  const titleFound = `${offersCount} ${offersCount === 1 ? `place` : `places`} to stay in Amsterdam`;
+  const offersCoords = getOffersCoords(offers);
+  const mainClassName = offersCount ? `` : `page__main--index-empty`;
 
-    this.onChangeSortingType = this.onChangeSortingType.bind(this);
-  }
+  return (
+    <div className="page page--gray page--main">
+      <Header />
 
-  onChangeSortingType(type) {
-    this.setState({
-      currentSortingType: type
-    });
-  }
+      <main className={`page__main page__main--index ${mainClassName}`}>
+        <h1 className="visually-hidden">Cities</h1>
 
-  onSortingOffers(newLocation) {
-    this.setState({
-      offers: this.props.offers.filter(({city}) => city === newLocation)
-    });
-    this.props.onChangeLocation(newLocation);
-  }
-
-  render() {
-    const {activeCard, onActiveCard, onMouseOutWithCard, currentLocation} = this.props;
-    const {city: currentLocationCity} = currentLocation;
-    const {currentSortingType, offers} = this.state;
-    const offersCoords = getOffersCoords(offers);
-    const offersCount = offers.length;
-    const mainClassName = offersCount ? `` : `page__main--index-empty`;
-
-    return (
-      <div className="page page--gray page--main">
-        <Header />
-
-        <main className={`page__main page__main--index ${mainClassName}`}>
-          <h1 className="visually-hidden">Cities</h1>
-
-          <CitiesNavigation
-            onChangeLocation={(newLocation) => this.onSortingOffers(newLocation)}
-            currentLocationCity={currentLocationCity} />
-          {
-            offersCount
-              ?
-              <Cities
-                activeCard={activeCard}
-                onActiveCard={onActiveCard}
-                onMouseOutWithCard={onMouseOutWithCard}
-                currentLocation={currentLocation}
-                currentSortingType={currentSortingType}
-                offersCoords={offersCoords}
-                offers={offers}
-                onChangeSortingType={this.onChangeSortingType} />
-              :
-              <CitiesEmpty
-                currentLocationCity={currentLocationCity} />
-          }
-        </main>
-      </div>
-    );
-  }
-}
+        <CitiesNavigation />
+        {
+          offersCount === 0 ?
+            <CitiesEmpty /> :
+            <div className="cities">
+              <div className="cities__places-container container">
+                <section className="cities__places places">
+                  <h2 className="visually-hidden">Places</h2>
+                  <b className="places__found">{titleFound}</b>
+                  <Sorting />
+                  <PlacesListMain
+                    offers={offers}
+                    onActiveCard={onActiveCard}
+                    onMouseOutWithCard={onMouseOutWithCard} />
+                </section>
+                <div className="cities__right-section">
+                  <section className="cities__map map">
+                    <Map
+                      offersCoords={offersCoords}
+                      activeCard={activeCard} />
+                  </section>
+                </div>
+              </div>
+            </div>
+        }
+      </main>
+    </div>
+  );
+};
 
 MainPage.propTypes = {
   activeCard: PropTypes.string.isRequired,
   onActiveCard: PropTypes.func.isRequired,
   onMouseOutWithCard: PropTypes.func.isRequired,
-  onChangeLocation: PropTypes.func.isRequired,
-  currentLocation: PropTypes.shape({
-    city: PropTypes.string.isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number).isRequired
-  }),
   offers: PropTypes.array.isRequired
 };
 

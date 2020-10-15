@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import PlacesList from '../places-list';
+import PlacesList from '../places-list/places-list';
 
 import {TypeList} from '../../consts';
 
@@ -20,7 +20,7 @@ const PlacesListNear = (props) => {
 
 PlacesListNear.propTypes = {
   otherOffers: PropTypes.array,
-  className: PropTypes.string.isRequired
+  className: PropTypes.string
 };
 
 export default PlacesListNear;

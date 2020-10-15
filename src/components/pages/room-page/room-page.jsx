@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Header from '../../header';
-import NearPlaces from '../../near-places';
-import RoomProperty from '../../room-property';
-import Map from '../../map';
+import Header from '../../header/header';
+import NearPlaces from '../../near-places/near-places';
+import RoomProperty from '../../room-property/room-property';
+import Map from '../../map/map';
 
-import {getOffersCoords} from '../../../utils';
+import {getOffersCoords} from '../../../utils/map';
 
 const MAX_COUNT_OTHER_OFFERS = 3;
 
 const RoomPage = (props) => {
-  const {currentOffer, offers, currentLocation} = props;
+  const {currentOffer, offers} = props;
 
   const otherOffers = offers
     .filter((offer) => offer.id !== currentOffer.id)
@@ -25,11 +25,9 @@ const RoomPage = (props) => {
     <div className="page">
       <Header />
       <RoomProperty
-        currentOffer={currentOffer}
-        currentLocation={currentLocation}>
+        currentOffer={currentOffer}>
         <Map
           activeCard={currentOffer.id}
-          currentLocationCoords={currentLocation.coords}
           offersCoords={offersCoords} />
       </RoomProperty>
       <NearPlaces otherOffers={otherOffers} />
@@ -43,10 +41,6 @@ RoomPage.propTypes = {
     coords: PropTypes.arrayOf(PropTypes.string).isRequired
   }).isRequired,
   offers: PropTypes.array.isRequired,
-  currentLocation: PropTypes.shape({
-    city: PropTypes.string.isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number).isRequired
-  }),
 };
 
 export default RoomPage;

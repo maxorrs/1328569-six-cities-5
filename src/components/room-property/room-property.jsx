@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Reviews from '../reviews';
-import Host from '../host';
-import InsideList from '../inside-list';
-import FeaturesList from '../features-list';
-import PhotosList from '../photos-list';
+import Reviews from '../reviews/reviews';
+import Host from '../host/host';
+import InsideList from '../inside-list/inside-list';
+import FeaturesList from '../features-list/features-list';
+import PhotosList from '../photos-list/photos-list';
 
-import {getTransformDataOffer, getAverageRating, getRatingAsPercentage} from '../../utils';
+import {getTransformDataOffer, getAverageRating, getRatingAsPercentage} from '../../utils/common';
 
 const RoomProperty = ({currentOffer, children}) => {
   const transformOffer = getTransformDataOffer(currentOffer);

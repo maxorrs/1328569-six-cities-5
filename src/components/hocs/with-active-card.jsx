@@ -45,7 +45,6 @@ export const withActiveCard = (Component) => {
       coords: PropTypes.arrayOf(PropTypes.number).isRequired
     }),
     offers: PropTypes.arrayOf(PropTypes.object).isRequired,
-    onChangeLocation: PropTypes.func.isRequired
   };
 
   return WithActiveCard;

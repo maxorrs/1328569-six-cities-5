@@ -2,27 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
-import MainPage from '../pages/main-page';
-import SignInPage from '../pages/sign-in-page';
-import FavoritesPage from '../pages/favorites-page';
-import RoomPage from '../pages/room-page';
-import NotFoundPage from '../pages/not-found-page';
+import MainPage from '../pages/main-page/main-page';
+import SignInPage from '../pages/sign-in-page/sign-in-page';
+import FavoritesPage from '../pages/favorites-page/favorites-page';
+import RoomPage from '../pages/room-page/room-page';
+import NotFoundPage from '../pages/not-found-page/not-found-page';
 
-import {getFavoriteOffers} from '../../utils';
-import {withLocation} from '../hocs';
+import {getFavoriteOffers} from '../../utils/common';
 
 const App = (props) => {
-  const {offers, onChangeLocation, currentLocation} = props;
+  const {offers} = props;
   const favoriteOffers = getFavoriteOffers(offers);
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path='/'>
-          <MainPage
-            offers={offers}
-            onChangeLocation={onChangeLocation}
-            currentLocation={currentLocation} />
+          <MainPage offers={offers} />
         </Route>
         <Route exact path='/login'>
           <SignInPage />
@@ -37,7 +33,6 @@ const App = (props) => {
             const currentOffer = offers.find((offer) => offer.id === idMatch);
 
             return <RoomPage
-              currentLocation={currentLocation}
               currentOffer={currentOffer}
               offers={offers} />;
           }}>
@@ -51,12 +46,7 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  offers: PropTypes.array.isRequired,
-  onChangeLocation: PropTypes.func.isRequired,
-  currentLocation: PropTypes.shape({
-    city: PropTypes.string.isRequired,
-    coords: PropTypes.arrayOf(PropTypes.number).isRequired
-  })
+  offers: PropTypes.array.isRequired
 };
 
-export default withLocation(App);
+export default App;

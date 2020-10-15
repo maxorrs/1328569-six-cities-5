@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import FavoritesList from '../favorites-list';
+import FavoritesList from '../favorites-list/favorites-list';
 
 const CitiesList = ({uniqueCities, favoriteOffers}) => {
   return (

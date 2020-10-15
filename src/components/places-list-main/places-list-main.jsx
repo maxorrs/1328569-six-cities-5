@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import PlacesList from '../places-list';
+import PlacesList from '../places-list/places-list';
 
 import {TypeList} from '../../consts';
 
@@ -19,7 +19,7 @@ const PlacesListMain = (props) => {
 };
 
 PlacesListMain.propTypes = {
-  className: PropTypes.string.isRequired
+  className: PropTypes.string
 };
 
 export default PlacesListMain;

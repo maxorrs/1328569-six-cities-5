@@ -4,6 +4,11 @@ import PropTypes from 'prop-types';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
+import {getIconUrl} from '../../utils/map';
+
+const LOCATION_COORDS = [52.38333, 4.9];
+
+
 const MapSetting = {
   ZOOM: 12,
   ICON_SIZE: [30, 30],
@@ -17,39 +22,28 @@ export default class Map extends PureComponent {
   constructor(props) {
     super(props);
     this._mapRef = createRef();
-    this._map = null;
-
-    this.state = {
-      locationCoords: this.props.currentLocationCoords,
-      offersCoords: this.props.offersCoords,
-      activeCard: this.props.activeCard
-    };
   }
 
-  _getIconUrl(id, activeCard) {
-    return id === activeCard ? `/img/pin-active.svg` : `/img/pin.svg`;
-  }
+  componentDidMount() {
+    const {offersCoords, activeCard} = this.props;
 
-  _initMap(location) {
     this._map = leaflet.map(this._mapRef.current, {
-      center: location,
+      center: LOCATION_COORDS,
       zoom: MapSetting.ZOOM,
       zoomControl: MapSetting.ZOOM_CONTROL,
       marker: MapSetting.MARKER
     });
 
-    this._map.setView(location, MapSetting.ZOOM);
+    this._map.setView(LOCATION_COORDS, MapSetting.ZOOM);
 
     leaflet
       .tileLayer(MapSetting.TITLE_LAYER, {attribution: MapSetting.ATTRIBUTION})
       .addTo(this._map);
-  }
 
-  _setMarkers(offersCoords, activeCard) {
     offersCoords
       .map(([id, coords]) => {
         const icon = leaflet.icon({
-          iconUrl: this._getIconUrl(id, activeCard),
+          iconUrl: getIconUrl(id, activeCard),
           iconSize: MapSetting.ICON_SIZE
         });
 
@@ -59,33 +53,20 @@ export default class Map extends PureComponent {
       });
   }
 
-  _destroyMap() {
-    this._map.remove();
-    this._map = null;
-  }
-
-  componentDidMount() {
-    const {locationCoords, offersCoords, activeCard} = this.state;
-
-    this._initMap(locationCoords);
-    this._setMarkers(offersCoords, activeCard);
-  }
-
   componentDidUpdate() {
-    const {offersCoords, activeCard, currentLocationCoords} = this.props;
-    const {locationCoords} = this.state;
+    const {offersCoords, activeCard} = this.props;
 
-    if (currentLocationCoords !== locationCoords) {
-      this._destroyMap();
-      this._initMap(currentLocationCoords);
+    offersCoords
+      .map(([id, coords]) => {
+        const icon = leaflet.icon({
+          iconUrl: getIconUrl(id, activeCard),
+          iconSize: MapSetting.ICON_SIZE
+        });
 
-      this.setState({
-        offersCoords,
-        locationCoords: currentLocationCoords
+        leaflet
+          .marker(coords, {icon})
+          .addTo(this._map);
       });
-    }
-
-    this._setMarkers(offersCoords, activeCard);
   }
 
   render() {
@@ -97,6 +78,5 @@ export default class Map extends PureComponent {
 
 Map.propTypes = {
   offersCoords: PropTypes.array.isRequired,
-  activeCard: PropTypes.string,
-  currentLocationCoords: PropTypes.array.isRequired
+  activeCard: PropTypes.string
 };

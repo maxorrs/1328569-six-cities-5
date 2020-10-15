@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import PlaceCardMain from '../place-card-main';
-import PlaceCardNear from '../place-card-near';
-import PlaceCard from '../place-card';
+import PlaceCardMain from '../place-card-main/place-card-main';
+import PlaceCardNear from '../place-card-near/place-card-near';
+import PlaceCard from '../place-card/place-card';
 
-import {getTransformDataOffer} from '../../utils';
+import {getTransformDataOffer} from '../../utils/common';
 import {TypeList} from '../../consts';
 
 const getCardComponentByType = (type, transformOffer, restProps) => {
