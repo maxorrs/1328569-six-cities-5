@@ -6,7 +6,7 @@ import {getAverageRating, getRatingAsPercentage} from '../../utils/common';
 import {housingTypes} from '../../consts';
 
 const PlaceCard = (props) => {
-  const {className, offer, onActiveCard, onMouseOutWithCard, prefix} = props;
+  const {offer, onActiveCard, onMouseOutWithCard, className} = props;
   const {id, photos, isPremium, title, type, price, reviews, isBookmarked} = offer;
 
   const [previewPhotoUrl] = photos;
@@ -22,13 +22,13 @@ const PlaceCard = (props) => {
 
   return (
     <article
-      className={`place-card ${className}`}
+      className={`place-card ${className}__place-card`}
       onMouseOver={() => onActiveCard(id)}
       onMouseOut={() => onMouseOutWithCard()}>
 
       {premiumLabel}
 
-      <div className={`${prefix}__image-wrapper place-card__image-wrapper`}>
+      <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewPhotoUrl} width="260" height="200" alt="Place image" />
         </Link>
@@ -70,8 +70,6 @@ PlaceCard.defaultProps = {
 };
 
 PlaceCard.propTypes = {
-  onActiveCard: PropTypes.func,
-  onMouseOutWithCard: PropTypes.func,
   offer: PropTypes.shape({
     id: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
@@ -82,8 +80,9 @@ PlaceCard.propTypes = {
     type: PropTypes.oneOf([...housingTypes]),
     reviews: PropTypes.array
   }).isRequired,
-  className: PropTypes.string.isRequired,
-  prefix: PropTypes.oneOf([`cities`, `near-places`])
+  className: PropTypes.oneOf([`cities`, `near-places`]),
+  onActiveCard: PropTypes.func,
+  onMouseOutWithCard: PropTypes.func
 };
 
 export default PlaceCard;

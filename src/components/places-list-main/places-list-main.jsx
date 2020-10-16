@@ -1,25 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import PlacesList from '../places-list/places-list';
+import PlaceCard from '../place-card/place-card';
 
-import {TypeList} from '../../consts';
+import {CardPlaceClassName} from '../../consts';
 
-const PlacesListMain = (props) => {
-  const {className = ``} = props;
-  const restProps = Object.assign({}, props);
-  delete restProps.className;
-
+const PlacesListMain = ({offers, onActiveCard, onMouseOutWithCard}) => {
   return (
-    <PlacesList
-      className={`cities__places-list tabs__content ${className}`}
-      {...restProps}
-      type={TypeList.MAIN} />
+    <div className="cities__places-list places__list tabs__content">
+      {
+        offers.map((offer) => {
+          return (
+            <PlaceCard
+              key={offer.id}
+              offer={offer}
+              className={CardPlaceClassName.CITIES}
+              onMouseOutWithCard={onMouseOutWithCard}
+              onActiveCard={onActiveCard} />
+          );
+        })
+      }
+    </div>
   );
 };
 
 PlacesListMain.propTypes = {
-  className: PropTypes.string
+  offers: PropTypes.array.isRequired,
+  onMouseOutWithCard: PropTypes.func.isRequired,
+  onActiveCard: PropTypes.func.isRequired
 };
 
 export default PlacesListMain;

@@ -47,7 +47,7 @@ export const DEFAULT_SORT_TYPE = `POPULAR`;
 
 export const DEFAULT_LOCATION = `Amsterdam`;
 
-export const TypeList = {
-  MAIN: `main`,
-  NEAR: `near`
+export const CardPlaceClassName = {
+  CITIES: `cities`,
+  NEAR_PLACES: `near-places`
 };
