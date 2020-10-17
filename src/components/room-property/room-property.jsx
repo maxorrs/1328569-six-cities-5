@@ -1,20 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Reviews from '../reviews';
-import Host from '../host';
-import InsideList from '../inside-list';
-import FeaturesList from '../features-list';
-import PhotosList from '../photos-list';
+import Reviews from '../reviews/reviews';
+import Host from '../host/host';
+import InsideList from '../inside-list/inside-list';
+import FeaturesList from '../features-list/features-list';
+import PhotosList from '../photos-list/photos-list';
 
-import {getTransformDataOffer, getAverageRating, getRatingAsPercentage} from '../../utils';
+import {getTransformDataOffer, getAverageRating, getRatingAsPercentage} from '../../utils/common';
 
-const RoomProperty = ({currentOffer}) => {
+const RoomProperty = ({currentOffer, children}) => {
   const transformOffer = getTransformDataOffer(currentOffer);
   const {photos, isPremium, title, features, price, inside, host, reviews, isBookmarked} = transformOffer;
 
-  const averageRating = reviews ? getAverageRating(reviews) : 0;
-  const ratingAsPercentage = reviews ? getRatingAsPercentage(averageRating) : 0;
+  const averageRating = getAverageRating(reviews);
+  const ratingAsPercentage = getRatingAsPercentage(averageRating);
 
   const classBookmarkButton = isBookmarked === `true` ? `property__bookmark-button--active` : ``;
 
@@ -64,14 +64,17 @@ const RoomProperty = ({currentOffer}) => {
             <Reviews reviews={reviews} />
           </div>
         </div>
-        <section className="property__map map" />
+        <section className="property__map map">
+          {children}
+        </section>
       </section>
     </main>
   );
 };
 
 RoomProperty.propTypes = {
-  currentOffer: PropTypes.object.isRequired
+  currentOffer: PropTypes.object.isRequired,
+  children: PropTypes.element.isRequired
 };
 
 export default RoomProperty;

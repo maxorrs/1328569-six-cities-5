@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
-import MainPage from '../pages/main-page';
-import SignInPage from '../pages/sign-in-page';
-import FavoritesPage from '../pages/favorites-page';
-import RoomPage from '../pages/room-page';
-import NotFoundPage from '../pages/not-found-page';
+import MainPage from '../pages/main-page/main-page';
+import SignInPage from '../pages/sign-in-page/sign-in-page';
+import FavoritesPage from '../pages/favorites-page/favorites-page';
+import RoomPage from '../pages/room-page/room-page';
+import NotFoundPage from '../pages/not-found-page/not-found-page';
 
-import {getFavoriteOffers} from '../../utils';
+import {getFavoriteOffers} from '../../utils/common';
 
 const App = (props) => {
   const {offers} = props;

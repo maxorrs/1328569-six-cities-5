@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import CitiesList from '../cities-list';
-import {getUniqueCities} from '../../utils';
+import CitiesList from '../cities-list/cities-list';
+import {getUniqueCities} from '../../utils/common';
 
 const Favorites = (props) => {
   const {favoriteOffers} = props;

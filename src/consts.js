@@ -24,12 +24,12 @@ export const ratingInformation = [
 export const citiesProps = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
 export const cities = [
-  {city: `Paris`, coords: [``, ``]},
-  {city: `Cologne`, coords: [``, ``]},
-  {city: `Brussels`, coords: [``, ``]},
+  {city: `Paris`, coords: [48.8589, 2.3469]},
+  {city: `Cologne`, coords: [30, 2]},
+  {city: `Brussels`, coords: [60, 1]},
   {city: `Amsterdam`, coords: [52.38333, 4.9]},
-  {city: `Hamburg`, coords: [``, ``]},
-  {city: `Dusseldorf`, coords: [``, ``]}
+  {city: `Hamburg`, coords: [20, 22]},
+  {city: `Dusseldorf`, coords: [33, 44]}
 ];
 
 export const housingTypes = [`Apartment`, `Room`, `House`, `Hotel`];
@@ -47,3 +47,7 @@ export const DEFAULT_SORT_TYPE = `POPULAR`;
 
 export const DEFAULT_LOCATION = `Amsterdam`;
 
+export const CardPlaceClassName = {
+  CITIES: `cities`,
+  NEAR_PLACES: `near-places`
+};

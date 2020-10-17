@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Header from '../../header';
-import Favorites from '../../favorites';
-import FavoritesEmpty from '../../favorites-empty';
-import Footer from '../../footer';
+import Header from '../../header/header';
+import Favorites from '../../favorites/favorites';
+import FavoritesEmpty from '../../favorites-empty/favorites-empty';
+import Footer from '../../footer/footer';
 
 const FavoritesPage = (props) => {
   const {favoriteOffers} = props;

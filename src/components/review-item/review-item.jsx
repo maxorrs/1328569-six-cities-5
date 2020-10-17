@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {getRatingAsPercentage, formatDateForReview, formatDateForReviewAttr} from '../../utils';
+import {getRatingAsPercentage} from '../../utils/common';
+import {formatDateForReview, formatDateForReviewAttr} from '../../utils/date';
 
 const ReviewItem = (props) => {
   const {authorImg, authorName, rating, review, date} = props.review;

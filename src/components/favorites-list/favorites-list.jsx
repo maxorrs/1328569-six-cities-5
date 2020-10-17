@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import FavoriteCard from '../favorite-card';
+import FavoriteCard from '../favorite-card/favorite-card';
 
 import {citiesProps} from '../../consts';
 

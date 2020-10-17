@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import ReviewItem from '../review-item';
+import ReviewItem from '../review-item/review-item';
 
-import {sortReviewsByTime} from '../../utils';
+import {sortReviewsByTime} from '../../utils/date';
 
 const MAX_COUNT_REVIEWS = 10;
 
