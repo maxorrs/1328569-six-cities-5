@@ -12,7 +12,7 @@ const NearPlaces = ({otherOffers}) => {
     <div className="container">
       <section className="near-places places">
         <h2 className="near-places__title">{title}</h2>
-        <PlacesListNear offers={otherOffers} />
+        <PlacesListNear otherOffers={otherOffers} />
       </section>
     </div>
   );

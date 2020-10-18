@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {ActionCreator} from '../../store/actions';
+import {ActionCreator} from '../../store/reducer';
 import {connect} from 'react-redux';
 
 import CitiesNavigationList from '../cities-navigation-list/cities-navigation-list';
@@ -24,9 +24,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onChangeSelectedCity(payload) {
-    dispatch(ActionCreator.changeSelectedCity(payload));
-  }
+  onChangeSelectedCity: (payload) => dispatch(ActionCreator.changeSelectedCity(payload))
 });
 
 CitiesNavigation.propTypes = {

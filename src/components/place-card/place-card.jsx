@@ -65,7 +65,7 @@ const PlaceCard = (props) => {
 };
 
 PlaceCard.defaultProps = {
-  onActiveCard: () => {},
+  onChangeActiveCard: () => {},
   onMouseOutWithCard: () => {}
 };
 
