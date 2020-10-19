@@ -47,12 +47,20 @@ export const getFavoriteOffers = (offers) => {
     .filter(({isBookmarked}) => isBookmarked === `true`);
 };
 
-export const getUniqueCities = (favoreiteOffers) => {
-  const cities = favoreiteOffers
+export const getUniqueCities = (offers) => {
+  const cities = offers
     .map(({city}) => city)
     .sort();
 
   const uniqueCities = [...new Set(cities)];
 
   return uniqueCities;
+};
+
+export const extend = (a, b) => {
+  return Object.assign({}, a, b);
+};
+
+export const getFilteredOffersBySelectedCity = (offers, selectedCity) => {
+  return offers.filter((offer) => offer.city === selectedCity);
 };

@@ -24,7 +24,7 @@ export const ratingInformation = [
 export const citiesProps = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
 export const cities = [
-  {city: `Paris`, coords: [48.8589, 2.3469]},
+  {city: `Paris`, coords: [48.8588, 2.347]},
   {city: `Cologne`, coords: [30, 2]},
   {city: `Brussels`, coords: [60, 1]},
   {city: `Amsterdam`, coords: [52.38333, 4.9]},

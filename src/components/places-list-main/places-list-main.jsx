@@ -5,7 +5,7 @@ import PlaceCard from '../place-card/place-card';
 
 import {CardPlaceClassName} from '../../consts';
 
-const PlacesListMain = ({offers, onActiveCard, onMouseOutWithCard}) => {
+const PlacesListMain = ({offers, onChangeActiveCard, onMouseOutWithCard}) => {
   return (
     <div className="cities__places-list places__list tabs__content">
       {
@@ -16,7 +16,7 @@ const PlacesListMain = ({offers, onActiveCard, onMouseOutWithCard}) => {
               offer={offer}
               className={CardPlaceClassName.CITIES}
               onMouseOutWithCard={onMouseOutWithCard}
-              onActiveCard={onActiveCard} />
+              onChangeActiveCard={onChangeActiveCard} />
           );
         })
       }
@@ -27,7 +27,7 @@ const PlacesListMain = ({offers, onActiveCard, onMouseOutWithCard}) => {
 PlacesListMain.propTypes = {
   offers: PropTypes.array.isRequired,
   onMouseOutWithCard: PropTypes.func.isRequired,
-  onActiveCard: PropTypes.func.isRequired
+  onChangeActiveCard: PropTypes.func.isRequired
 };
 
 export default PlacesListMain;

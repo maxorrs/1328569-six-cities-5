@@ -150,5 +150,49 @@ export default [
         date: `2015-02-20T19:29:31.238Z`
       }
     ]
+  },
+  {
+    id: `5`,
+    city: `Paris`,
+    coords: [`48.8683`, `2.3263`],
+    photos: [
+      `https://picsum.photos/260/200?random=${Math.random()}`,
+      `https://picsum.photos/260/200?random=${Math.random()}`,
+      `https://picsum.photos/260/200?random=${Math.random()}`,
+      `https://picsum.photos/260/200?random=${Math.random()}`,
+      `https://picsum.photos/260/200?random=${Math.random()}`
+    ],
+    isPremium: `true`,
+    isBookmarked: `true`,
+    title: `Maecenas consequat`,
+    type: `Apartment`,
+    bedrooms: `4`,
+    maxGuests: `5`,
+    price: `300`,
+    inside: [`Dishwasher`, `Towels`, `Baby seat`, `Cabel TV`],
+    host: {
+      imgUrl: `https://picsum.photos/74/74?random=${Math.random()}`,
+      firstName: `Aaa`,
+      description: `Sed pulvinar aliquam enim at tristique. Quisque sollicitudin eget tellus quis pulvinar. Quisque pellentesque hendrerit.`,
+      isProUser: `true`
+    },
+    reviews: [
+      {
+        id: `1`,
+        authorImg: `https://picsum.photos/54?random=${Math.random()}`,
+        authorName: `Max`,
+        rating: `1`,
+        review: `Lorem`,
+        date: `2018-11-28T10:29:31.238Z`
+      },
+      {
+        id: `2`,
+        authorImg: `https://picsum.photos/54?random=${Math.random()}`,
+        authorName: `Abc`,
+        rating: `4`,
+        review: `Lorem lorem`,
+        date: `2015-02-20T19:29:31.238Z`
+      }
+    ]
   }
 ];

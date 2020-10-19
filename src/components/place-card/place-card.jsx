@@ -6,7 +6,7 @@ import {getAverageRating, getRatingAsPercentage} from '../../utils/common';
 import {housingTypes} from '../../consts';
 
 const PlaceCard = (props) => {
-  const {offer, onActiveCard, onMouseOutWithCard, className} = props;
+  const {offer, onChangeActiveCard, onMouseOutWithCard, className} = props;
   const {id, photos, isPremium, title, type, price, reviews, isBookmarked} = offer;
 
   const [previewPhotoUrl] = photos;
@@ -23,7 +23,7 @@ const PlaceCard = (props) => {
   return (
     <article
       className={`place-card ${className}__place-card`}
-      onMouseOver={() => onActiveCard(id)}
+      onMouseOver={() => onChangeActiveCard(id)}
       onMouseOut={() => onMouseOutWithCard()}>
 
       {premiumLabel}
@@ -65,7 +65,7 @@ const PlaceCard = (props) => {
 };
 
 PlaceCard.defaultProps = {
-  onActiveCard: () => {},
+  onChangeActiveCard: () => {},
   onMouseOutWithCard: () => {}
 };
 
@@ -81,7 +81,7 @@ PlaceCard.propTypes = {
     reviews: PropTypes.array
   }).isRequired,
   className: PropTypes.oneOf([`cities`, `near-places`]),
-  onActiveCard: PropTypes.func,
+  onChangeActiveCard: PropTypes.func,
   onMouseOutWithCard: PropTypes.func
 };
 

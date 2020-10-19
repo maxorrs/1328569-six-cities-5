@@ -5,9 +5,7 @@ import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 import {getIconUrl} from '../../utils/map';
-
-const LOCATION_COORDS = [52.38333, 4.9];
-
+import {cities} from '../../consts';
 
 const MapSetting = {
   ZOOM: 12,
@@ -25,16 +23,17 @@ export default class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {offersCoords, activeCard} = this.props;
+    const {offersCoords, activeCard, selectedCity} = this.props;
+    this._currentCityInfo = cities.find((item) => item.city === selectedCity);
 
     this._map = leaflet.map(this._mapRef.current, {
-      center: LOCATION_COORDS,
+      center: this._currentCityInfo.coords,
       zoom: MapSetting.ZOOM,
       zoomControl: MapSetting.ZOOM_CONTROL,
       marker: MapSetting.MARKER
     });
 
-    this._map.setView(LOCATION_COORDS, MapSetting.ZOOM);
+    this._map.setView(this._currentCityInfo.coords, MapSetting.ZOOM);
 
     leaflet
       .tileLayer(MapSetting.TITLE_LAYER, {attribution: MapSetting.ATTRIBUTION})
@@ -54,17 +53,39 @@ export default class Map extends PureComponent {
   }
 
   componentDidUpdate() {
-    const {offersCoords, activeCard} = this.props;
+    const {offersCoords, activeCard, selectedCity} = this.props;
+    const {coords} = cities.find((item) => item.city === selectedCity);
+
+    if (this._currentCityInfo.coords !== coords) {
+      this._currentCityInfo = cities.find((item) => item.city === selectedCity);
+
+      this._map.remove();
+
+      this._map = leaflet.map(this._mapRef.current, {
+        center: this._currentCityInfo.coords,
+        zoom: MapSetting.ZOOM,
+        zoomControl: MapSetting.ZOOM_CONTROL,
+        marker: MapSetting.MARKER
+      });
+
+      this._map.setView(this._currentCityInfo.coords, MapSetting.ZOOM);
+
+      leaflet
+        .tileLayer(MapSetting.TITLE_LAYER, {attribution: MapSetting.ATTRIBUTION})
+        .addTo(this._map);
+
+      this._map.setView(this._currentCityInfo.coords, MapSetting.ZOOM);
+    }
 
     offersCoords
-      .map(([id, coords]) => {
+      .map(([id, offerCoords]) => {
         const icon = leaflet.icon({
           iconUrl: getIconUrl(id, activeCard),
           iconSize: MapSetting.ICON_SIZE
         });
 
         leaflet
-          .marker(coords, {icon})
+          .marker(offerCoords, {icon})
           .addTo(this._map);
       });
   }
@@ -78,5 +99,6 @@ export default class Map extends PureComponent {
 
 Map.propTypes = {
   offersCoords: PropTypes.array.isRequired,
-  activeCard: PropTypes.string
+  activeCard: PropTypes.string.isRequired,
+  selectedCity: PropTypes.string.isRequired
 };

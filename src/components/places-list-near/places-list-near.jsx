@@ -23,8 +23,7 @@ const PlacesListNear = ({otherOffers}) => {
 };
 
 PlacesListNear.propTypes = {
-  otherOffers: PropTypes.array,
-  className: PropTypes.string.isRequired
+  otherOffers: PropTypes.array
 };
 
 export default PlacesListNear;
