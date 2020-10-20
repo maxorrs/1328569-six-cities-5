@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
-import {getAverageRating, getRatingAsPercentage} from '../../utils/common';
-import {housingTypes} from '../../consts';
+import {getRatingAsPercentage} from '../../utils/common';
+import {housingTypes, CardPlaceClassName} from '../../consts';
+
 
 const PlaceCard = (props) => {
   const {offer, onChangeActiveCard, onMouseOutWithCard, className} = props;
-  const {id, photos, isPremium, title, type, price, reviews, isBookmarked} = offer;
+  const {id, photos, isPremium, title, type, price, isBookmarked, rating} = offer;
 
   const [previewPhotoUrl] = photos;
   const premiumLabel = (isPremium === `true` &&
@@ -17,7 +18,6 @@ const PlaceCard = (props) => {
 
   const classBookmarkButton = isBookmarked === `true` ? `place-card__bookmark-button--active` : ``;
 
-  const rating = getAverageRating(reviews);
   const ratingAsPercentage = getRatingAsPercentage(rating);
 
   return (
@@ -26,14 +26,14 @@ const PlaceCard = (props) => {
       onMouseOver={() => onChangeActiveCard(id)}
       onMouseOut={() => onMouseOutWithCard()}>
 
-      {premiumLabel}
+      {!CardPlaceClassName.FAVORITES ? premiumLabel : null}
 
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewPhotoUrl} width="260" height="200" alt="Place image" />
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className={`${className === CardPlaceClassName.FAVORITES ? `favorites__card-info` : ``} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -76,11 +76,12 @@ PlaceCard.propTypes = {
     photos: PropTypes.array.isRequired,
     isPremium: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    rating: PropTypes.string.isRequired,
     isBookmarked: PropTypes.string.isRequired,
     type: PropTypes.oneOf([...housingTypes]),
     reviews: PropTypes.array
   }).isRequired,
-  className: PropTypes.oneOf([`cities`, `near-places`]),
+  className: PropTypes.oneOf([`cities`, `near-places`, `favorites`]),
   onChangeActiveCard: PropTypes.func,
   onMouseOutWithCard: PropTypes.func
 };

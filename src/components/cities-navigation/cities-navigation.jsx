@@ -24,7 +24,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onChangeSelectedCity: (payload) => dispatch(ActionCreator.changeSelectedCity(payload))
+  onChangeSelectedCity: (payload) => {
+    dispatch(ActionCreator.changeSelectedCity(payload));
+    dispatch(ActionCreator.resetSortType());
+    dispatch(ActionCreator.closeSortMenu());
+  }
 });
 
 CitiesNavigation.propTypes = {

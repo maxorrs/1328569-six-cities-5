@@ -1,17 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import {SortingType} from '../../consts';
+import {SortType} from '../../consts';
 
-const SortingList = () => {
+const SortingList = ({isSortMenuOpen, onChangeSelectedSortType}) => {
+  const openSortMenuClassName = isSortMenuOpen ? `places__options--opened` : ``;
+
   return (
-    <ul className="places__options places__options--custom places__options">
+    <ul className={`places__options places__options--custom places__options ${openSortMenuClassName}`}>
       {
         Object
-          .keys(SortingType)
+          .values(SortType)
           .map((type) => {
             return (
               <li
                 key={type}
+                onClick={() => onChangeSelectedSortType(type)}
                 className={`places__option`}
                 tabIndex="0">
                 {type}
@@ -21,6 +25,11 @@ const SortingList = () => {
       }
     </ul>
   );
+};
+
+SortingList.propTypes = {
+  isSortMenuOpen: PropTypes.bool.isRequired,
+  onChangeSelectedSortType: PropTypes.func.isRequired
 };
 
 export default SortingList;

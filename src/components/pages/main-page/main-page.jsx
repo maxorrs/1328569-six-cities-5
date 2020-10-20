@@ -10,7 +10,7 @@ import Map from '../../map/map';
 import Sorting from '../../sorting/sorting';
 
 import {getOffersCoords} from '../../../utils/map';
-import {getUniqueCities, getFilteredOffersBySelectedCity} from '../../../utils/common';
+import {getUniqueCities, getFilteredOffers} from '../../../utils/common';
 import {ActionCreator} from '../../../store/reducer';
 
 const MainPage = (props) => {
@@ -19,12 +19,12 @@ const MainPage = (props) => {
     onChangeActiveCard,
     onMouseOutWithCard,
     selectedCity,
-    filteredOffersBySelectedCity,
+    filteredOffers,
     offersCoords,
     citiesList
   } = props;
 
-  const offersCount = filteredOffersBySelectedCity.length;
+  const offersCount = filteredOffers.length;
 
   const titleFound = `${offersCount} ${offersCount === 1 ? `place` : `places`} to stay in ${selectedCity}`;
   const mainClassName = offersCount ? `` : `page__main--index-empty`;
@@ -47,7 +47,7 @@ const MainPage = (props) => {
                   <b className="places__found">{titleFound}</b>
                   <Sorting />
                   <PlacesListMain
-                    offers={filteredOffersBySelectedCity}
+                    offers={filteredOffers}
                     onChangeActiveCard={onChangeActiveCard}
                     onMouseOutWithCard={onMouseOutWithCard} />
                 </section>
@@ -70,8 +70,8 @@ const MainPage = (props) => {
 const mapStateToProps = (state) => ({
   activeCard: state.activeCard,
   selectedCity: state.selectedCity,
-  filteredOffersBySelectedCity: getFilteredOffersBySelectedCity(state.offers, state.selectedCity),
-  offersCoords: getOffersCoords(getFilteredOffersBySelectedCity(state.offers, state.selectedCity)),
+  filteredOffers: getFilteredOffers(state.offers, state.selectedCity, state.selectedSortType),
+  offersCoords: getOffersCoords(getFilteredOffers(state.offers, state.selectedCity, state.selectedSortType)),
   citiesList: getUniqueCities(state.offers)
 });
 
@@ -85,7 +85,7 @@ MainPage.propTypes = {
   onChangeActiveCard: PropTypes.func.isRequired,
   onMouseOutWithCard: PropTypes.func.isRequired,
   selectedCity: PropTypes.string.isRequired,
-  filteredOffersBySelectedCity: PropTypes.array.isRequired,
+  filteredOffers: PropTypes.array.isRequired,
   offersCoords: PropTypes.array.isRequired,
   citiesList: PropTypes.array.isRequired
 };

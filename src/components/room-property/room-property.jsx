@@ -7,14 +7,13 @@ import InsideList from '../inside-list/inside-list';
 import FeaturesList from '../features-list/features-list';
 import PhotosList from '../photos-list/photos-list';
 
-import {getTransformDataOffer, getAverageRating, getRatingAsPercentage} from '../../utils/common';
+import {getTransformDataOffer, getRatingAsPercentage} from '../../utils/common';
 
 const RoomProperty = ({currentOffer, children}) => {
   const transformOffer = getTransformDataOffer(currentOffer);
-  const {photos, isPremium, title, features, price, inside, host, reviews, isBookmarked} = transformOffer;
+  const {photos, isPremium, title, features, price, inside, host, reviews, isBookmarked, rating} = transformOffer;
 
-  const averageRating = getAverageRating(reviews);
-  const ratingAsPercentage = getRatingAsPercentage(averageRating);
+  const ratingAsPercentage = getRatingAsPercentage(rating);
 
   const classBookmarkButton = isBookmarked === `true` ? `property__bookmark-button--active` : ``;
 
@@ -52,7 +51,7 @@ const RoomProperty = ({currentOffer, children}) => {
                 <span style={{width: `${ratingAsPercentage}`}}></span>
                 <span className="visually-hidden">Rating</span>
               </div>
-              <span className="property__rating-value rating__value">{averageRating}</span>
+              <span className="property__rating-value rating__value">{rating}</span>
             </div>
             <FeaturesList features={features} />
             <div className="property__price">

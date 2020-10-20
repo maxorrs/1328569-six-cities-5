@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import FavoritesList from '../favorites-list/favorites-list';
+import PlacesListFavorite from '../places-list-favorite/places-list-favorite';
 
 const CitiesList = ({uniqueCities, favoriteOffers}) => {
   return (
@@ -18,7 +18,7 @@ const CitiesList = ({uniqueCities, favoriteOffers}) => {
             </div>
           </div>
           <div className="favorites__places">
-            <FavoritesList
+            <PlacesListFavorite
               city={city}
               favoriteOffers={favoriteOffers} />
           </div>

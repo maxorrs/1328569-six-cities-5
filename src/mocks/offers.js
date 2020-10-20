@@ -15,6 +15,7 @@ export default [
     bedrooms: `3`,
     maxGuests: `3`,
     price: `100`,
+    rating: `0.5`,
     inside: [`Wi-Fi`, `Heating`, `Kitchen`],
     host: {
       imgUrl: `https://picsum.photos/74/74?random=${Math.random()}`,
@@ -56,6 +57,7 @@ export default [
     type: `Apartment`,
     bedrooms: `2`,
     maxGuests: `1`,
+    rating: `4`,
     price: `200`,
     inside: [`Frigde`, `Washing machine`, `Coffee machine`],
     host: {
@@ -81,6 +83,7 @@ export default [
     bedrooms: `2`,
     maxGuests: `1`,
     price: `500`,
+    rating: `3`,
     inside: [`Dishwasher`, `Towels`, `Baby seat`, `Cabel TV`],
     host: {
       imgUrl: `https://picsum.photos/74/74?random=${Math.random()}`,
@@ -124,6 +127,7 @@ export default [
     type: `Apartment`,
     bedrooms: `4`,
     maxGuests: `5`,
+    rating: `2`,
     price: `300`,
     inside: [`Dishwasher`, `Towels`, `Baby seat`, `Cabel TV`],
     host: {
@@ -168,6 +172,7 @@ export default [
     type: `Apartment`,
     bedrooms: `4`,
     maxGuests: `5`,
+    rating: `0`,
     price: `300`,
     inside: [`Dishwasher`, `Towels`, `Baby seat`, `Cabel TV`],
     host: {

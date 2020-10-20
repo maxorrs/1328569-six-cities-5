@@ -1,3 +1,5 @@
+import {SortType} from '../consts';
+
 export const getRatingAsPercentage = (rating) => {
   return `${Math.round(+rating * 100 / 5)}%`;
 };
@@ -25,23 +27,6 @@ export const getTransformDataOffer = (offer) => {
   return transformOffer;
 };
 
-export const getAverageRating = (reviews) => {
-  if (!reviews) {
-    return 0;
-  }
-
-  const reviewsCount = reviews.length;
-
-  const ratingAmount = reviews
-    .reduce((total, {rating}) => {
-      return total + parseInt(rating, 10);
-    }, 0);
-
-  const averageRating = ratingAmount / reviewsCount;
-
-  return Math.round(averageRating);
-};
-
 export const getFavoriteOffers = (offers) => {
   return offers
     .filter(({isBookmarked}) => isBookmarked === `true`);
@@ -61,6 +46,52 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
-export const getFilteredOffersBySelectedCity = (offers, selectedCity) => {
-  return offers.filter((offer) => offer.city === selectedCity);
+export const getFilteredOffers = (offers, selectedCity, selectedSortType) => {
+  const filteredOfferBySelectedCity = offers.filter((offer) => offer.city === selectedCity);
+
+  switch (selectedSortType) {
+    case SortType.POPULAR:
+      return filteredOfferBySelectedCity;
+
+    case SortType.PRICE_HIGH_TO_LOW:
+      return filteredOfferBySelectedCity
+        .slice()
+        .sort((a, b) => {
+          if (+a.price < +b.price) {
+            return 1;
+          } else if (+a.price > +b.price) {
+            return -1;
+          } else {
+            return 0;
+          }
+        });
+
+    case SortType.PRICE_LOW_TO_HIGH:
+      return filteredOfferBySelectedCity
+        .slice()
+        .sort((a, b) => {
+          if (+a.price > +b.price) {
+            return 1;
+          } else if (+a.price < +b.price) {
+            return -1;
+          } else {
+            return 0;
+          }
+        });
+
+    case SortType.TOP_RATED:
+      return filteredOfferBySelectedCity
+        .slice()
+        .sort((a, b) => {
+          if (+a.rating < +b.rating) {
+            return 1;
+          } else if (+a.rating > +b.rating) {
+            return -1;
+          } else {
+            return 0;
+          }
+        });
+  }
+
+  return filteredOfferBySelectedCity;
 };
