@@ -36,18 +36,15 @@ export const housingTypes = [`Apartment`, `Room`, `House`, `Hotel`];
 
 export const fieldsType = [`entire`, `bedrooms`, `adults`];
 
-export const SortingType = {
+export const SortType = {
   POPULAR: `Popular`,
-  LOW: `Price: low to high`,
-  HIGH: `Price: high to low`,
-  TOP: `Top rated first`
+  PRICE_LOW_TO_HIGH: `Price: low to high`,
+  PRICE_HIGH_TO_LOW: `Price: high to low`,
+  TOP_RATED: `Top rated first`
 };
-
-export const DEFAULT_SORT_TYPE = `POPULAR`;
-
-export const DEFAULT_LOCATION = `Amsterdam`;
 
 export const CardPlaceClassName = {
   CITIES: `cities`,
-  NEAR_PLACES: `near-places`
+  NEAR_PLACES: `near-places`,
+  FAVORITES: `favorites`
 };

@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 import Header from '../../header/header';
 import Favorites from '../../favorites/favorites';
 import FavoritesEmpty from '../../favorites-empty/favorites-empty';
 import Footer from '../../footer/footer';
 
-const FavoritesPage = (props) => {
-  const {favoriteOffers} = props;
+import {getFavoriteOffers} from '../../../utils/common';
+
+const FavoritesPage = ({favoriteOffers}) => {
   const favoritesOffersCount = favoriteOffers.length;
   const classNameEmptyPage = favoritesOffersCount ? `` : `page--favorites-empty`;
 
@@ -24,8 +26,13 @@ const FavoritesPage = (props) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  favoriteOffers: getFavoriteOffers(state.offers)
+});
+
 FavoritesPage.propTypes = {
   favoriteOffers: PropTypes.array.isRequired
 };
 
-export default FavoritesPage;
+export {FavoritesPage};
+export default connect(mapStateToProps)(FavoritesPage);
