@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
@@ -90,5 +90,7 @@ MainPage.propTypes = {
   citiesList: PropTypes.array.isRequired
 };
 
-export {MainPage};
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+const MainPageMemo = memo(MainPage);
+
+export {MainPageMemo};
+export default connect(mapStateToProps, mapDispatchToProps)(MainPageMemo);

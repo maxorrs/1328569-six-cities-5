@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 
 import {ActionCreator} from '../../store/reducer';
 import {connect} from 'react-redux';
 
 import CitiesNavigationList from '../cities-navigation-list/cities-navigation-list';
+
+import {areEqualByCitiesListAndSelectedCity} from '../../utils/memo';
 
 const CitiesNavigation = ({onChangeSelectedCity, selectedCity, citiesList}) => {
   return (
@@ -37,5 +39,7 @@ CitiesNavigation.propTypes = {
   selectedCity: PropTypes.string.isRequired
 };
 
-export {CitiesNavigation};
-export default connect(mapStateToProps, mapDispatchToProps)(CitiesNavigation);
+const CitiesNavigationMemo = memo(CitiesNavigation, areEqualByCitiesListAndSelectedCity);
+
+export {CitiesNavigationMemo};
+export default connect(mapStateToProps, mapDispatchToProps)(CitiesNavigationMemo);

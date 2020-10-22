@@ -1,5 +1,7 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
+
+import {areEqualByReview} from '../../utils/memo';
 
 const TextareaReview = ({review, onInputChange}) => {
   return (
@@ -18,4 +20,4 @@ TextareaReview.propTypes = {
   onInputChange: PropTypes.func.isRequired
 };
 
-export default TextareaReview;
+export default memo(TextareaReview, areEqualByReview);

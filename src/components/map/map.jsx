@@ -1,4 +1,4 @@
-import React, {createRef, PureComponent} from 'react';
+import React, {createRef, Component} from 'react';
 import PropTypes from 'prop-types';
 
 import leaflet from 'leaflet';
@@ -16,7 +16,7 @@ const MapSetting = {
   ATTRIBUTION: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
 };
 
-export default class Map extends PureComponent {
+export default class Map extends Component {
   constructor(props) {
     super(props);
     this._mapRef = createRef();
@@ -50,6 +50,11 @@ export default class Map extends PureComponent {
           .marker(coords, {icon})
           .addTo(this._map);
       });
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return (nextProps.activeCard !== this.props.activeCard ||
+      nextProps.selectedCity !== this.props.selectedCity);
   }
 
   componentDidUpdate() {

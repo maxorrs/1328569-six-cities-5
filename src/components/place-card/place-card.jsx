@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
@@ -86,4 +86,4 @@ PlaceCard.propTypes = {
   onMouseOutWithCard: PropTypes.func
 };
 
-export default PlaceCard;
+export default memo(PlaceCard);

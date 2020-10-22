@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+
+import {areEqualBySelectedCity} from '../../utils/memo';
 
 const CitiesNavigationList = ({citiesList, onChangeSelectedCity, selectedCity}) => {
   return (
@@ -32,4 +34,4 @@ CitiesNavigationList.propTypes = {
   selectedCity: PropTypes.string.isRequired
 };
 
-export default CitiesNavigationList;
+export default memo(CitiesNavigationList, areEqualBySelectedCity);
