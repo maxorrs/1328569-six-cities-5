@@ -1,14 +1,18 @@
 import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+
+import {ActionCreator} from '../../store/reducer';
 
 import {areEqualBySelectedCity} from '../../utils/memo';
+import {cities} from '../../consts';
 
-const CitiesNavigationList = ({citiesList, onChangeSelectedCity, selectedCity}) => {
+const CitiesNavigationList = ({onChangeSelectedCity, selectedCity}) => {
   return (
     <ul className="locations__list tabs__list">
       {
-        citiesList.map((city) => {
+        cities.map(({city}) => {
           const activeClass = city === selectedCity ? `tabs__item--active` : ``;
           return (
             <li
@@ -28,10 +32,24 @@ const CitiesNavigationList = ({citiesList, onChangeSelectedCity, selectedCity}) 
   );
 };
 
+const mapStateToProps = (state) => ({
+  selectedCity: state.selectedCity
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onChangeSelectedCity: (payload) => {
+    dispatch(ActionCreator.changeSelectedCity(payload));
+    dispatch(ActionCreator.resetSortType());
+    dispatch(ActionCreator.closeSortMenu());
+  }
+});
+
 CitiesNavigationList.propTypes = {
-  citiesList: PropTypes.array.isRequired,
   onChangeSelectedCity: PropTypes.func.isRequired,
   selectedCity: PropTypes.string.isRequired
 };
 
-export default memo(CitiesNavigationList, areEqualBySelectedCity);
+const CitiesNavigationListMemo = memo(CitiesNavigationList, areEqualBySelectedCity);
+
+export {CitiesNavigationListMemo};
+export default connect(mapStateToProps, mapDispatchToProps)(CitiesNavigationListMemo);

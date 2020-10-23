@@ -10,11 +10,6 @@ export const areEqualBySelectedCity = (prevProps, nextProps) => {
   return prevProps.selectedCity === nextProps.selectedCity;
 };
 
-export const areEqualByCitiesListAndSelectedCity = (prevProps, nextProps) => {
-  return (prevProps.citiesList === nextProps.citiesList ||
-    prevProps.selectedCity === nextProps.selectedCity);
-};
-
 export const areEqualByOffersId = (prevProps, nextProps) => {
   const prevOffers = prevProps.offers.map(({id}) => id);
   const nextOffers = nextProps.offers.map(({id}) => id);

@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import CitiesList from '../cities-list/cities-list';
+import FavoritesCitiesList from '../favorites-cities-list/favorites-cities-list';
 import {getUniqueCities} from '../../utils/common';
 
-const Favorites = (props) => {
-  const {favoriteOffers} = props;
+const Favorites = ({favoriteOffers}) => {
   const uniqueCities = getUniqueCities(favoriteOffers);
 
   return (
@@ -13,7 +12,7 @@ const Favorites = (props) => {
       <div className="page__favorites-container container">
         <section className="favorites">
           <h1 className="favorites__title">Saved listing</h1>
-          <CitiesList
+          <FavoritesCitiesList
             uniqueCities={uniqueCities}
             favoriteOffers={favoriteOffers} />
         </section>

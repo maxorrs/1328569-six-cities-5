@@ -20,6 +20,9 @@ const PlaceCard = (props) => {
 
   const ratingAsPercentage = getRatingAsPercentage(rating);
 
+  const imageWidth = className === CardPlaceClassName.FAVORITES ? `150` : `260`;
+  const imageHeight = className === CardPlaceClassName.FAVORITES ? `110` : `200`;
+
   return (
     <article
       className={`place-card ${className}__place-card`}
@@ -30,7 +33,7 @@ const PlaceCard = (props) => {
 
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
-          <img className="place-card__image" src={previewPhotoUrl} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={previewPhotoUrl} width={imageWidth} height={imageHeight} alt="Place image" />
         </Link>
       </div>
       <div className={`${className === CardPlaceClassName.FAVORITES ? `favorites__card-info` : ``} place-card__info`}>

@@ -10,7 +10,7 @@ import Map from '../../map/map';
 import Sorting from '../../sorting/sorting';
 
 import {getOffersCoords} from '../../../utils/map';
-import {getUniqueCities, getFilteredOffers} from '../../../utils/common';
+import {getFilteredOffers} from '../../../utils/common';
 import {ActionCreator} from '../../../store/reducer';
 
 const MainPage = (props) => {
@@ -20,8 +20,7 @@ const MainPage = (props) => {
     onMouseOutWithCard,
     selectedCity,
     filteredOffers,
-    offersCoords,
-    citiesList
+    offersCoords
   } = props;
 
   const offersCount = filteredOffers.length;
@@ -36,10 +35,10 @@ const MainPage = (props) => {
       <main className={`page__main page__main--index ${mainClassName}`}>
         <h1 className="visually-hidden">Cities</h1>
 
-        <CitiesNavigation citiesList={citiesList}/>
+        <CitiesNavigation />
         {
           offersCount === 0 ?
-            <CitiesEmpty /> :
+            <CitiesEmpty selectedCity={selectedCity} /> :
             <div className="cities">
               <div className="cities__places-container container">
                 <section className="cities__places places">
@@ -72,7 +71,6 @@ const mapStateToProps = (state) => ({
   selectedCity: state.selectedCity,
   filteredOffers: getFilteredOffers(state.offers, state.selectedCity, state.selectedSortType),
   offersCoords: getOffersCoords(getFilteredOffers(state.offers, state.selectedCity, state.selectedSortType)),
-  citiesList: getUniqueCities(state.offers)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -87,7 +85,6 @@ MainPage.propTypes = {
   selectedCity: PropTypes.string.isRequired,
   filteredOffers: PropTypes.array.isRequired,
   offersCoords: PropTypes.array.isRequired,
-  citiesList: PropTypes.array.isRequired
 };
 
 const MainPageMemo = memo(MainPage);
