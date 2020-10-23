@@ -95,3 +95,4 @@ export const getFilteredOffers = (offers, selectedCity, selectedSortType) => {
 
   return filteredOfferBySelectedCity;
 };
+

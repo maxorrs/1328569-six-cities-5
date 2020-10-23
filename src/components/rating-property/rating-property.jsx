@@ -1,7 +1,8 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, memo} from 'react';
 import PropTypes from 'prop-types';
 
 import {ratingInformation} from '../../consts';
+import {areEqualByRating} from '../../utils/memo';
 
 const RatingProperty = ({onInputChange, rating}) => {
 
@@ -39,4 +40,4 @@ RatingProperty.propTypes = {
   onInputChange: PropTypes.func.isRequired
 };
 
-export default RatingProperty;
+export default memo(RatingProperty, areEqualByRating);

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 
 import PlaceCard from '../place-card/place-card';
 
 import {CardPlaceClassName} from '../../consts';
+import {areEqualByOffersId} from '../../utils/memo';
 
 const PlacesListMain = ({offers, onChangeActiveCard, onMouseOutWithCard}) => {
   return (
@@ -30,4 +31,4 @@ PlacesListMain.propTypes = {
   onChangeActiveCard: PropTypes.func.isRequired
 };
 
-export default PlacesListMain;
+export default memo(PlacesListMain, areEqualByOffersId);

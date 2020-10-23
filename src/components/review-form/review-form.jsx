@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {withInputReviewChange} from '../hocs/with-input-review-change';
+import {withInputReviewChange} from '../../hocs/with-input-review-change';
 
 import RatingProperty from '../rating-property/rating-property';
 import TextareaReview from '../textarea-review/textarea-review';
