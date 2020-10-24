@@ -1,27 +1,10 @@
 export const ratingInformation = [
-  {
-    title: `perfect`,
-    value: `5`
-  },
-  {
-    title: `good`,
-    value: `4`
-  },
-  {
-    title: `not bad`,
-    value: `3`
-  },
-  {
-    title: `badly`,
-    value: `2`
-  },
-  {
-    title: `terribly`,
-    value: `1`
-  }
+  {title: `perfect`, value: `5`},
+  {title: `good`, value: `4`},
+  {title: `not bad`, value: `3`},
+  {title: `badly`, value: `2`},
+  {title: `terribly`, value: `1`}
 ];
-
-export const citiesProps = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
 export const cities = [
   {city: `Paris`, coords: [48.8588, 2.347]},
