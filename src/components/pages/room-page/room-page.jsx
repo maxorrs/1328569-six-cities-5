@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
@@ -7,20 +7,21 @@ import NearPlaces from '../../near-places/near-places';
 import RoomProperty from '../../room-property/room-property';
 import Map from '../../map/map';
 
-import {getOffersCoords} from '../../../utils/map';
+import {getCityCoords, getOffersCoords, getOfferCoords} from '../../../utils/map';
+import {getOffersAdaptSelector, getOffersNearbyAdaptSelector} from '../../../store/selectors';
 
-const MAX_COUNT_OTHER_OFFERS = 3;
+const MAX_COUNT_OFFERS_NEARBY = 3;
 
 const RoomPage = (props) => {
-  const {currentOffer, offers, selectedCity} = props;
+  const {currentOffer, cityCoords, offersNearby} = props;
+  const currentCity = currentOffer.city.name;
 
-  const otherOffers = offers
-    .filter((offer) => offer.id !== currentOffer.id && offer.city === selectedCity)
-    .slice(0, MAX_COUNT_OTHER_OFFERS);
+  const offersNearbyCoords = getOffersCoords(offersNearby)
+    .slice(0, MAX_COUNT_OFFERS_NEARBY);
 
-  const otherOffersCoords = getOffersCoords(otherOffers);
-  const currentOfferCoords = [currentOffer.id, currentOffer.coords];
-  const offersCoords = [...otherOffersCoords, currentOfferCoords];
+  const currentOfferCoords = getOfferCoords(currentOffer);
+
+  const offersCoords = [...offersNearbyCoords, currentOfferCoords];
 
   return (
     <div className="page">
@@ -30,25 +31,33 @@ const RoomPage = (props) => {
         <Map
           activeCard={currentOffer.id}
           offersCoords={offersCoords}
-          selectedCity={selectedCity} />
+          selectedCity={currentCity}
+          cityCoords={cityCoords} />
       </RoomProperty>
-      <NearPlaces otherOffers={otherOffers} />
+      <NearPlaces offersNearby={offersNearby} />
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({
-  selectedCity: state.selectedCity
+const mapStateToProps = (state, ownProps) => ({
+  offers: getOffersAdaptSelector(state),
+  cityCoords: getCityCoords(state.DATA.offers, ownProps.currentOffer.city.name),
+  offersNearby: getOffersNearbyAdaptSelector(state)
 });
 
 RoomPage.propTypes = {
   currentOffer: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    coords: PropTypes.arrayOf(PropTypes.string).isRequired
+    id: PropTypes.number.isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired
+    }).isRequired
   }).isRequired,
   offers: PropTypes.array.isRequired,
-  selectedCity: PropTypes.string.isRequired
+  cityCoords: PropTypes.object.isRequired,
+  offersNearby: PropTypes.array.isRequired
 };
 
-export {RoomPage};
-export default connect(mapStateToProps)(RoomPage);
+const RoomPageMemo = memo(RoomPage);
+
+export {RoomPageMemo};
+export default connect(mapStateToProps)(RoomPageMemo);

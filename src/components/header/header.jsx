@@ -16,7 +16,7 @@ const Header = () => {
               <li className="header__nav-item user">
                 <Link to="/favorites" className="header__nav-link header__nav-link--profile">
                   <div className="header__avatar-wrapper user__avatar-wrapper" />
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                  <span className="header__user-name user__name">Sign in</span>
                 </Link>
               </li>
             </ul>

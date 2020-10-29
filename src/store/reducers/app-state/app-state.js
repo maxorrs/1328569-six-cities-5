@@ -1,13 +1,10 @@
-import {extend} from '../utils/common';
-
-import offers from '../mocks/offers';
-
-import {SortType} from '../consts';
+import {extend} from '../../../utils/common';
+import {SortType} from '../../../consts';
 
 const DefaultValue = {
   CITY: `Amsterdam`,
   SORT_TYPE: SortType.POPULAR,
-  ACTIVE_CARD: `-1`,
+  ACTIVE_CARD: -1,
   IS_SORT_MENU_OPEN: false
 };
 
@@ -15,11 +12,10 @@ const initialState = {
   selectedCity: DefaultValue.CITY,
   activeCard: DefaultValue.ACTIVE_CARD,
   isSortMenuOpen: DefaultValue.IS_SORT_MENU_OPEN,
-  selectedSortType: DefaultValue.SORT_TYPE,
-  offers
+  selectedSortType: DefaultValue.SORT_TYPE
 };
 
-export const ActionType = {
+export const AppStateActionType = {
   CHANGE_SELECTED_CITY: `CHANGE_SELECTED_CITY`,
   CHANGE_ACTIVE_CARD: `CHANGE_ACTIVE_CARD`,
   RESET_ACTIVE_CARD: `RESET_ACTIVE_CARD`,
@@ -29,66 +25,66 @@ export const ActionType = {
   RESET_SORT_TYPE: `RESET_SORT_TYPE`
 };
 
-export const ActionCreator = {
+export const AppStateActionCreator = {
   changeSelectedCity: (payload) => ({
-    type: ActionType.CHANGE_SELECTED_CITY,
+    type: AppStateActionType.CHANGE_SELECTED_CITY,
     payload
   }),
   changeActiveCard: (payload) => ({
-    type: ActionType.CHANGE_ACTIVE_CARD,
+    type: AppStateActionType.CHANGE_ACTIVE_CARD,
     payload
   }),
   resetActiveCard: () => ({
-    type: ActionType.RESET_ACTIVE_CARD
+    type: AppStateActionType.RESET_ACTIVE_CARD
   }),
   toggledSortMenu: () => ({
-    type: ActionType.TOGGLE_SORT_MENU
+    type: AppStateActionType.TOGGLE_SORT_MENU
   }),
   changeSelectedSortType: (payload) => ({
-    type: ActionType.CHANGE_SELECTED_SORT_TYPE,
+    type: AppStateActionType.CHANGE_SELECTED_SORT_TYPE,
     payload
   }),
   resetSortType: () => ({
-    type: ActionType.RESET_SORT_TYPE
+    type: AppStateActionType.RESET_SORT_TYPE
   }),
   closeSortMenu: () => ({
-    type: ActionType.CLOSE_SORT_MENU
+    type: AppStateActionType.CLOSE_SORT_MENU
   })
 };
 
-export const reducer = (state = initialState, action) => {
+export const appState = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.CHANGE_SELECTED_CITY:
+    case AppStateActionType.CHANGE_SELECTED_CITY:
       return extend(state, {
         selectedCity: action.payload
       });
 
-    case ActionType.CHANGE_ACTIVE_CARD:
+    case AppStateActionType.CHANGE_ACTIVE_CARD:
       return extend(state, {
         activeCard: action.payload
       });
 
-    case ActionType.RESET_ACTIVE_CARD:
+    case AppStateActionType.RESET_ACTIVE_CARD:
       return extend(state, {
         activeCard: DefaultValue.ACTIVE_CARD
       });
 
-    case ActionType.TOGGLE_SORT_MENU:
+    case AppStateActionType.TOGGLE_SORT_MENU:
       return extend(state, {
         isSortMenuOpen: !state.isSortMenuOpen
       });
 
-    case ActionType.CHANGE_SELECTED_SORT_TYPE:
+    case AppStateActionType.CHANGE_SELECTED_SORT_TYPE:
       return extend(state, {
         selectedSortType: action.payload
       });
 
-    case ActionType.RESET_SORT_TYPE:
+    case AppStateActionType.RESET_SORT_TYPE:
       return extend(state, {
         selectedSortType: DefaultValue.SORT_TYPE
       });
 
-    case ActionType.CLOSE_SORT_MENU:
+    case AppStateActionType.CLOSE_SORT_MENU:
       return extend(state, {
         isSortMenuOpen: false
       });

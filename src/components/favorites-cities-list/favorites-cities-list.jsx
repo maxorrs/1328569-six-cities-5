@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import PlacesListFavorite from '../places-list-favorite/places-list-favorite';
+import {getSelectedCitySelector} from '../../store/selectors';
 
 const CitiesList = ({uniqueCities, favoriteOffers, selectedCity}) => {
   return (
-
     <ul className="favorites__list">
       {
         uniqueCities.map((city) => {
           const activeClass = city === selectedCity ? `locations--current` : ``;
-
+          const favoriteOffersByCity = favoriteOffers.filter((offer) => offer.city.name === selectedCity);
           return (
             <li
               key={city}
@@ -25,8 +25,7 @@ const CitiesList = ({uniqueCities, favoriteOffers, selectedCity}) => {
               </div>
               <div className="favorites__places">
                 <PlacesListFavorite
-                  city={city}
-                  favoriteOffers={favoriteOffers} />
+                  favoriteOffers={favoriteOffersByCity} />
               </div>
             </li>
           );
@@ -37,7 +36,7 @@ const CitiesList = ({uniqueCities, favoriteOffers, selectedCity}) => {
 };
 
 const mapStateToProps = (state) => ({
-  selectedCity: state.selectedCity
+  selectedCity: getSelectedCitySelector(state)
 });
 
 CitiesList.propTypes = {

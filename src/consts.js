@@ -31,3 +31,8 @@ export const CardPlaceClassName = {
   NEAR_PLACES: `near-places`,
   FAVORITES: `favorites`
 };
+
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};

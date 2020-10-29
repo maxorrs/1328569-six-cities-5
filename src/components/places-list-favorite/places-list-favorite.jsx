@@ -5,10 +5,9 @@ import PlaceCard from '../place-card/place-card';
 
 import {CardPlaceClassName, cities} from '../../consts';
 
-const PlacesListFavorite = ({city, favoriteOffers}) => {
+const PlacesListFavorite = ({favoriteOffers}) => {
   return (
     favoriteOffers
-      .filter((favoriteOffer) => favoriteOffer.city === city)
       .map((favoriteOffer) => {
         return (
           <PlaceCard

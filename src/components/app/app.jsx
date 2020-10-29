@@ -8,8 +8,10 @@ import SignInPage from '../pages/sign-in-page/sign-in-page';
 import FavoritesPage from '../pages/favorites-page/favorites-page';
 import RoomPage from '../pages/room-page/room-page';
 import NotFoundPage from '../pages/not-found-page/not-found-page';
+import {getOffersAdaptSelector} from '../../store/selectors';
+import {fetchOffersNearbyList} from '../../store/api-actions';
 
-const App = ({offers}) => {
+const App = ({offers, getOffersNearby}) => {
   return (
     <BrowserRouter>
       <Switch>
@@ -26,11 +28,9 @@ const App = ({offers}) => {
           path='/offer/:id'
           render={({match}) => {
             const {id: idMatch} = match.params;
-            const currentOffer = offers.find((offer) => offer.id === idMatch);
-
-            return <RoomPage
-              currentOffer={currentOffer}
-              offers={offers} />;
+            getOffersNearby(idMatch);
+            const currentOffer = offers.find((offer) => offer.id === +idMatch);
+            return <RoomPage currentOffer={currentOffer} />;
           }}>
         </Route>
         <Route>
@@ -42,12 +42,17 @@ const App = ({offers}) => {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers
+  offers: getOffersAdaptSelector(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getOffersNearby: (id) => dispatch(fetchOffersNearbyList(id))
 });
 
 App.propTypes = {
-  offers: PropTypes.array.isRequired
+  offers: PropTypes.array.isRequired,
+  getOffersNearby: PropTypes.func.isRequired
 };
 
 export {App};
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

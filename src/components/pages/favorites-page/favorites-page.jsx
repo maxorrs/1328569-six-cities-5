@@ -7,7 +7,7 @@ import Favorites from '../../favorites/favorites';
 import FavoritesEmpty from '../../favorites-empty/favorites-empty';
 import Footer from '../../footer/footer';
 
-import {getFavoriteOffers} from '../../../utils/common';
+import {getFavoriteOffersSelector} from '../../../store/selectors';
 
 const FavoritesPage = ({favoriteOffers}) => {
   const favoritesOffersCount = favoriteOffers.length;
@@ -17,9 +17,9 @@ const FavoritesPage = ({favoriteOffers}) => {
     <div className={`page ${classNameEmptyPage}`}>
       <Header />
       {
-        favoritesOffersCount ?
-          <Favorites favoriteOffers={favoriteOffers} /> :
-          <FavoritesEmpty />
+        favoritesOffersCount
+          ? <Favorites favoriteOffers={favoriteOffers} />
+          : <FavoritesEmpty />
       }
       <Footer />
     </div>
@@ -27,7 +27,7 @@ const FavoritesPage = ({favoriteOffers}) => {
 };
 
 const mapStateToProps = (state) => ({
-  favoriteOffers: getFavoriteOffers(state.offers)
+  favoriteOffers: getFavoriteOffersSelector(state)
 });
 
 FavoritesPage.propTypes = {

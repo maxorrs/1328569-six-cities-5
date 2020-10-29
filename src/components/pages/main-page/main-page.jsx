@@ -9,9 +9,8 @@ import PlacesListMain from '../../places-list-main/places-list-main';
 import Map from '../../map/map';
 import Sorting from '../../sorting/sorting';
 
-import {getOffersCoords} from '../../../utils/map';
-import {getFilteredOffers} from '../../../utils/common';
-import {ActionCreator} from '../../../store/reducer';
+import {AppStateActionCreator} from '../../../store/reducers/app-state/app-state';
+import {getActiveCardSelector, getCityCoordsSelector, getFilteredOffersSelector, getOffersCoordsSelector, getSelectedCitySelector} from '../../../store/selectors';
 
 const MainPage = (props) => {
   const {
@@ -20,8 +19,8 @@ const MainPage = (props) => {
     onMouseOutWithCard,
     selectedCity,
     filteredOffers,
-    offersCoords
-  } = props;
+    offersCoords,
+    cityCoords} = props;
 
   const offersCount = filteredOffers.length;
 
@@ -55,7 +54,8 @@ const MainPage = (props) => {
                     <Map
                       offersCoords={offersCoords}
                       activeCard={activeCard}
-                      selectedCity={selectedCity} />
+                      selectedCity={selectedCity}
+                      cityCoords={cityCoords} />
                   </section>
                 </div>
               </div>
@@ -67,24 +67,26 @@ const MainPage = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  activeCard: state.activeCard,
-  selectedCity: state.selectedCity,
-  filteredOffers: getFilteredOffers(state.offers, state.selectedCity, state.selectedSortType),
-  offersCoords: getOffersCoords(getFilteredOffers(state.offers, state.selectedCity, state.selectedSortType)),
+  activeCard: getActiveCardSelector(state),
+  selectedCity: getSelectedCitySelector(state),
+  filteredOffers: getFilteredOffersSelector(state),
+  offersCoords: getOffersCoordsSelector(state),
+  cityCoords: getCityCoordsSelector(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onChangeActiveCard: (payload) => dispatch(ActionCreator.changeActiveCard(payload)),
-  onMouseOutWithCard: () => dispatch(ActionCreator.resetActiveCard())
+  onChangeActiveCard: (payload) => dispatch(AppStateActionCreator.changeActiveCard(payload)),
+  onMouseOutWithCard: () => dispatch(AppStateActionCreator.resetActiveCard())
 });
 
 MainPage.propTypes = {
-  activeCard: PropTypes.string.isRequired,
+  activeCard: PropTypes.number.isRequired,
   onChangeActiveCard: PropTypes.func.isRequired,
   onMouseOutWithCard: PropTypes.func.isRequired,
   selectedCity: PropTypes.string.isRequired,
   filteredOffers: PropTypes.array.isRequired,
   offersCoords: PropTypes.array.isRequired,
+  cityCoords: PropTypes.object.isRequired
 };
 
 const MainPageMemo = memo(MainPage);

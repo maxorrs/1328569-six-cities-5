@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import {ActionCreator} from '../../store/reducer';
+import {AppStateActionCreator} from '../../store/reducers/app-state/app-state';
 
 import SortingList from '../sorting-list/sorting-list';
 
 import {SortType} from '../../consts';
+import {getSelectedSortTypeSelector, getSortMenuStatusSelector} from '../../store/selectors';
 
 const Sorting = ({selectedSortType, isSortMenuOpen, onChangeSelectedSortType, handleToggledSortMenu}) => {
   return (
@@ -29,16 +30,16 @@ const Sorting = ({selectedSortType, isSortMenuOpen, onChangeSelectedSortType, ha
 };
 
 const mapStateToProps = (state) => ({
-  selectedSortType: state.selectedSortType,
-  isSortMenuOpen: state.isSortMenuOpen
+  selectedSortType: getSelectedSortTypeSelector(state),
+  isSortMenuOpen: getSortMenuStatusSelector(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeSelectedSortType: (payload) => {
-    dispatch(ActionCreator.changeSelectedSortType(payload));
-    dispatch(ActionCreator.toggledSortMenu());
+    dispatch(AppStateActionCreator.changeSelectedSortType(payload));
+    dispatch(AppStateActionCreator.toggledSortMenu());
   },
-  handleToggledSortMenu: () => dispatch(ActionCreator.toggledSortMenu())
+  handleToggledSortMenu: () => dispatch(AppStateActionCreator.toggledSortMenu())
 });
 
 Sorting.propTypes = {

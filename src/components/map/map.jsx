@@ -5,7 +5,6 @@ import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 import {getIconUrl} from '../../utils/map';
-import {cities} from '../../consts';
 
 const MapSetting = {
   ZOOM: 12,
@@ -23,74 +22,80 @@ export default class Map extends Component {
   }
 
   componentDidMount() {
-    const {offersCoords, activeCard, selectedCity} = this.props;
-    this._currentCityInfo = cities.find((item) => item.city === selectedCity);
+    const {offersCoords, activeCard, cityCoords} = this.props;
+
+    this._currentCityCoords = cityCoords;
+    const {location, zoom} = this._currentCityCoords;
 
     this._map = leaflet.map(this._mapRef.current, {
-      center: this._currentCityInfo.coords,
-      zoom: MapSetting.ZOOM,
+      center: location,
+      zoom,
       zoomControl: MapSetting.ZOOM_CONTROL,
       marker: MapSetting.MARKER
     });
 
-    this._map.setView(this._currentCityInfo.coords, MapSetting.ZOOM);
+    this._map.setView(location, zoom);
 
     leaflet
       .tileLayer(MapSetting.TITLE_LAYER, {attribution: MapSetting.ATTRIBUTION})
       .addTo(this._map);
 
     offersCoords
-      .map(([id, coords]) => {
+      .map((offerCoords) => {
+        const {id, location: offerLocation} = offerCoords;
+
         const icon = leaflet.icon({
           iconUrl: getIconUrl(id, activeCard),
           iconSize: MapSetting.ICON_SIZE
         });
 
         leaflet
-          .marker(coords, {icon})
+          .marker(offerLocation, {icon})
           .addTo(this._map);
       });
   }
 
   shouldComponentUpdate(nextProps) {
-    return (nextProps.activeCard !== this.props.activeCard ||
-      nextProps.selectedCity !== this.props.selectedCity);
+    return (nextProps.activeCard !== this.props.activeCard
+      || nextProps.selectedCity !== this.props.selectedCity
+      || nextProps.offersCoords !== this.props.offersCoords);
   }
 
   componentDidUpdate() {
-    const {offersCoords, activeCard, selectedCity} = this.props;
-    const {coords} = cities.find((item) => item.city === selectedCity);
+    const {offersCoords, activeCard, cityCoords, selectedCity} = this.props;
 
-    if (this._currentCityInfo.coords !== coords) {
-      this._currentCityInfo = cities.find((item) => item.city === selectedCity);
-
+    if (this._currentCityCoords.city !== selectedCity) {
       this._map.remove();
 
+      this._currentCityCoords = cityCoords;
+      const {location, zoom} = this._currentCityCoords;
+
       this._map = leaflet.map(this._mapRef.current, {
-        center: this._currentCityInfo.coords,
-        zoom: MapSetting.ZOOM,
+        center: location,
+        zoom,
         zoomControl: MapSetting.ZOOM_CONTROL,
         marker: MapSetting.MARKER
       });
 
-      this._map.setView(this._currentCityInfo.coords, MapSetting.ZOOM);
+      this._map.setView(location, zoom);
 
       leaflet
         .tileLayer(MapSetting.TITLE_LAYER, {attribution: MapSetting.ATTRIBUTION})
         .addTo(this._map);
 
-      this._map.setView(this._currentCityInfo.coords, MapSetting.ZOOM);
+      this._map.setView(location, zoom);
     }
 
     offersCoords
-      .map(([id, offerCoords]) => {
+      .map((offerCoords) => {
+        const {id, location} = offerCoords;
         const icon = leaflet.icon({
           iconUrl: getIconUrl(id, activeCard),
           iconSize: MapSetting.ICON_SIZE
         });
 
         leaflet
-          .marker(offerCoords, {icon})
+          .marker(location, {icon})
           .addTo(this._map);
       });
   }
@@ -104,6 +109,7 @@ export default class Map extends Component {
 
 Map.propTypes = {
   offersCoords: PropTypes.array.isRequired,
-  activeCard: PropTypes.string.isRequired,
-  selectedCity: PropTypes.string.isRequired
+  activeCard: PropTypes.number.isRequired,
+  selectedCity: PropTypes.string.isRequired,
+  cityCoords: PropTypes.array.isRequired
 };

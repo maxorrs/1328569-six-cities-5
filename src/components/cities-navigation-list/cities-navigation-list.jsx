@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-import {ActionCreator} from '../../store/reducer';
+import {AppStateActionCreator} from '../../store/reducers/app-state/app-state';
 
 import {areEqualBySelectedCity} from '../../utils/memo';
 import {cities} from '../../consts';
+import {getSelectedCitySelector} from '../../store/selectors';
 
 const CitiesNavigationList = ({onChangeSelectedCity, selectedCity}) => {
   return (
@@ -33,14 +34,14 @@ const CitiesNavigationList = ({onChangeSelectedCity, selectedCity}) => {
 };
 
 const mapStateToProps = (state) => ({
-  selectedCity: state.selectedCity
+  selectedCity: getSelectedCitySelector(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeSelectedCity: (payload) => {
-    dispatch(ActionCreator.changeSelectedCity(payload));
-    dispatch(ActionCreator.resetSortType());
-    dispatch(ActionCreator.closeSortMenu());
+    dispatch(AppStateActionCreator.changeSelectedCity(payload));
+    dispatch(AppStateActionCreator.resetSortType());
+    dispatch(AppStateActionCreator.closeSortMenu());
   }
 });
 

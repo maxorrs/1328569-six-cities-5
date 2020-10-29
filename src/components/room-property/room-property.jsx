@@ -5,19 +5,18 @@ import Reviews from '../reviews/reviews';
 import Host from '../host/host';
 import InsideList from '../inside-list/inside-list';
 import FeaturesList from '../features-list/features-list';
-import PhotosList from '../photos-list/photos-list';
+import ImagesList from '../images-list/images-list';
 
-import {getTransformDataOffer, getRatingAsPercentage} from '../../utils/common';
+import {getRatingAsPercentage} from '../../utils/common';
 
 const RoomProperty = ({currentOffer, children}) => {
-  const transformOffer = getTransformDataOffer(currentOffer);
-  const {photos, isPremium, title, features, price, inside, host, reviews, isBookmarked, rating} = transformOffer;
+  const {images, isPremium, title, features, price, goods, host, reviews, isFavorite, rating} = currentOffer;
 
   const ratingAsPercentage = getRatingAsPercentage(rating);
 
-  const classBookmarkButton = isBookmarked === `true` ? `property__bookmark-button--active` : ``;
+  const classBookmarkButton = isFavorite ? `property__bookmark-button--active` : ``;
 
-  const premiumLabel = isPremium === `true` &&
+  const premiumLabel = isPremium &&
     <div className="property__mark">
       <span>Premium</span>
     </div>;
@@ -25,11 +24,7 @@ const RoomProperty = ({currentOffer, children}) => {
   return (
     <main className="page__main page__main--property">
       <section className="property">
-        <div className="property__gallery-container container">
-          <div className="property__gallery">
-            <PhotosList photos={photos} />
-          </div>
-        </div>
+        <ImagesList images={images} />
         <div className="property__container container">
           <div className="property__wrapper">
             {premiumLabel}
@@ -58,7 +53,7 @@ const RoomProperty = ({currentOffer, children}) => {
               <b className="property__price-value">&euro;{price}</b>
               <span className="property__price-text">&nbsp;night</span>
             </div>
-            <InsideList inside={inside} />
+            <InsideList goods={goods} />
             <Host host={host} />
             <Reviews reviews={reviews} />
           </div>
