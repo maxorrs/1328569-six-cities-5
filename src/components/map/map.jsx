@@ -111,5 +111,5 @@ Map.propTypes = {
   offersCoords: PropTypes.array.isRequired,
   activeCard: PropTypes.number.isRequired,
   selectedCity: PropTypes.string.isRequired,
-  cityCoords: PropTypes.array.isRequired
+  cityCoords: PropTypes.object.isRequired
 };

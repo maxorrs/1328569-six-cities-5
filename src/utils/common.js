@@ -12,9 +12,7 @@ export const getUniqueCities = (offers) => {
   const cities = offers
     .map(({city}) => city.name)
     .sort();
-
   const uniqueCities = [...new Set(cities)];
-
 
   return uniqueCities;
 };
@@ -76,4 +74,8 @@ export const filterOffers = (offers, selectedCity, selectedSortType) => {
 
 export const capitalizeFirstLetter = (str) => {
   return str[0].toUpperCase() + str.slice(1);
+};
+
+export const getFavoritesByCity = (favorites, city) => {
+  return favorites.filter((offer) => offer.city.name === city);
 };

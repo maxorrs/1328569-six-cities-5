@@ -4,14 +4,13 @@ import {SortType} from '../../../consts';
 const DefaultValue = {
   CITY: `Amsterdam`,
   SORT_TYPE: SortType.POPULAR,
-  ACTIVE_CARD: -1,
-  IS_SORT_MENU_OPEN: false
+  ACTIVE_CARD: -1
 };
 
 const initialState = {
   selectedCity: DefaultValue.CITY,
   activeCard: DefaultValue.ACTIVE_CARD,
-  isSortMenuOpen: DefaultValue.IS_SORT_MENU_OPEN,
+  isSortMenuOpen: false,
   selectedSortType: DefaultValue.SORT_TYPE
 };
 
@@ -22,7 +21,8 @@ export const AppStateActionType = {
   TOGGLE_SORT_MENU: `TOGGLE_SORT_MENU`,
   CLOSE_SORT_MENU: `CLOSE_SORT_MENU`,
   CHANGE_SELECTED_SORT_TYPE: `CHANGE_SELECTED_SORT_TYPE`,
-  RESET_SORT_TYPE: `RESET_SORT_TYPE`
+  RESET_SORT_TYPE: `RESET_SORT_TYPE`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`
 };
 
 export const AppStateActionCreator = {
@@ -49,6 +49,10 @@ export const AppStateActionCreator = {
   }),
   closeSortMenu: () => ({
     type: AppStateActionType.CLOSE_SORT_MENU
+  }),
+  redirectToRoute: (payload) => ({
+    type: AppStateActionType.REDIRECT_TO_ROUTE,
+    payload
   })
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Host = ({host}) => {
+const Host = ({host, description}) => {
   const {isPro, avatarUrl, name} = host;
   const proUserLabel = isPro ? `property__avatar-wrapper--pro` : ``;
 
@@ -15,10 +15,11 @@ const Host = ({host}) => {
         <span className="property__user-name">
           {name}
         </span>
+        {isPro && <span className="property__user-status">Pro</span>}
       </div>
       <div className="property__description">
         <p className="property__text">
-          ??
+          {description}
         </p>
       </div>
     </div>
@@ -30,7 +31,8 @@ Host.propTypes = {
     isPro: PropTypes.bool.isRequired,
     avatarUrl: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired
-  }).isRequired
+  }).isRequired,
+  description: PropTypes.string
 };
 
 export default Host;

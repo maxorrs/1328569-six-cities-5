@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
@@ -7,57 +7,107 @@ import NearPlaces from '../../near-places/near-places';
 import RoomProperty from '../../room-property/room-property';
 import Map from '../../map/map';
 
-import {getCityCoords, getOffersCoords, getOfferCoords} from '../../../utils/map';
-import {getOffersAdaptSelector, getOffersNearbyAdaptSelector} from '../../../store/selectors';
+import {getOffersCoords, getOfferCoords} from '../../../utils/map';
+import {getOfferSelector, getOffersNearbyAdaptSelector, getStatusOfferSelector, getStatusOffersNearbySelector} from '../../../store/reducers/data/selectors';
+import {fetchOffersNearbyList, fetchOffer} from '../../../store/api-actions';
+import Spinner from '../../spinner/spinner';
+import {adaptOfferToClient} from '../../../utils/adapter';
 
 const MAX_COUNT_OFFERS_NEARBY = 3;
 
-const RoomPage = (props) => {
-  const {currentOffer, cityCoords, offersNearby} = props;
-  const currentCity = currentOffer.city.name;
+class RoomPage extends Component {
+  constructor(props) {
+    super(props);
+  }
 
-  const offersNearbyCoords = getOffersCoords(offersNearby)
-    .slice(0, MAX_COUNT_OFFERS_NEARBY);
+  componentDidMount() {
+    const {idMatch, loadOffersNearby, loadOffer} = this.props;
 
-  const currentOfferCoords = getOfferCoords(currentOffer);
+    loadOffer(idMatch);
+    loadOffersNearby(idMatch);
+  }
 
-  const offersCoords = [...offersNearbyCoords, currentOfferCoords];
+  componentDidUpdate(prevProps) {
+    const {idMatch, loadOffersNearby, loadOffer} = this.props;
 
-  return (
-    <div className="page">
-      <Header />
-      <RoomProperty
-        currentOffer={currentOffer}>
-        <Map
-          activeCard={currentOffer.id}
-          offersCoords={offersCoords}
-          selectedCity={currentCity}
-          cityCoords={cityCoords} />
-      </RoomProperty>
-      <NearPlaces offersNearby={offersNearby} />
-    </div>
-  );
-};
+    if (idMatch !== prevProps.idMatch) {
+      loadOffer(idMatch);
+      loadOffersNearby(idMatch);
+    }
+  }
 
-const mapStateToProps = (state, ownProps) => ({
-  offers: getOffersAdaptSelector(state),
-  cityCoords: getCityCoords(state.DATA.offers, ownProps.currentOffer.city.name),
+  shouldComponentUpdate(nextProps) {
+    return this.props.offer.id === nextProps.offer.id;
+  }
+
+  render() {
+    const {offersNearby, offer, statusOffer, statusOffersNearby} = this.props;
+
+    if (statusOffer || statusOffersNearby) {
+      return <Spinner />;
+    }
+
+    const adaptOffer = adaptOfferToClient(offer);
+    const currentCity = adaptOffer.city.name;
+
+    const offersNearbyCoords = getOffersCoords(offersNearby)
+      .slice(0, MAX_COUNT_OFFERS_NEARBY);
+
+    const currentOfferCoords = getOfferCoords(adaptOffer);
+
+    const offersCoords = [...offersNearbyCoords, currentOfferCoords];
+    const cityCoords = {
+      city: currentCity,
+      location: [adaptOffer.location.latitude, adaptOffer.location.longitude],
+      zoom: adaptOffer.location.zoom
+    };
+
+    return (
+      <div className="page">
+        <Header />
+        <RoomProperty offer={adaptOffer}>
+          <Map
+            activeCard={adaptOffer.id}
+            offersCoords={offersCoords}
+            selectedCity={currentCity}
+            cityCoords={cityCoords} />
+        </RoomProperty>
+        <NearPlaces offersNearby={offersNearby} />
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state) => ({
+  offer: getOfferSelector(state),
+  statusOffer: getStatusOfferSelector(state),
+  statusOffersNearby: getStatusOffersNearbySelector(state),
   offersNearby: getOffersNearbyAdaptSelector(state)
 });
 
+const mapDispathToProps = (dispatch) => ({
+  loadOffer: (id) => {
+    dispatch(fetchOffer(id));
+  },
+  loadOffersNearby: (id) => {
+    dispatch(fetchOffersNearbyList(id));
+  }
+});
+
 RoomPage.propTypes = {
-  currentOffer: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+  offer: PropTypes.shape({
+    id: PropTypes.number,
     city: PropTypes.shape({
       name: PropTypes.string.isRequired
-    }).isRequired
+    })
   }).isRequired,
-  offers: PropTypes.array.isRequired,
-  cityCoords: PropTypes.object.isRequired,
-  offersNearby: PropTypes.array.isRequired
+  offersNearby: PropTypes.array,
+  loadOffer: PropTypes.func.isRequired,
+  loadOffersNearby: PropTypes.func.isRequired,
+  statusOffer: PropTypes.bool.isRequired,
+  statusOffersNearby: PropTypes.bool.isRequired,
+  idMatch: PropTypes.string.isRequired
 };
 
-const RoomPageMemo = memo(RoomPage);
-
-export {RoomPageMemo};
-export default connect(mapStateToProps)(RoomPageMemo);
+export {RoomPage};
+export default connect(mapStateToProps, mapDispathToProps)(RoomPage);

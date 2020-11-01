@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import {getRatingAsPercentage} from '../../utils/common';
 import {formatDateForReview, formatDateForReviewAttr} from '../../utils/date';
 
-const ReviewItem = (props) => {
-  const {authorImg, authorName, rating, review, date} = props.review;
+const ReviewItem = ({review}) => {
+  const {user, comment, rating, date} = review;
+  const {name, avatarUrl} = user;
 
   const ratingAsPercentage = getRatingAsPercentage(rating);
-
   const dateForReview = formatDateForReview(date);
   const dateForReviewAttr = formatDateForReviewAttr(date);
 
@@ -16,9 +16,9 @@ const ReviewItem = (props) => {
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src={authorImg} width="54" height="54" alt="Reviews avatar" />
+          <img className="reviews__avatar user__avatar" src={avatarUrl} width="54" height="54" alt="Reviews avatar" />
         </div>
-        <span className="reviews__user-name">{authorName}</span>
+        <span className="reviews__user-name">{name}</span>
       </div>
       <div className="reviews__info">
         <div className="reviews__rating rating">
@@ -27,7 +27,7 @@ const ReviewItem = (props) => {
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
-        <p className="reviews__text">{review}</p>
+        <p className="reviews__text">{comment}</p>
         <time className="reviews__time" dateTime={dateForReviewAttr}>{dateForReview}</time>
       </div>
     </li>
@@ -36,12 +36,16 @@ const ReviewItem = (props) => {
 
 ReviewItem.propTypes = {
   review: PropTypes.shape({
-    authorImg: PropTypes.string.isRequired,
-    authorName: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    rating: PropTypes.string.isRequired,
-    review: PropTypes.string.isRequired
+    comment: PropTypes.string,
+    date: PropTypes.string,
+    id: PropTypes.number,
+    rating: PropTypes.number,
+    user: PropTypes.shape({
+      avatarUrl: PropTypes.string,
+      id: PropTypes.number,
+      isPro: PropTypes.bool,
+      name: PropTypes.string
+    })
   })
 };
 

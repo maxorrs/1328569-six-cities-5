@@ -7,7 +7,8 @@ import {AppStateActionCreator} from '../../store/reducers/app-state/app-state';
 import SortingList from '../sorting-list/sorting-list';
 
 import {SortType} from '../../consts';
-import {getSelectedSortTypeSelector, getSortMenuStatusSelector} from '../../store/selectors';
+import {getSortMenuStatusSelector} from '../../store/reducers/app-state/selectors';
+import {getSelectedSortTypeSelector} from '../../store/reducers/data/selectors';
 
 const Sorting = ({selectedSortType, isSortMenuOpen, onChangeSelectedSortType, handleToggledSortMenu}) => {
   return (
