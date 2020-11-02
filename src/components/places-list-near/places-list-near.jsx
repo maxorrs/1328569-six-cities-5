@@ -5,11 +5,11 @@ import PlaceCard from '../place-card/place-card';
 
 import {CardPlaceClassName} from '../../consts';
 
-const PlacesListNear = ({otherOffers}) => {
+const PlacesListNear = ({offersNearby}) => {
   return (
     <div className="near-places__list places__list">
       {
-        otherOffers.map((offer) => {
+        offersNearby.map((offer) => {
           return (
             <PlaceCard
               key={offer.id}
@@ -23,7 +23,7 @@ const PlacesListNear = ({otherOffers}) => {
 };
 
 PlacesListNear.propTypes = {
-  otherOffers: PropTypes.array
+  offersNearby: PropTypes.array
 };
 
 export default PlacesListNear;

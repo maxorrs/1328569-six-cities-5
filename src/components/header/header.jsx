@@ -1,7 +1,15 @@
 import React, {memo} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import {getAuthorizationStatusSelector, getAdaptUserDataSelector} from '../../store/reducers/user/selectors';
 
-const Header = () => {
+import {AuthorizationStatus} from '../../consts';
+
+const Header = ({authorizationStatus, userData}) => {
+  const {email} = userData;
+  const userName = authorizationStatus === AuthorizationStatus.AUTH ? email : `Sign in`;
+
   return (
     <header className="header">
       <div className="container">
@@ -16,7 +24,7 @@ const Header = () => {
               <li className="header__nav-item user">
                 <Link to="/favorites" className="header__nav-link header__nav-link--profile">
                   <div className="header__avatar-wrapper user__avatar-wrapper" />
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                  <span className="header__user-name user__name">{userName}</span>
                 </Link>
               </li>
             </ul>
@@ -27,4 +35,19 @@ const Header = () => {
   );
 };
 
-export default memo(Header);
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatusSelector(state),
+  userData: getAdaptUserDataSelector(state)
+});
+
+Header.propTypes = {
+  authorizationStatus: PropTypes.oneOf([...Object.values(AuthorizationStatus)]),
+  userData: PropTypes.shape({
+    email: PropTypes.string
+  })
+};
+
+const HeaderMemo = memo(Header);
+
+export {HeaderMemo};
+export default connect(mapStateToProps)(HeaderMemo);

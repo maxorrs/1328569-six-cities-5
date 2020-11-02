@@ -1,20 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Host = ({host}) => {
-  const {isProUser, imgUrl, firstName, description} = host;
-  const proUserLabel = isProUser ? `property__avatar-wrapper--pro` : ``;
+const Host = ({host, description}) => {
+  const {isPro, avatarUrl, name} = host;
+  const proUserLabel = isPro ? `property__avatar-wrapper--pro` : ``;
 
   return (
     <div className="property__host">
       <h2 className="property__host-title">Meet the host</h2>
       <div className="property__host-user user">
         <div className={`property__avatar-wrapper user__avatar-wrapper ${proUserLabel}`}>
-          <img className="property__avatar user__avatar" src={imgUrl} width="74" height="74" alt="Host avatar" />
+          <img className="property__avatar user__avatar" src={`/${avatarUrl}`} width="74" height="74" alt="Host avatar" />
         </div>
         <span className="property__user-name">
-          {firstName}
+          {name}
         </span>
+        {isPro && <span className="property__user-status">Pro</span>}
       </div>
       <div className="property__description">
         <p className="property__text">
@@ -27,11 +28,11 @@ const Host = ({host}) => {
 
 Host.propTypes = {
   host: PropTypes.shape({
-    isProUser: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    imgUrl: PropTypes.string.isRequired,
-    firstName: PropTypes.string.isRequired
-  }).isRequired
+    isPro: PropTypes.bool.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
+  }).isRequired,
+  description: PropTypes.string
 };
 
 export default Host;

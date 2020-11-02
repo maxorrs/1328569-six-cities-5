@@ -1,42 +1,17 @@
 import {SortType} from '../consts';
 
 export const getRatingAsPercentage = (rating) => {
-  return `${Math.round(+rating * 100 / 5)}%`;
-};
-
-export const getTransformDataOffer = (offer) => {
-  const transformOffer = Object.assign(
-      {},
-      offer,
-      {
-        features: [
-          {
-            field: `entire`,
-            label: offer.type
-          }, {
-            field: `bedrooms`,
-            label: `${offer.bedrooms} Bedrooms`
-          }, {
-            field: `adults`,
-            label: `Max ${offer.maxGuests} adults`
-          }
-        ]
-      }
-  );
-
-  return transformOffer;
+  return `${Math.round(rating * 100 / 5)}%`;
 };
 
 export const getFavoriteOffers = (offers) => {
-  return offers
-    .filter(({isBookmarked}) => isBookmarked === `true`);
+  return offers.filter(({isFavorite}) => isFavorite);
 };
 
 export const getUniqueCities = (offers) => {
   const cities = offers
-    .map(({city}) => city)
+    .map(({city}) => city.name)
     .sort();
-
   const uniqueCities = [...new Set(cities)];
 
   return uniqueCities;
@@ -46,8 +21,9 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
-export const getFilteredOffers = (offers, selectedCity, selectedSortType) => {
-  const filteredOfferBySelectedCity = offers.filter((offer) => offer.city === selectedCity);
+export const filterOffers = (offers, selectedCity, selectedSortType) => {
+  const filteredOfferBySelectedCity = offers
+    .filter((offer) => offer.city.name === selectedCity);
 
   switch (selectedSortType) {
     case SortType.POPULAR:
@@ -96,3 +72,10 @@ export const getFilteredOffers = (offers, selectedCity, selectedSortType) => {
   return filteredOfferBySelectedCity;
 };
 
+export const capitalizeFirstLetter = (str) => {
+  return str[0].toUpperCase() + str.slice(1);
+};
+
+export const getFavoritesByCity = (favorites, city) => {
+  return favorites.filter((offer) => offer.city.name === city);
+};

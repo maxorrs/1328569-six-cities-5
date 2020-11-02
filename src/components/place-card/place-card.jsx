@@ -5,18 +5,16 @@ import {Link} from 'react-router-dom';
 import {getRatingAsPercentage} from '../../utils/common';
 import {housingTypes, CardPlaceClassName} from '../../consts';
 
-
 const PlaceCard = (props) => {
   const {offer, onChangeActiveCard, onMouseOutWithCard, className} = props;
-  const {id, photos, isPremium, title, type, price, isBookmarked, rating} = offer;
+  const {id, isPremium, title, type, price, isFavorite, rating, previewImage} = offer;
 
-  const [previewPhotoUrl] = photos;
-  const premiumLabel = (isPremium === `true` &&
+  const premiumLabel = (isPremium &&
     <div className="place-card__mark">
       <span>Premium</span>
     </div>);
 
-  const classBookmarkButton = isBookmarked === `true` ? `place-card__bookmark-button--active` : ``;
+  const classBookmarkButton = isFavorite ? `place-card__bookmark-button--active` : ``;
 
   const ratingAsPercentage = getRatingAsPercentage(rating);
 
@@ -33,7 +31,7 @@ const PlaceCard = (props) => {
 
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
-          <img className="place-card__image" src={previewPhotoUrl} width={imageWidth} height={imageHeight} alt="Place image" />
+          <img className="place-card__image" src={previewImage} width={imageWidth} height={imageHeight} alt="Place image" />
         </Link>
       </div>
       <div className={`${className === CardPlaceClassName.FAVORITES ? `favorites__card-info` : ``} place-card__info`}>
@@ -74,14 +72,15 @@ PlaceCard.defaultProps = {
 
 PlaceCard.propTypes = {
   offer: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
-    photos: PropTypes.array.isRequired,
-    isPremium: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    images: PropTypes.array.isRequired,
+    isPremium: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired,
-    rating: PropTypes.string.isRequired,
-    isBookmarked: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     type: PropTypes.oneOf([...housingTypes]),
+    previewImage: PropTypes.string.isRequired,
     reviews: PropTypes.array
   }).isRequired,
   className: PropTypes.oneOf([`cities`, `near-places`, `favorites`]),

@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import PlacesListFavorite from '../places-list-favorite/places-list-favorite';
+import {getFavoritesAdaptSelector, getSelectedCitySelector, getUniqueCitiesSelector} from '../../store/reducers/data/selectors';
+import {getFavoritesByCity} from '../../utils/common';
 
-const CitiesList = ({uniqueCities, favoriteOffers, selectedCity}) => {
+const CitiesList = ({uniqueCities, favorites, selectedCity}) => {
   return (
-
     <ul className="favorites__list">
       {
         uniqueCities.map((city) => {
           const activeClass = city === selectedCity ? `locations--current` : ``;
-
+          const favoritesByCity = getFavoritesByCity(favorites, city);
           return (
             <li
               key={city}
@@ -25,8 +26,7 @@ const CitiesList = ({uniqueCities, favoriteOffers, selectedCity}) => {
               </div>
               <div className="favorites__places">
                 <PlacesListFavorite
-                  city={city}
-                  favoriteOffers={favoriteOffers} />
+                  favorites={favoritesByCity} />
               </div>
             </li>
           );
@@ -37,12 +37,14 @@ const CitiesList = ({uniqueCities, favoriteOffers, selectedCity}) => {
 };
 
 const mapStateToProps = (state) => ({
-  selectedCity: state.selectedCity
+  uniqueCities: getUniqueCitiesSelector(state),
+  selectedCity: getSelectedCitySelector(state),
+  favorites: getFavoritesAdaptSelector(state)
 });
 
 CitiesList.propTypes = {
   uniqueCities: PropTypes.array.isRequired,
-  favoriteOffers: PropTypes.array.isRequired,
+  favorites: PropTypes.array.isRequired,
   selectedCity: PropTypes.string.isRequired
 };
 

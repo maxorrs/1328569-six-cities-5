@@ -2,12 +2,12 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-const InsideList = ({inside}) => {
+const InsideList = ({goods}) => {
   return (
     <div className="property__inside">
       <h2 className="property__inside-title">What&apos;s inside</h2>
       <ul className="property__inside-list">
-        {inside.map((item, i) => {
+        {goods.map((item, i) => {
           return (
             <li
               key={`${item}-${i}`}
@@ -23,7 +23,7 @@ const InsideList = ({inside}) => {
 };
 
 InsideList.propTypes = {
-  inside: PropTypes.array.isRequired
+  goods: PropTypes.array.isRequired
 };
 
 export default InsideList;

@@ -4,16 +4,18 @@ import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card';
 
 import {CardPlaceClassName, cities} from '../../consts';
+import {adaptOfferToClient} from '../../utils/adapter';
 
-const PlacesListFavorite = ({city, favoriteOffers}) => {
+const PlacesListFavorite = ({favorites}) => {
   return (
-    favoriteOffers
-      .filter((favoriteOffer) => favoriteOffer.city === city)
-      .map((favoriteOffer) => {
+    favorites
+      .map((favorite) => {
+        const adaptFavorite = adaptOfferToClient(favorite);
+
         return (
           <PlaceCard
-            key={favoriteOffer.id}
-            offer={favoriteOffer}
+            key={favorite.id}
+            offer={adaptFavorite}
             className={CardPlaceClassName.FAVORITES} />
         );
       })
@@ -22,7 +24,7 @@ const PlacesListFavorite = ({city, favoriteOffers}) => {
 
 PlacesListFavorite.propTypes = {
   city: PropTypes.oneOf([...cities.map(({city}) => city)]),
-  favoriteOffers: PropTypes.array.isRequired
+  favorites: PropTypes.array.isRequired
 };
 
 export default PlacesListFavorite;

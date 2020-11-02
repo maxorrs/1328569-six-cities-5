@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import PlacesListNear from '../places-list-near/places-list-near';
 
-const NearPlaces = ({otherOffers}) => {
-  const title = otherOffers.length !== 0 ?
+const NearPlaces = ({offersNearby}) => {
+  const title = offersNearby.length !== 0 ?
     `Other places in the neighbourhood` :
     `There are no other places in the neighborhood`;
 
@@ -12,14 +12,14 @@ const NearPlaces = ({otherOffers}) => {
     <div className="container">
       <section className="near-places places">
         <h2 className="near-places__title">{title}</h2>
-        <PlacesListNear otherOffers={otherOffers} />
+        <PlacesListNear offersNearby={offersNearby} />
       </section>
     </div>
   );
 };
 
 NearPlaces.propTypes = {
-  otherOffers: PropTypes.array.isRequired
+  offersNearby: PropTypes.array.isRequired
 };
 
 export default NearPlaces;

@@ -6,14 +6,7 @@ export const ratingInformation = [
   {title: `terribly`, value: `1`}
 ];
 
-export const cities = [
-  {city: `Paris`, coords: [48.8588, 2.347]},
-  {city: `Cologne`, coords: [30, 2]},
-  {city: `Brussels`, coords: [60, 1]},
-  {city: `Amsterdam`, coords: [52.38333, 4.9]},
-  {city: `Hamburg`, coords: [20, 22]},
-  {city: `Dusseldorf`, coords: [33, 44]}
-];
+export const cities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
 export const housingTypes = [`Apartment`, `Room`, `House`, `Hotel`];
 
@@ -30,4 +23,9 @@ export const CardPlaceClassName = {
   CITIES: `cities`,
   NEAR_PLACES: `near-places`,
   FAVORITES: `favorites`
+};
+
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
 };

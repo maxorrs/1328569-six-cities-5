@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
@@ -7,32 +7,59 @@ import Favorites from '../../favorites/favorites';
 import FavoritesEmpty from '../../favorites-empty/favorites-empty';
 import Footer from '../../footer/footer';
 
-import {getFavoriteOffers} from '../../../utils/common';
+import {fetchFavoritesList} from '../../../store/api-actions';
+import Spinner from '../../spinner/spinner';
+import {getFavoritesSelector, getStatusFavoritesSelector} from '../../../store/reducers/data/selectors';
 
-const FavoritesPage = ({favoriteOffers}) => {
-  const favoritesOffersCount = favoriteOffers.length;
-  const classNameEmptyPage = favoritesOffersCount ? `` : `page--favorites-empty`;
+class FavoritesPage extends PureComponent {
+  constructor(props) {
+    super(props);
+  }
 
-  return (
-    <div className={`page ${classNameEmptyPage}`}>
-      <Header />
-      {
-        favoritesOffersCount ?
-          <Favorites favoriteOffers={favoriteOffers} /> :
-          <FavoritesEmpty />
-      }
-      <Footer />
-    </div>
-  );
-};
+  componentDidMount() {
+    this.props.loadFavorites();
+  }
+
+  render() {
+    const {statusFavorites, favorites} = this.props;
+
+    if (statusFavorites) {
+      return <Spinner />;
+    }
+
+    const favoritesCount = favorites.length;
+    const classNameEmptyPage = favoritesCount ? `` : `page--favorites-empty`;
+
+    return (
+      <div className={`page ${classNameEmptyPage}`}>
+        <Header />
+        {
+          favoritesCount
+            ? <Favorites />
+            : <FavoritesEmpty />
+        }
+        <Footer />
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = (state) => ({
-  favoriteOffers: getFavoriteOffers(state.offers)
+  favorites: getFavoritesSelector(state),
+  statusFavorites: getStatusFavoritesSelector(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loadFavorites: () => {
+    dispatch(fetchFavoritesList());
+  }
 });
 
 FavoritesPage.propTypes = {
-  favoriteOffers: PropTypes.array.isRequired
+  favorites: PropTypes.array,
+  loadFavorites: PropTypes.func.isRequired,
+  statusFavorites: PropTypes.bool.isRequired
 };
 
 export {FavoritesPage};
-export default connect(mapStateToProps)(FavoritesPage);
+export default connect(mapStateToProps, mapDispatchToProps)(FavoritesPage);
