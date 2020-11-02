@@ -15,7 +15,7 @@ const MapSetting = {
   ATTRIBUTION: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
 };
 
-export default class Map extends Component {
+class Map extends Component {
   constructor(props) {
     super(props);
     this._mapRef = createRef();
@@ -113,3 +113,5 @@ Map.propTypes = {
   selectedCity: PropTypes.string.isRequired,
   cityCoords: PropTypes.object.isRequired
 };
+
+export default Map;

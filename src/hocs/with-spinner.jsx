@@ -1,40 +1,19 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Spinner from '../components/spinner/spinner';
 
 export const withSpinner = (Component) => {
-  class WithSpinner extends PureComponent {
-    constructor(props) {
-      super(props);
-
-      this.state = {
-        isLoading: true
-      };
-    }
-
-    componentDidMount() {
-      this.props.requestData()
-        .then(() => this.setState({
-          isLoading: false
-        }))
-        .catch(() => this.setState({
-          isLoading: false
-        }));
-    }
-
-    render() {
-      const {isLoading} = this.state;
-      return (
-        isLoading
-          ? <Spinner />
-          : <Component {...this.props} />
-      );
-    }
-  }
+  const WithSpinner = (props) => {
+    return (
+      props.isLoading
+        ? <Spinner />
+        : <Component {...props} />
+    );
+  };
 
   WithSpinner.propTypes = {
-    requestData: PropTypes.func.isRequired
+    isLoading: PropTypes.bool
   };
 
   return WithSpinner;

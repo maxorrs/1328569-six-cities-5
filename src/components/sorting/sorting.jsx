@@ -30,6 +30,13 @@ const Sorting = ({selectedSortType, isSortMenuOpen, onChangeSelectedSortType, ha
   );
 };
 
+Sorting.propTypes = {
+  selectedSortType: PropTypes.oneOf([...Object.values(SortType)]).isRequired,
+  isSortMenuOpen: PropTypes.bool.isRequired,
+  onChangeSelectedSortType: PropTypes.func.isRequired,
+  handleToggledSortMenu: PropTypes.func.isRequired
+};
+
 const mapStateToProps = (state) => ({
   selectedSortType: getSelectedSortTypeSelector(state),
   isSortMenuOpen: getSortMenuStatusSelector(state)
@@ -42,13 +49,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleToggledSortMenu: () => dispatch(AppStateActionCreator.toggledSortMenu())
 });
-
-Sorting.propTypes = {
-  selectedSortType: PropTypes.oneOf([...Object.values(SortType)]).isRequired,
-  isSortMenuOpen: PropTypes.bool.isRequired,
-  onChangeSelectedSortType: PropTypes.func.isRequired,
-  handleToggledSortMenu: PropTypes.func.isRequired
-};
 
 export {Sorting};
 export default connect(mapStateToProps, mapDispatchToProps)(Sorting);

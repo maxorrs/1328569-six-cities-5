@@ -1,14 +1,15 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import Reviews from '../reviews/reviews';
+import Reviews from '../reviews/reviews-container';
 import Host from '../host/host';
 import InsideList from '../inside-list/inside-list';
 import FeaturesList from '../features-list/features-list';
 import ImagesList from '../images-list/images-list';
 
 import {getRatingAsPercentage} from '../../utils/common';
+import {areEqualByOfferId} from '../../utils/memo';
 import {changeBookmarkStatus} from '../../store/api-actions';
 import {withBookmarkToggle} from '../../hocs/with-bookmark-toggle';
 import {getAuthorizationStatusSelector} from '../../store/reducers/user/selectors';
@@ -75,6 +76,13 @@ const RoomProperty = (props) => {
   );
 };
 
+RoomProperty.propTypes = {
+  offer: PropTypes.object.isRequired,
+  children: PropTypes.element.isRequired,
+  onToggleBookmark: PropTypes.func.isRequired,
+  isBookmark: PropTypes.bool.isRequired
+};
+
 const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatusSelector(state)
 });
@@ -85,11 +93,6 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-RoomProperty.propTypes = {
-  offer: PropTypes.object.isRequired,
-  children: PropTypes.element.isRequired,
-  onToggleBookmark: PropTypes.func.isRequired,
-  isBookmark: PropTypes.bool.isRequired
-};
+const RoomPropertyMemo = memo(RoomProperty, areEqualByOfferId);
 
-export default connect(mapStateToProps, mapDispatchToProps)(withBookmarkToggle(RoomProperty));
+export default connect(mapStateToProps, mapDispatchToProps)(withBookmarkToggle(RoomPropertyMemo));

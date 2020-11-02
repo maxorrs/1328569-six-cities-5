@@ -29,3 +29,20 @@ export const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
 };
+
+export const AppRoute = {
+  LOGIN: `/login`,
+  FAVORITES: `/favorites`,
+  roomPage: (id = `:id`) => `/offer/${id}`,
+  ROOT: `/`
+};
+
+export const APIRoute = {
+  LOGIN: `/login`,
+  OFFERS: `/hotels`,
+  offer: (id) => `/hotels/${id}`,
+  nearby: (id) => `/hotels/${id}/nearby`,
+  FAVORITES: `/favorite`,
+  reviews: (id) => `/comments/${id}`,
+  bookmark: (id, status) => `/favorite/${id}/${status}`
+};

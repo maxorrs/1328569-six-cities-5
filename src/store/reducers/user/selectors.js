@@ -15,3 +15,4 @@ export const getAdaptUserDataSelector = createSelector(
     adaptUserDataToClient
 );
 
+export const getLoadAuthStatusSelector = (state) => state[NameSpace.USER].isLoadAuthStatus;

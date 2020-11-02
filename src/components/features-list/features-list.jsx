@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 
 import {fieldsType} from '../../consts';
@@ -30,4 +30,4 @@ FeaturesList.propTypes = {
   ).isRequired
 };
 
-export default FeaturesList;
+export default memo(FeaturesList);

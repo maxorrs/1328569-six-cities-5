@@ -1,7 +1,8 @@
 import React, {PureComponent} from 'react';
+import PropTypes from 'prop-types';
 
-export const withInputReviewChange = (Component) => {
-  class WithInputReviewChange extends PureComponent {
+export const withSendReview = (Component) => {
+  class WithSendReview extends PureComponent {
     constructor(props) {
       super(props);
 
@@ -16,10 +17,17 @@ export const withInputReviewChange = (Component) => {
 
     onSubmit(evt) {
       evt.preventDefault();
-      this.setState({
-        rating: `0`,
-        review: ``
-      });
+      const {onSendReview, id, sentReviewHasError, statusSendReview} = this.props;
+      const {rating, review} = this.state;
+
+      onSendReview(id, {review, rating});
+
+      if (!sentReviewHasError || !statusSendReview) {
+        this.setState({
+          rating: `0`,
+          review: ``
+        });
+      }
     }
 
     onInputChange(evt) {
@@ -44,5 +52,12 @@ export const withInputReviewChange = (Component) => {
     }
   }
 
-  return WithInputReviewChange;
+  WithSendReview.propTypes = {
+    onSendReview: PropTypes.func.isRequired,
+    id: PropTypes.number.isRequired,
+    sentReviewHasError: PropTypes.bool.isRequired,
+    statusSendReview: PropTypes.bool.isRequired
+  };
+
+  return WithSendReview;
 };

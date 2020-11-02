@@ -55,6 +55,17 @@ const SignInPage = (props) => {
   );
 };
 
+SignInPage.propTypes = {
+  sendAuthData: PropTypes.func.isRequired,
+  clearError: PropTypes.func.isRequired,
+  onFocusClearError: PropTypes.func.isRequired,
+  selectedCity: PropTypes.string.isRequired,
+  authDataHasError: PropTypes.bool.isRequired,
+  isDataChecked: PropTypes.bool.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onInputChange: PropTypes.func.isRequired
+};
+
 const mapStateToProps = (state) => ({
   selectedCity: getSelectedCitySelector(state),
   authDataHasError: getAuthDataHasErrorSelector(state),
@@ -69,17 +80,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(UserActionCreator.authDataHasError(false));
   }
 });
-
-SignInPage.propTypes = {
-  sendAuthData: PropTypes.func.isRequired,
-  clearError: PropTypes.func.isRequired,
-  onFocusClearError: PropTypes.func.isRequired,
-  selectedCity: PropTypes.string.isRequired,
-  authDataHasError: PropTypes.bool.isRequired,
-  isDataChecked: PropTypes.bool.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-  onInputChange: PropTypes.func.isRequired
-};
 
 export {SignInPage};
 export default connect(mapStateToProps, mapDispatchToProps)(withInputLogin(SignInPage));

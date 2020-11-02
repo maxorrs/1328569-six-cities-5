@@ -1,9 +1,11 @@
 export const areEqualByRating = (prevProps, nextProps) => {
-  return prevProps.rating === nextProps.rating;
+  return prevProps.rating === nextProps.rating
+    || prevProps.disabledInput !== nextProps.disabledInput;
 };
 
 export const areEqualByReview = (prevProps, nextProps) => {
-  return prevProps.review === nextProps.review;
+  return prevProps.review === nextProps.review
+    || prevProps.disabledInput !== nextProps.disabledInput;
 };
 
 export const areEqualBySelectedCity = (prevProps, nextProps) => {
@@ -15,4 +17,8 @@ export const areEqualByOffersId = (prevProps, nextProps) => {
   const nextOffers = nextProps.offers.map(({id}) => id);
 
   return prevOffers.every((id, index) => id === nextOffers[index]);
+};
+
+export const areEqualByOfferId = (prevProps, nextProps) => {
+  return !(prevProps.offer.id === nextProps.offer.id);
 };

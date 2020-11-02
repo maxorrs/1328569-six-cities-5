@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 
 const Host = ({host, description}) => {
@@ -35,4 +35,4 @@ Host.propTypes = {
   description: PropTypes.string
 };
 
-export default Host;
+export default memo(Host);
