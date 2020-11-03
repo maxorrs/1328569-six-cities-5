@@ -3,41 +3,49 @@ import {Router as BrowserRouter, Switch, Route} from 'react-router-dom';
 import browserHistory from '../../browser-history';
 import {connect} from 'react-redux';
 
-import MainPage from '../pages/main-page/main-page';
+import MainPage from '../pages/main-page/main-page-container';
 import SignInPage from '../pages/sign-in-page/sign-in-page';
-import FavoritesPage from '../pages/favorites-page/favorites-page';
-import RoomPage from '../pages/room-page/room-page';
+import FavoritesPage from '../pages/favorites-page/favorites-page-container';
+import RoomPage from '../pages/room-page/room-page-container';
 import NotFoundPage from '../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 
 import {withSpinner} from '../../hocs/with-spinner';
-import {checkAuth} from '../../store/api-actions';
+import {getLoadAuthStatusSelector} from '../../store/reducers/user/selectors';
+import {AppRoute} from '../../consts';
 
 const App = () => {
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
-        <Route exact path='/'>
+        <Route
+          exact
+          path={AppRoute.ROOT}>
           <MainPage />
         </Route>
-        <Route exact path='/login'>
+
+        <Route
+          exact
+          path={AppRoute.LOGIN}>
           <SignInPage />
         </Route>
+
         <PrivateRoute
           exact
-          path='/favorites'
+          path={AppRoute.FAVORITES}
           render={() => {
             return (
               <FavoritesPage />
             );
           }} />
+
         <Route exact
-          path='/offer/:id'
+          path={AppRoute.roomPage()}
           render={({match}) => {
             const {id: idMatch} = match.params;
             return <RoomPage idMatch={idMatch} />;
-          }}>
-        </Route>
+          }} />
+
         <Route>
           <NotFoundPage />
         </Route>
@@ -46,9 +54,9 @@ const App = () => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  requestData: () => dispatch(checkAuth())
+const mapStateToProp = (state) => ({
+  isLoading: getLoadAuthStatusSelector(state)
 });
 
 export {App};
-export default connect(null, mapDispatchToProps)(withSpinner(App));
+export default connect(mapStateToProp)(withSpinner(App));

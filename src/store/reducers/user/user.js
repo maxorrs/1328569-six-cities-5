@@ -5,14 +5,16 @@ const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   hasError: false,
   isDataChecked: false,
-  userData: {}
+  userData: {},
+  isLoadAuthStatus: false
 };
 
 export const UserActionType = {
   REQUIRE_AUTHORIZATION: `REQUIRE_AUTHORIZATION`,
   AUTH_DATA_HAS_ERROR: `AUTH_DATA_HAS_ERROR`,
   CHECKED_DATA: `CHECKED_DATA`,
-  SET_USER_DATA: `SET_USER_DATA`
+  SET_USER_DATA: `SET_USER_DATA`,
+  LOAD_AUTH_STATUS: `LOAD_AUTH_STATUS`
 };
 
 export const UserActionCreator = {
@@ -30,6 +32,10 @@ export const UserActionCreator = {
   }),
   setUserData: (payload) => ({
     type: UserActionType.SET_USER_DATA,
+    payload
+  }),
+  loadAuthStatus: (payload) => ({
+    type: UserActionType.LOAD_AUTH_STATUS,
     payload
   })
 };
@@ -54,6 +60,11 @@ export const user = (state = initialState, action) => {
     case UserActionType.SET_USER_DATA:
       return extend(state, {
         userData: action.payload
+      });
+
+    case UserActionType.LOAD_AUTH_STATUS:
+      return extend(state, {
+        isLoadAuthStatus: action.payload
       });
   }
 

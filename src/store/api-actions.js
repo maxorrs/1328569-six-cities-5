@@ -1,10 +1,10 @@
 import {DataActionCreator} from './reducers/data/data';
 import {UserActionCreator} from './reducers/user/user';
 import {AppStateActionCreator} from './reducers/app-state/app-state';
-import {AuthorizationStatus} from '../consts';
+import {AuthorizationStatus, APIRoute, AppRoute} from '../consts';
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
-  api.get(`/hotels`)
+  api.get(APIRoute.OFFERS)
     .then(({data}) => {
       dispatch(DataActionCreator.toggleStatusOffers(true));
       dispatch(DataActionCreator.loadOffers(data));
@@ -13,7 +13,7 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
 );
 
 export const fetchOffer = (id) => (dispatch, _getState, api) => (
-  api.get(`/hotels/${id}`)
+  api.get(APIRoute.offer(id))
     .then(({data}) => {
       dispatch(DataActionCreator.toggleStatusOffer(true));
       dispatch(DataActionCreator.loadOffer(data));
@@ -22,18 +22,22 @@ export const fetchOffer = (id) => (dispatch, _getState, api) => (
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => {
-  return api.get(`/login`)
+  dispatch(UserActionCreator.loadAuthStatus(true));
+  return api.get(APIRoute.LOGIN)
     .then(({data}) => {
       dispatch(UserActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
       dispatch(UserActionCreator.setUserData(data));
+      dispatch(UserActionCreator.loadAuthStatus(false));
     })
     .catch((err) => {
+      dispatch(UserActionCreator.loadAuthStatus(false));
+
       throw err;
     });
 };
 
 export const fetchOffersNearbyList = (id) => (dispatch, _getState, api) => (
-  api.get(`/hotels/${id}/nearby`)
+  api.get(APIRoute.nearby(id))
     .then(({data}) => {
       dispatch(DataActionCreator.toggleStatusOffersNearby(true));
       dispatch(DataActionCreator.loadOffersNearby(data));
@@ -42,7 +46,7 @@ export const fetchOffersNearbyList = (id) => (dispatch, _getState, api) => (
 );
 
 export const fetchFavoritesList = () => (dispatch, _getState, api) => (
-  api.get(`/favorite`)
+  api.get(APIRoute.FAVORITES)
     .then(({data}) => {
       dispatch(DataActionCreator.toggleStatusFavorites(true));
       dispatch(DataActionCreator.loadFavorites(data));
@@ -51,7 +55,7 @@ export const fetchFavoritesList = () => (dispatch, _getState, api) => (
 );
 
 export const fetchReviews = (id) => (dispatch, _getState, api) => (
-  api.get(`/comments/${id}`)
+  api.get(APIRoute.reviews(id))
     .then(({data}) => {
       dispatch(DataActionCreator.toggleStatusReviews(true));
       dispatch(DataActionCreator.loadReviews(data));
@@ -62,13 +66,13 @@ export const fetchReviews = (id) => (dispatch, _getState, api) => (
 export const login = ({email, password}) => (dispatch, _getState, api) => {
   dispatch(UserActionCreator.checkedData(true));
 
-  api.post(`/login`, {email, password})
+  api.post(APIRoute.LOGIN, {email, password})
     .then(({data}) => {
       dispatch(UserActionCreator.authDataHasError(false));
       dispatch(UserActionCreator.checkedData(false));
       dispatch(UserActionCreator.setUserData(data));
       dispatch(UserActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
-      dispatch(AppStateActionCreator.redirectToRoute(`/favorites`));
+      dispatch(AppStateActionCreator.redirectToRoute(AppRoute.ROOT));
     })
     .catch(() => {
       dispatch(UserActionCreator.authDataHasError(true));
@@ -76,7 +80,21 @@ export const login = ({email, password}) => (dispatch, _getState, api) => {
     });
 };
 
-export const changeBookmarkStatus = (id, status) => (dispatch, _getState, api) => {
-  api.post(`/favorite/${id}/${status}`)
-    .catch(() => dispatch(AppStateActionCreator.redirectToRoute(`/login`)));
+export const changeBookmarkStatus = (id, status) => (dispatch, _getState, api) => (
+  api.post(APIRoute.bookmark(id, status))
+    .catch(() => dispatch(AppStateActionCreator.redirectToRoute(AppRoute.LOGIN)))
+);
+
+export const sendReview = (id, {review: comment, rating}) => (dispatch, _getState, api) => {
+  dispatch(DataActionCreator.toggleStatusSendReview(true));
+  return api.post(APIRoute.reviews(id), {comment, rating})
+    .then(({data}) => {
+      dispatch(DataActionCreator.sentReviewHasError(false));
+      dispatch(DataActionCreator.loadReviews(data));
+      dispatch(DataActionCreator.toggleStatusSendReview(false));
+    })
+    .catch(() => {
+      dispatch(DataActionCreator.sentReviewHasError(true));
+      dispatch(DataActionCreator.toggleStatusSendReview(false));
+    });
 };

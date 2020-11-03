@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {AppStateActionCreator} from '../../store/reducers/app-state/app-state';
 
 import {areEqualBySelectedCity} from '../../utils/memo';
-import {cities} from '../../consts';
+import {AppRoute, cities} from '../../consts';
 import {getSelectedCitySelector} from '../../store/reducers/data/selectors';
 
 const CitiesNavigationList = ({onChangeSelectedCity, selectedCity}) => {
@@ -21,7 +21,7 @@ const CitiesNavigationList = ({onChangeSelectedCity, selectedCity}) => {
               onClick={() => onChangeSelectedCity(city)}
               className="locations__item">
               <Link
-                to="/"
+                to={AppRoute.ROOT}
                 className={`locations__item-link tabs__item ${activeClass}`}>
                 <span>{city}</span>
               </Link>
@@ -31,6 +31,11 @@ const CitiesNavigationList = ({onChangeSelectedCity, selectedCity}) => {
       }
     </ul>
   );
+};
+
+CitiesNavigationList.propTypes = {
+  onChangeSelectedCity: PropTypes.func.isRequired,
+  selectedCity: PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -44,11 +49,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(AppStateActionCreator.closeSortMenu());
   }
 });
-
-CitiesNavigationList.propTypes = {
-  onChangeSelectedCity: PropTypes.func.isRequired,
-  selectedCity: PropTypes.string.isRequired
-};
 
 const CitiesNavigationListMemo = memo(CitiesNavigationList, areEqualBySelectedCity);
 

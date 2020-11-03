@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 
 const MAX_COUNT_PHOTOS = 6;
@@ -29,4 +29,4 @@ ImagesList.propTypes = {
   images: PropTypes.array.isRequired
 };
 
-export default ImagesList;
+export default memo(ImagesList);

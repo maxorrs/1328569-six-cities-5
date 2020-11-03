@@ -52,3 +52,7 @@ export const getStatusOffersNearbySelector = (state) => state[NameSpace.DATA].st
 export const getStatusReviewsSelector = (state) => state[NameSpace.DATA].statusReviews;
 
 export const getReviewsSelector = (state) => state[NameSpace.DATA].reviews;
+
+export const getSentReviewStatusSelector = (state) => state[NameSpace.DATA].sentReviewHasError;
+
+export const getStatusSendReviewSelector = (state) => state[NameSpace.DATA].statusSendReview;

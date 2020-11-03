@@ -36,17 +36,17 @@ const CitiesList = ({uniqueCities, favorites, selectedCity}) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  uniqueCities: getUniqueCitiesSelector(state),
-  selectedCity: getSelectedCitySelector(state),
-  favorites: getFavoritesAdaptSelector(state)
-});
-
 CitiesList.propTypes = {
   uniqueCities: PropTypes.array.isRequired,
   favorites: PropTypes.array.isRequired,
   selectedCity: PropTypes.string.isRequired
 };
+
+const mapStateToProps = (state) => ({
+  uniqueCities: getUniqueCitiesSelector(state),
+  selectedCity: getSelectedCitySelector(state),
+  favorites: getFavoritesAdaptSelector(state)
+});
 
 export {CitiesList};
 export default connect(mapStateToProps)(CitiesList);

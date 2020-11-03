@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 
 import PropTypes from 'prop-types';
 
@@ -26,4 +26,4 @@ InsideList.propTypes = {
   goods: PropTypes.array.isRequired
 };
 
-export default InsideList;
+export default memo(InsideList);
