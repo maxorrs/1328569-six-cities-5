@@ -6,7 +6,7 @@ import PlacesListFavorite from '../places-list-favorite/places-list-favorite';
 import {getFavoritesAdaptSelector, getSelectedCitySelector, getUniqueCitiesSelector} from '../../store/reducers/data/selectors';
 import {getFavoritesByCity} from '../../utils/common';
 
-const CitiesList = ({uniqueCities, favorites, selectedCity}) => {
+const FavoritesCitiesList = ({uniqueCities, favorites, selectedCity}) => {
   return (
     <ul className="favorites__list">
       {
@@ -36,7 +36,7 @@ const CitiesList = ({uniqueCities, favorites, selectedCity}) => {
   );
 };
 
-CitiesList.propTypes = {
+FavoritesCitiesList.propTypes = {
   uniqueCities: PropTypes.array.isRequired,
   favorites: PropTypes.array.isRequired,
   selectedCity: PropTypes.string.isRequired
@@ -48,5 +48,5 @@ const mapStateToProps = (state) => ({
   favorites: getFavoritesAdaptSelector(state)
 });
 
-export {CitiesList};
-export default connect(mapStateToProps)(CitiesList);
+export {FavoritesCitiesList};
+export default connect(mapStateToProps)(FavoritesCitiesList);

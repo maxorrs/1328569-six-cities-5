@@ -52,5 +52,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 const CitiesNavigationListMemo = memo(CitiesNavigationList, areEqualBySelectedCity);
 
-export {CitiesNavigationListMemo};
+export {CitiesNavigationList};
 export default connect(mapStateToProps, mapDispatchToProps)(CitiesNavigationListMemo);

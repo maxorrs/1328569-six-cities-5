@@ -23,7 +23,7 @@ const PlacesListFavorite = ({favorites}) => {
 };
 
 PlacesListFavorite.propTypes = {
-  city: PropTypes.oneOf([...cities.map(({city}) => city)]),
+  city: PropTypes.oneOf([...cities.map((city) => city)]),
   favorites: PropTypes.array.isRequired
 };
 

@@ -27,7 +27,7 @@ const PlaceCard = (props) => {
       onMouseOver={() => onChangeActiveCard(id)}
       onMouseOut={() => onMouseOutWithCard()}>
 
-      {!CardPlaceClassName.FAVORITES ? premiumLabel : null}
+      {className === CardPlaceClassName.FAVORITES ? null : premiumLabel}
 
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>

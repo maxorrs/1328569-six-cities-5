@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {withInputLogin} from '../../../hocs/with-input-login';
+import {compose} from 'redux';
+import {withInputLogin} from '../../../hocs/with-input-login/with-input-login';
 
 import {login} from '../../../store/api-actions';
 import {getSelectedCitySelector} from '../../../store/reducers/data/selectors';
@@ -82,4 +83,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export {SignInPage};
-export default connect(mapStateToProps, mapDispatchToProps)(withInputLogin(SignInPage));
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withInputLogin
+)(SignInPage);

@@ -1,6 +1,7 @@
 import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {compose} from 'redux';
 
 import Reviews from '../reviews/reviews-container';
 import Host from '../host/host';
@@ -11,12 +12,13 @@ import ImagesList from '../images-list/images-list';
 import {getRatingAsPercentage} from '../../utils/common';
 import {areEqualByOfferId} from '../../utils/memo';
 import {changeBookmarkStatus} from '../../store/api-actions';
-import {withBookmarkToggle} from '../../hocs/with-bookmark-toggle';
+import {withBookmarkToggle} from '../../hocs/with-bookmark-toggle/with-bookmark-toggle';
 import {getAuthorizationStatusSelector} from '../../store/reducers/user/selectors';
 
 const RoomProperty = (props) => {
   const {offer, children, onToggleBookmark, isBookmark} = props;
-  const {id, description, images, isPremium, title, features, price, goods, host, reviews, rating} = offer;
+  const {id, description, images, isPremium, title, features, price, goods, host, rating} = offer;
+
   const ratingAsPercentage = getRatingAsPercentage(rating);
 
   const classBookmarkButton = isBookmark ? `property__bookmark-button--active` : ``;
@@ -54,7 +56,8 @@ const RoomProperty = (props) => {
               </div>
               <span className="property__rating-value rating__value">{rating}</span>
             </div>
-            <FeaturesList features={features} />
+            <FeaturesList
+              features={features} />
             <div className="property__price">
               <b className="property__price-value">&euro;{price}</b>
               <span className="property__price-text">&nbsp;night</span>
@@ -64,8 +67,7 @@ const RoomProperty = (props) => {
               host={host}
               description={description} />
             <Reviews
-              id={id}
-              reviews={reviews} />
+              id={id} />
           </div>
         </div>
         <section className="property__map map">
@@ -94,5 +96,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const RoomPropertyMemo = memo(RoomProperty, areEqualByOfferId);
-
-export default connect(mapStateToProps, mapDispatchToProps)(withBookmarkToggle(RoomPropertyMemo));
+export {RoomProperty};
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withBookmarkToggle
+)(RoomPropertyMemo);

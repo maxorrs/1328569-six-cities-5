@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {compose} from 'redux';
 
 import RatingProperty from '../rating-property/rating-property';
 import TextareaReview from '../textarea-review/textarea-review';
 
-import {withSendReview} from '../../hocs/with-send-review';
+import {withSendReview} from '../../hocs/with-send-review/with-send-review';
 
 import {getSentReviewStatusSelector, getStatusSendReviewSelector} from '../../store/reducers/data/selectors';
 import {DataActionCreator} from '../../store/reducers/data/data';
@@ -76,4 +77,8 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withSendReview(ReviewForm));
+export {ReviewForm};
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withSendReview
+)(ReviewForm);

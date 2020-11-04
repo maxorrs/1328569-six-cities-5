@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
-import {AuthorizationStatus} from '../consts';
+import {AuthorizationStatus} from '../../consts';
 
 export const withBookmarkToggle = (Component) => {
   class WithBookmarkToogle extends PureComponent {

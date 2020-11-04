@@ -55,5 +55,5 @@ const mapDispatchToProps = (dispatch) => ({
   getOffers: () => dispatch(fetchOffersList())
 });
 
-export {MainPage};
+export {MainPageContainer};
 export default connect(mapStateToProps, mapDispatchToProps)(MainPageContainer);
