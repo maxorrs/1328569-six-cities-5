@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PlacesListMain is rendered correctly PlacesListMain is rendered correctly 1`] = `
+exports[`PlacesListMain is rendered correctly 1`] = `
 <div
   className="cities__places-list places__list tabs__content"
 >
@@ -20,7 +20,7 @@ exports[`PlacesListMain is rendered correctly PlacesListMain is rendered correct
           alt="Place image"
           className="place-card__image"
           height="200"
-          src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg"
+          src="url"
           width="260"
         />
       </a>
@@ -47,7 +47,7 @@ exports[`PlacesListMain is rendered correctly PlacesListMain is rendered correct
           </span>
         </div>
         <button
-          className="place-card__bookmark-button button "
+          className="place-card__bookmark-button button place-card__bookmark-button--active"
           type="button"
         >
           <svg
@@ -109,13 +109,6 @@ exports[`PlacesListMain is rendered correctly PlacesListMain is rendered correct
     onMouseOver={[Function]}
   >
     <div
-      className="place-card__mark"
-    >
-      <span>
-        Premium
-      </span>
-    </div>
-    <div
       className="cities__image-wrapper place-card__image-wrapper"
     >
       <a
@@ -126,7 +119,7 @@ exports[`PlacesListMain is rendered correctly PlacesListMain is rendered correct
           alt="Place image"
           className="place-card__image"
           height="200"
-          src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg"
+          src="url"
           width="260"
         />
       </a>
@@ -144,7 +137,7 @@ exports[`PlacesListMain is rendered correctly PlacesListMain is rendered correct
             className="place-card__price-value"
           >
             €
-            2298
+            298
           </b>
           <span
             className="place-card__price-text"
@@ -181,7 +174,7 @@ exports[`PlacesListMain is rendered correctly PlacesListMain is rendered correct
           <span
             style={
               Object {
-                "width": "80%",
+                "width": "94%",
               }
             }
           />
@@ -225,7 +218,7 @@ exports[`PlacesListMain is rendered correctly PlacesListMain is rendered correct
           alt="Place image"
           className="place-card__image"
           height="200"
-          src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg"
+          src="url"
           width="260"
         />
       </a>
@@ -243,7 +236,7 @@ exports[`PlacesListMain is rendered correctly PlacesListMain is rendered correct
             className="place-card__price-value"
           >
             €
-            350
+            298
           </b>
           <span
             className="place-card__price-text"
@@ -280,7 +273,7 @@ exports[`PlacesListMain is rendered correctly PlacesListMain is rendered correct
           <span
             style={
               Object {
-                "width": "84%",
+                "width": "94%",
               }
             }
           />

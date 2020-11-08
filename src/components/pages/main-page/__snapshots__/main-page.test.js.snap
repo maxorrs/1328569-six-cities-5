@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MainPageContainer is rendered correctly MainPageContainer is rendered correctly 1`] = `
+exports[`MainPageContainer is rendered correctly 1`] = `
 <div
   className="page page--gray page--main"
 >
@@ -260,7 +260,7 @@ exports[`MainPageContainer is rendered correctly MainPageContainer is rendered c
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg"
+                    src="url"
                     width="260"
                   />
                 </a>
@@ -349,13 +349,6 @@ exports[`MainPageContainer is rendered correctly MainPageContainer is rendered c
               onMouseOver={[Function]}
             >
               <div
-                className="place-card__mark"
-              >
-                <span>
-                  Premium
-                </span>
-              </div>
-              <div
                 className="cities__image-wrapper place-card__image-wrapper"
               >
                 <a
@@ -366,7 +359,7 @@ exports[`MainPageContainer is rendered correctly MainPageContainer is rendered c
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg"
+                    src="url"
                     width="260"
                   />
                 </a>
@@ -384,7 +377,7 @@ exports[`MainPageContainer is rendered correctly MainPageContainer is rendered c
                       className="place-card__price-value"
                     >
                       €
-                      2298
+                      298
                     </b>
                     <span
                       className="place-card__price-text"
@@ -393,7 +386,7 @@ exports[`MainPageContainer is rendered correctly MainPageContainer is rendered c
                     </span>
                   </div>
                   <button
-                    className="place-card__bookmark-button button place-card__bookmark-button--active"
+                    className="place-card__bookmark-button button "
                     type="button"
                   >
                     <svg
@@ -421,7 +414,7 @@ exports[`MainPageContainer is rendered correctly MainPageContainer is rendered c
                     <span
                       style={
                         Object {
-                          "width": "80%",
+                          "width": "94%",
                         }
                       }
                     />
@@ -465,7 +458,7 @@ exports[`MainPageContainer is rendered correctly MainPageContainer is rendered c
                     alt="Place image"
                     className="place-card__image"
                     height="200"
-                    src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg"
+                    src="url"
                     width="260"
                   />
                 </a>
@@ -483,7 +476,7 @@ exports[`MainPageContainer is rendered correctly MainPageContainer is rendered c
                       className="place-card__price-value"
                     >
                       €
-                      350
+                      298
                     </b>
                     <span
                       className="place-card__price-text"
@@ -492,7 +485,7 @@ exports[`MainPageContainer is rendered correctly MainPageContainer is rendered c
                     </span>
                   </div>
                   <button
-                    className="place-card__bookmark-button button place-card__bookmark-button--active"
+                    className="place-card__bookmark-button button "
                     type="button"
                   >
                     <svg
@@ -520,7 +513,7 @@ exports[`MainPageContainer is rendered correctly MainPageContainer is rendered c
                     <span
                       style={
                         Object {
-                          "width": "84%",
+                          "width": "94%",
                         }
                       }
                     />

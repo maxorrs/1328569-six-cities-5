@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ImagesList is rendered correctly ImagesList is rendered correctly 1`] = `
+exports[`ImagesList is rendered correctly 1`] = `
 <div
   className="property__gallery-container container"
 >

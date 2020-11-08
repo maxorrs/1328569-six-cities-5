@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RoomProperty is rendered correctly RoomProperty is rendered correctly 1`] = `
+exports[`RoomProperty is rendered correctly 1`] = `
 <main
   className="page__main page__main--property"
 >
@@ -19,7 +19,7 @@ exports[`RoomProperty is rendered correctly RoomProperty is rendered correctly 1
           <img
             alt="Photo studio"
             className="property__image"
-            src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/7.jpg"
+            src="url1"
           />
         </div>
         <div
@@ -28,43 +28,7 @@ exports[`RoomProperty is rendered correctly RoomProperty is rendered correctly 1
           <img
             alt="Photo studio"
             className="property__image"
-            src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/17.jpg"
-          />
-        </div>
-        <div
-          className="property__image-wrapper"
-        >
-          <img
-            alt="Photo studio"
-            className="property__image"
-            src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/15.jpg"
-          />
-        </div>
-        <div
-          className="property__image-wrapper"
-        >
-          <img
-            alt="Photo studio"
-            className="property__image"
-            src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/2.jpg"
-          />
-        </div>
-        <div
-          className="property__image-wrapper"
-        >
-          <img
-            alt="Photo studio"
-            className="property__image"
-            src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/11.jpg"
-          />
-        </div>
-        <div
-          className="property__image-wrapper"
-        >
-          <img
-            alt="Photo studio"
-            className="property__image"
-            src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/3.jpg"
+            src="url2"
           />
         </div>
       </div>
@@ -140,7 +104,7 @@ exports[`RoomProperty is rendered correctly RoomProperty is rendered correctly 1
           <li
             className="property__feature property__feature--bedrooms"
           >
-            1 Beedroom
+            1 Bedrooms
           </li>
           <li
             className="property__feature property__feature--adults"
@@ -230,7 +194,7 @@ exports[`RoomProperty is rendered correctly RoomProperty is rendered correctly 1
             <p
               className="property__text"
             >
-              Peaceful studio in the most wanted area in town. Quiet house Near of everything. Completely renovated. Lovely neighbourhood, lot of trendy shops, restaurants and bars in a walking distance.
+              Description
             </p>
           </div>
         </div>
@@ -263,14 +227,14 @@ exports[`RoomProperty is rendered correctly RoomProperty is rendered correctly 1
                     alt="Reviews avatar"
                     className="reviews__avatar user__avatar"
                     height="54"
-                    src="https://assets.htmlacademy.ru/intensives/javascript-3/avatar/10.jpg"
+                    src="https://assets.htmlacademy.ru/intensives/javascript-3/avatar/4.jpg"
                     width="54"
                   />
                 </div>
                 <span
                   className="reviews__user-name"
                 >
-                  A
+                  Zak
                 </span>
               </div>
               <div
@@ -285,7 +249,7 @@ exports[`RoomProperty is rendered correctly RoomProperty is rendered correctly 1
                     <span
                       style={
                         Object {
-                          "width": "80%",
+                          "width": "60%",
                         }
                       }
                     />
@@ -299,13 +263,13 @@ exports[`RoomProperty is rendered correctly RoomProperty is rendered correctly 1
                 <p
                   className="reviews__text"
                 >
-                  AbcAbc
+                  Comment
                 </p>
                 <time
                   className="reviews__time"
-                  dateTime="2020-11-28"
+                  dateTime="2020-10-30"
                 >
-                  November 2020
+                  October 2020
                 </time>
               </div>
             </li>
@@ -322,14 +286,14 @@ exports[`RoomProperty is rendered correctly RoomProperty is rendered correctly 1
                     alt="Reviews avatar"
                     className="reviews__avatar user__avatar"
                     height="54"
-                    src="https://assets.htmlacademy.ru/intensives/javascript-3/avatar/10.jpg"
+                    src="https://assets.htmlacademy.ru/intensives/javascript-3/avatar/5.jpg"
                     width="54"
                   />
                 </div>
                 <span
                   className="reviews__user-name"
                 >
-                  B
+                  Abc
                 </span>
               </div>
               <div
@@ -344,7 +308,7 @@ exports[`RoomProperty is rendered correctly RoomProperty is rendered correctly 1
                     <span
                       style={
                         Object {
-                          "width": "40%",
+                          "width": "100%",
                         }
                       }
                     />
@@ -358,11 +322,11 @@ exports[`RoomProperty is rendered correctly RoomProperty is rendered correctly 1
                 <p
                   className="reviews__text"
                 >
-                  Abc
+                  Comment2
                 </p>
                 <time
                   className="reviews__time"
-                  dateTime="2020-10-28"
+                  dateTime="2020-10-30"
                 >
                   October 2020
                 </time>

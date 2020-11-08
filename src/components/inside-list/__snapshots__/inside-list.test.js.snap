@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`InsideList is rendered correctly InsideList is rendered correctly 1`] = `
+exports[`InsideList is rendered correctly 1`] = `
 <div
   className="property__inside"
 >

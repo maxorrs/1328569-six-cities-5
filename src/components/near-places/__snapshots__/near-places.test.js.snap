@@ -31,7 +31,7 @@ exports[`NearPlaces is rendered correctly Render NearPlaces with data 1`] = `
               alt="Place image"
               className="place-card__image"
               height="200"
-              src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg"
+              src="url"
               width="260"
             />
           </a>
@@ -58,7 +58,7 @@ exports[`NearPlaces is rendered correctly Render NearPlaces with data 1`] = `
               </span>
             </div>
             <button
-              className="place-card__bookmark-button button "
+              className="place-card__bookmark-button button place-card__bookmark-button--active"
               type="button"
             >
               <svg
@@ -120,13 +120,6 @@ exports[`NearPlaces is rendered correctly Render NearPlaces with data 1`] = `
         onMouseOver={[Function]}
       >
         <div
-          className="place-card__mark"
-        >
-          <span>
-            Premium
-          </span>
-        </div>
-        <div
           className="near-places__image-wrapper place-card__image-wrapper"
         >
           <a
@@ -137,7 +130,7 @@ exports[`NearPlaces is rendered correctly Render NearPlaces with data 1`] = `
               alt="Place image"
               className="place-card__image"
               height="200"
-              src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg"
+              src="url"
               width="260"
             />
           </a>
@@ -155,7 +148,7 @@ exports[`NearPlaces is rendered correctly Render NearPlaces with data 1`] = `
                 className="place-card__price-value"
               >
                 €
-                2298
+                298
               </b>
               <span
                 className="place-card__price-text"
@@ -192,7 +185,7 @@ exports[`NearPlaces is rendered correctly Render NearPlaces with data 1`] = `
               <span
                 style={
                   Object {
-                    "width": "80%",
+                    "width": "94%",
                   }
                 }
               />
@@ -236,7 +229,7 @@ exports[`NearPlaces is rendered correctly Render NearPlaces with data 1`] = `
               alt="Place image"
               className="place-card__image"
               height="200"
-              src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg"
+              src="url"
               width="260"
             />
           </a>
@@ -254,7 +247,7 @@ exports[`NearPlaces is rendered correctly Render NearPlaces with data 1`] = `
                 className="place-card__price-value"
               >
                 €
-                350
+                298
               </b>
               <span
                 className="place-card__price-text"
@@ -291,7 +284,7 @@ exports[`NearPlaces is rendered correctly Render NearPlaces with data 1`] = `
               <span
                 style={
                   Object {
-                    "width": "84%",
+                    "width": "94%",
                   }
                 }
               />

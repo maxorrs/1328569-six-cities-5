@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FavoritesEmpty is rendered correctly FavoritesEmpty is rendered correctly 1`] = `
+exports[`FavoritesEmpty is rendered correctly 1`] = `
 <main
   className="page__main page__main--favorites page__main--favorites-empty"
 >

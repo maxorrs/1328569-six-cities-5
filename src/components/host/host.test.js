@@ -1,5 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+
 import Host from './host';
 
 describe(`Host is rendered correctly`, () => {

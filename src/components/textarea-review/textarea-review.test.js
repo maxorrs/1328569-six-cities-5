@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 
 import TextareaReview from './textarea-review';
 
-import {noop} from '../../test-data/test-data';
+const noop = () => {};
 
 describe(`TextareaReview is rendered correctly`, () => {
   it(`TextareaReview is rendered correctly with disabled input`, () => {

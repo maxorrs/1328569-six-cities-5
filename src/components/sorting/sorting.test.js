@@ -3,8 +3,14 @@ import renderer from 'react-test-renderer';
 
 import {Sorting} from './sorting';
 
-import {noop} from '../../test-data/test-data';
-import {SortType} from '../../consts';
+const noop = () => {};
+
+const SortType = {
+  POPULAR: `Popular`,
+  PRICE_LOW_TO_HIGH: `Price: low to high`,
+  PRICE_HIGH_TO_LOW: `Price: high to low`,
+  TOP_RATED: `Top rated first`
+};
 
 describe(`Sorting is rendered correctly`, () => {
   it(`Render Sorting with open menu`, () => {
@@ -12,7 +18,7 @@ describe(`Sorting is rendered correctly`, () => {
       selectedSortType: SortType.POPULAR,
       isSortMenuOpen: true,
       onChangeSelectedSortType: noop,
-      handleToggledSortMenu: noop
+      onToggledSortMenu: noop
     };
 
     const tree = renderer
@@ -29,7 +35,7 @@ describe(`Sorting is rendered correctly`, () => {
       selectedSortType: SortType.POPULAR,
       isSortMenuOpen: false,
       onChangeSelectedSortType: noop,
-      handleToggledSortMenu: noop
+      onToggledSortMenu: noop
     };
 
     const tree = renderer
@@ -50,7 +56,7 @@ describe(`Sorting is rendered correctly`, () => {
           selectedSortType: type,
           isSortMenuOpen: false,
           onChangeSelectedSortType: noop,
-          handleToggledSortMenu: noop
+          onToggledSortMenu: noop
         };
 
         const tree = renderer

@@ -1,10 +1,11 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import {BrowserRouter} from 'react-router-dom';
 
-import PlacesListMain from './places-list-main';
+import {configure, shallow} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
-const noop = () => {};
+import {RoomProperty} from './room-property';
+
+configure({adapter: new Adapter()});
 
 const getOffersAdaptMock = (count) => {
   const templateOffers = Array(count)
@@ -59,17 +60,25 @@ const getOffersAdaptMock = (count) => {
   return templateOffers;
 };
 
-it(`PlacesListMain is rendered correctly`, () => {
-  const tree = renderer
-    .create(
-        <BrowserRouter>
-          <PlacesListMain
-            offers={getOffersAdaptMock(3)}
-            onChangeActiveCard={noop}
-            onMouseOutWithCard={noop} />
-        </BrowserRouter>
-    )
-    .toJSON();
+const offerMock = getOffersAdaptMock(1);
 
-  expect(tree).toMatchSnapshot();
+const mockChildren = <div />;
+
+it(`RoomProperty change bookmark`, () => {
+  const onToggleBookmark = jest.fn();
+
+  const wrapper = shallow(
+      <RoomProperty
+        offer={offerMock}
+        onToggleBookmark={onToggleBookmark}
+        isBookmark={false}>
+        {mockChildren}
+      </RoomProperty>
+  );
+
+  const changeBookmarkButton = wrapper.find(`.property__bookmark-button`);
+
+  changeBookmarkButton.simulate(`click`);
+
+  expect(onToggleBookmark).toHaveBeenCalledTimes(1);
 });

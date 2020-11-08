@@ -29,10 +29,8 @@ export const checkAuth = () => (dispatch, _getState, api) => {
       dispatch(UserActionCreator.setUserData(data));
       dispatch(UserActionCreator.loadAuthStatus(false));
     })
-    .catch((err) => {
+    .catch(() => {
       dispatch(UserActionCreator.loadAuthStatus(false));
-
-      throw err;
     });
 };
 
@@ -66,7 +64,7 @@ export const fetchReviews = (id) => (dispatch, _getState, api) => (
 export const login = ({email, password}) => (dispatch, _getState, api) => {
   dispatch(UserActionCreator.checkedData(true));
 
-  api.post(APIRoute.LOGIN, {email, password})
+  return api.post(APIRoute.LOGIN, {email, password})
     .then(({data}) => {
       dispatch(UserActionCreator.authDataHasError(false));
       dispatch(UserActionCreator.checkedData(false));

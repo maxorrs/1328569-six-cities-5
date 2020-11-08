@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 
 import RatingProperty from './rating-property';
 
-import {noop} from '../../test-data/test-data';
+const noop = () => {};
 
 describe(`RatingProperty is rendered correctly`, () => {
   it(`RatingProperty is rendered with disabled input`, () => {

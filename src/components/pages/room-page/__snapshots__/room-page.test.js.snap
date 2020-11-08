@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RoomPageContainer is rendered correctly RoomPageContainer is rendered correctly 1`] = `
+exports[`RoomPageContainer is rendered correctly 1`] = `
 <div
   className="page"
 >
@@ -77,7 +77,7 @@ exports[`RoomPageContainer is rendered correctly RoomPageContainer is rendered c
             <img
               alt="Photo studio"
               className="property__image"
-              src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/7.jpg"
+              src="url1"
             />
           </div>
           <div
@@ -86,43 +86,7 @@ exports[`RoomPageContainer is rendered correctly RoomPageContainer is rendered c
             <img
               alt="Photo studio"
               className="property__image"
-              src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/17.jpg"
-            />
-          </div>
-          <div
-            className="property__image-wrapper"
-          >
-            <img
-              alt="Photo studio"
-              className="property__image"
-              src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/15.jpg"
-            />
-          </div>
-          <div
-            className="property__image-wrapper"
-          >
-            <img
-              alt="Photo studio"
-              className="property__image"
-              src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/2.jpg"
-            />
-          </div>
-          <div
-            className="property__image-wrapper"
-          >
-            <img
-              alt="Photo studio"
-              className="property__image"
-              src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/11.jpg"
-            />
-          </div>
-          <div
-            className="property__image-wrapper"
-          >
-            <img
-              alt="Photo studio"
-              className="property__image"
-              src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/3.jpg"
+              src="url2"
             />
           </div>
         </div>
@@ -142,7 +106,7 @@ exports[`RoomPageContainer is rendered correctly RoomPageContainer is rendered c
               Canal View Prinsengracht
             </h1>
             <button
-              className="property__bookmark-button  button"
+              className="property__bookmark-button property__bookmark-button--active button"
               onClick={[Function]}
               type="button"
             >
@@ -198,7 +162,7 @@ exports[`RoomPageContainer is rendered correctly RoomPageContainer is rendered c
             <li
               className="property__feature property__feature--bedrooms"
             >
-              1 Beedroom
+              1 Bedrooms
             </li>
             <li
               className="property__feature property__feature--adults"
@@ -288,7 +252,7 @@ exports[`RoomPageContainer is rendered correctly RoomPageContainer is rendered c
               <p
                 className="property__text"
               >
-                Peaceful studio in the most wanted area in town. Quiet house Near of everything. Completely renovated. Lovely neighbourhood, lot of trendy shops, restaurants and bars in a walking distance.
+                Description
               </p>
             </div>
           </div>
@@ -321,14 +285,14 @@ exports[`RoomPageContainer is rendered correctly RoomPageContainer is rendered c
                       alt="Reviews avatar"
                       className="reviews__avatar user__avatar"
                       height="54"
-                      src="https://assets.htmlacademy.ru/intensives/javascript-3/avatar/10.jpg"
+                      src="https://assets.htmlacademy.ru/intensives/javascript-3/avatar/4.jpg"
                       width="54"
                     />
                   </div>
                   <span
                     className="reviews__user-name"
                   >
-                    A
+                    Zak
                   </span>
                 </div>
                 <div
@@ -343,7 +307,7 @@ exports[`RoomPageContainer is rendered correctly RoomPageContainer is rendered c
                       <span
                         style={
                           Object {
-                            "width": "80%",
+                            "width": "60%",
                           }
                         }
                       />
@@ -357,13 +321,13 @@ exports[`RoomPageContainer is rendered correctly RoomPageContainer is rendered c
                   <p
                     className="reviews__text"
                   >
-                    AbcAbc
+                    Comment
                   </p>
                   <time
                     className="reviews__time"
-                    dateTime="2020-11-28"
+                    dateTime="2020-10-30"
                   >
-                    November 2020
+                    October 2020
                   </time>
                 </div>
               </li>
@@ -380,14 +344,14 @@ exports[`RoomPageContainer is rendered correctly RoomPageContainer is rendered c
                       alt="Reviews avatar"
                       className="reviews__avatar user__avatar"
                       height="54"
-                      src="https://assets.htmlacademy.ru/intensives/javascript-3/avatar/10.jpg"
+                      src="https://assets.htmlacademy.ru/intensives/javascript-3/avatar/5.jpg"
                       width="54"
                     />
                   </div>
                   <span
                     className="reviews__user-name"
                   >
-                    B
+                    Abc
                   </span>
                 </div>
                 <div
@@ -402,7 +366,7 @@ exports[`RoomPageContainer is rendered correctly RoomPageContainer is rendered c
                       <span
                         style={
                           Object {
-                            "width": "40%",
+                            "width": "100%",
                           }
                         }
                       />
@@ -416,11 +380,11 @@ exports[`RoomPageContainer is rendered correctly RoomPageContainer is rendered c
                   <p
                     className="reviews__text"
                   >
-                    Abc
+                    Comment2
                   </p>
                   <time
                     className="reviews__time"
-                    dateTime="2020-10-28"
+                    dateTime="2020-10-30"
                   >
                     October 2020
                   </time>
@@ -655,7 +619,7 @@ exports[`RoomPageContainer is rendered correctly RoomPageContainer is rendered c
                 alt="Place image"
                 className="place-card__image"
                 height="200"
-                src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg"
+                src="url"
                 width="260"
               />
             </a>
@@ -682,7 +646,7 @@ exports[`RoomPageContainer is rendered correctly RoomPageContainer is rendered c
                 </span>
               </div>
               <button
-                className="place-card__bookmark-button button "
+                className="place-card__bookmark-button button place-card__bookmark-button--active"
                 type="button"
               >
                 <svg
@@ -744,13 +708,6 @@ exports[`RoomPageContainer is rendered correctly RoomPageContainer is rendered c
           onMouseOver={[Function]}
         >
           <div
-            className="place-card__mark"
-          >
-            <span>
-              Premium
-            </span>
-          </div>
-          <div
             className="near-places__image-wrapper place-card__image-wrapper"
           >
             <a
@@ -761,7 +718,7 @@ exports[`RoomPageContainer is rendered correctly RoomPageContainer is rendered c
                 alt="Place image"
                 className="place-card__image"
                 height="200"
-                src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg"
+                src="url"
                 width="260"
               />
             </a>
@@ -779,7 +736,7 @@ exports[`RoomPageContainer is rendered correctly RoomPageContainer is rendered c
                   className="place-card__price-value"
                 >
                   €
-                  2298
+                  298
                 </b>
                 <span
                   className="place-card__price-text"
@@ -816,7 +773,7 @@ exports[`RoomPageContainer is rendered correctly RoomPageContainer is rendered c
                 <span
                   style={
                     Object {
-                      "width": "80%",
+                      "width": "94%",
                     }
                   }
                 />
@@ -860,7 +817,7 @@ exports[`RoomPageContainer is rendered correctly RoomPageContainer is rendered c
                 alt="Place image"
                 className="place-card__image"
                 height="200"
-                src="https://assets.htmlacademy.ru/intensives/javascript-3/hotel/16.jpg"
+                src="url"
                 width="260"
               />
             </a>
@@ -878,7 +835,7 @@ exports[`RoomPageContainer is rendered correctly RoomPageContainer is rendered c
                   className="place-card__price-value"
                 >
                   €
-                  350
+                  298
                 </b>
                 <span
                   className="place-card__price-text"
@@ -915,7 +872,7 @@ exports[`RoomPageContainer is rendered correctly RoomPageContainer is rendered c
                 <span
                   style={
                     Object {
-                      "width": "84%",
+                      "width": "94%",
                     }
                   }
                 />

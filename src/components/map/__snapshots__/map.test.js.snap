@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Map is rendered correctly Map is rendered correctly 1`] = `
+exports[`Map is rendered correctly 1`] = `
 <div
   id="map"
 />

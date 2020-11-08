@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Reviews is rendered correctly Reviews is rendered correctly 1`] = `
+exports[`Reviews is rendered correctly 1`] = `
 <section
   className="property__reviews reviews"
 >
@@ -30,14 +30,14 @@ exports[`Reviews is rendered correctly Reviews is rendered correctly 1`] = `
             alt="Reviews avatar"
             className="reviews__avatar user__avatar"
             height="54"
-            src="https://assets.htmlacademy.ru/intensives/javascript-3/avatar/10.jpg"
+            src="https://assets.htmlacademy.ru/intensives/javascript-3/avatar/4.jpg"
             width="54"
           />
         </div>
         <span
           className="reviews__user-name"
         >
-          A
+          Zak
         </span>
       </div>
       <div
@@ -52,7 +52,7 @@ exports[`Reviews is rendered correctly Reviews is rendered correctly 1`] = `
             <span
               style={
                 Object {
-                  "width": "80%",
+                  "width": "60%",
                 }
               }
             />
@@ -66,13 +66,13 @@ exports[`Reviews is rendered correctly Reviews is rendered correctly 1`] = `
         <p
           className="reviews__text"
         >
-          AbcAbc
+          Comment
         </p>
         <time
           className="reviews__time"
-          dateTime="2020-11-28"
+          dateTime="2020-10-30"
         >
-          November 2020
+          October 2020
         </time>
       </div>
     </li>
@@ -89,14 +89,14 @@ exports[`Reviews is rendered correctly Reviews is rendered correctly 1`] = `
             alt="Reviews avatar"
             className="reviews__avatar user__avatar"
             height="54"
-            src="https://assets.htmlacademy.ru/intensives/javascript-3/avatar/10.jpg"
+            src="https://assets.htmlacademy.ru/intensives/javascript-3/avatar/5.jpg"
             width="54"
           />
         </div>
         <span
           className="reviews__user-name"
         >
-          B
+          Abc
         </span>
       </div>
       <div
@@ -111,7 +111,7 @@ exports[`Reviews is rendered correctly Reviews is rendered correctly 1`] = `
             <span
               style={
                 Object {
-                  "width": "40%",
+                  "width": "100%",
                 }
               }
             />
@@ -125,11 +125,11 @@ exports[`Reviews is rendered correctly Reviews is rendered correctly 1`] = `
         <p
           className="reviews__text"
         >
-          Abc
+          Comment2
         </p>
         <time
           className="reviews__time"
-          dateTime="2020-10-28"
+          dateTime="2020-10-30"
         >
           October 2020
         </time>

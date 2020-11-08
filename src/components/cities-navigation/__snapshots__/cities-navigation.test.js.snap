@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CitiesNavigation is rendered correctly CitiesNavigation is rendered correctly 1`] = `
+exports[`CitiesNavigation is rendered correctly 1`] = `
 <div
   className="tabs"
 >

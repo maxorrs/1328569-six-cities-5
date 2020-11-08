@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NotFoundPage is rendered correctly NotFoundPage is rendered correctly 1`] = `
+exports[`NotFoundPage is rendered correctly 1`] = `
 <div
   className="not-found"
 >

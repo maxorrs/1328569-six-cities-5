@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 
 import {ReviewForm} from './review-form';
 
-import {noop} from '../../test-data/test-data';
+const noop = () => {};
 
 describe(`ReviewForm is rendered correctly`, () => {
   it(`ReviewForm is rendered correctly`, () => {

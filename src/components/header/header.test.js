@@ -4,7 +4,10 @@ import renderer from 'react-test-renderer';
 
 import {Header} from './header';
 
-import {AuthorizationStatus} from '../../consts';
+const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`
+};
 
 describe(`Header is rendered correctly`, () => {
   it(`Header with auth`, () => {

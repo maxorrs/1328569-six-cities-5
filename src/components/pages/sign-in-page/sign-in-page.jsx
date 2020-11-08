@@ -57,8 +57,8 @@ const SignInPage = (props) => {
 };
 
 SignInPage.propTypes = {
-  sendAuthData: PropTypes.func.isRequired,
-  clearError: PropTypes.func.isRequired,
+  onSendAuthData: PropTypes.func.isRequired,
+  onClearError: PropTypes.func.isRequired,
   onFocusClearError: PropTypes.func.isRequired,
   selectedCity: PropTypes.string.isRequired,
   authDataHasError: PropTypes.bool.isRequired,
@@ -74,10 +74,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  sendAuthData: (authData) => {
+  onSendAuthData: (authData) => {
     dispatch(login(authData));
   },
-  clearError: () => {
+  onClearError: () => {
     dispatch(UserActionCreator.authDataHasError(false));
   }
 });

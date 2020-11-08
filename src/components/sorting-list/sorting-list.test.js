@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 
 import SortingList from './sorting-list';
 
-import {noop} from '../../test-data/test-data';
+const noop = () => {};
 
 describe(`SortingList is rendered correctly`, () => {
   it(`Render SortingList with open menu`, () => {

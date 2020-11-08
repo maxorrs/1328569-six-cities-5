@@ -18,14 +18,14 @@ export const withInputLogin = (Component) => {
 
     onFocusClearError() {
       if (this.props.authDataHasError) {
-        this.props.clearError();
+        this.props.onClearError();
       }
     }
 
     onSubmit(evt) {
       evt.preventDefault();
       const {email, password} = this.state;
-      this.props.sendAuthData({email, password});
+      this.props.onSendAuthData({email, password});
 
       this.setState({
         email: ``,
@@ -58,8 +58,8 @@ export const withInputLogin = (Component) => {
 
   WithInputLogin.propTypes = {
     authDataHasError: PropTypes.bool.isRequired,
-    clearError: PropTypes.func.isRequired,
-    sendAuthData: PropTypes.func.isRequired
+    onClearError: PropTypes.func.isRequired,
+    onSendAuthData: PropTypes.func.isRequired
   };
 
   return WithInputLogin;

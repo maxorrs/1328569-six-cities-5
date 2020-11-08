@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FeaturesList is rendered correctly FeaturesList is rendered correctly 1`] = `
+exports[`FeaturesList is rendered correctly 1`] = `
 <ul
   className="property__features"
 >
