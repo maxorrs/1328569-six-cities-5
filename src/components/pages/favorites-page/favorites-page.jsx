@@ -8,8 +8,7 @@ import Footer from '../../footer/footer';
 
 import {withSpinner} from '../../../hocs/with-spinner/with-spinner';
 
-const FavoritesPage = (props) => {
-  const {favorites} = props;
+const FavoritesPage = ({favorites}) => {
   const favoritesCount = favorites.length;
   const classNameEmptyPage = favoritesCount ? `` : `page--favorites-empty`;
 

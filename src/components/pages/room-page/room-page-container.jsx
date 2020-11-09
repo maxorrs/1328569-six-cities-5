@@ -1,47 +1,23 @@
-import React, {Component} from 'react';
+import React, {memo, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {compose} from 'redux';
 
 import RoomPage from './room-page';
 
 import {getOfferAdaptSelector, getOffersNearbyAdaptSelector, getStatusOfferSelector, getStatusOffersNearbySelector, getOffersCoordsSelector, getCityCoordsSelector} from '../../../store/reducers/data/selectors';
 import {fetchOffersNearbyList, fetchOffer} from '../../../store/api-actions';
 
-class RoomPageContainer extends Component {
-  constructor(props) {
-    super(props);
-  }
+const RoomPageContainer = (props) => {
+  const {idMatch, loadOffersNearby, loadOffer} = props;
 
-  componentDidMount() {
-    const {idMatch, loadOffersNearby, loadOffer} = this.props;
-
+  useEffect(() => {
     loadOffer(idMatch);
     loadOffersNearby(idMatch);
-  }
+  }, [idMatch]);
 
-  componentDidUpdate(prevProps) {
-    const {idMatch, loadOffersNearby, loadOffer} = this.props;
-
-    if (idMatch !== prevProps.idMatch) {
-      loadOffer(idMatch);
-      loadOffersNearby(idMatch);
-    }
-  }
-
-  shouldComponentUpdate(nextProps) {
-    if (this.props.isLoading) {
-      return this.props.isLoading !== nextProps.isLoading;
-    }
-
-    return this.props.offer.id === nextProps.offer.id;
-  }
-
-  render() {
-    return (
-      <RoomPage {...this.props} />
-    );
-  }
-}
+  return <RoomPage {...props} />;
+};
 
 RoomPageContainer.propTypes = {
   offer: PropTypes.shape({
@@ -75,4 +51,7 @@ const mapDispathToProps = (dispatch) => ({
 });
 
 export {RoomPageContainer};
-export default connect(mapStateToProps, mapDispathToProps)(RoomPageContainer);
+export default compose(
+    connect(mapStateToProps, mapDispathToProps),
+    memo
+)(RoomPageContainer);

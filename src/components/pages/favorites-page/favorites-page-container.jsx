@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
@@ -7,19 +7,15 @@ import FavoritesPage from './favorites-page';
 import {fetchFavoritesList} from '../../../store/api-actions';
 import {getFavoritesSelector, getStatusFavoritesSelector} from '../../../store/reducers/data/selectors';
 
-class FavoritesPageContainer extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
+const FavoritesPageContainer = (props) => {
+  const {loadFavorites} = props;
 
-  componentDidMount() {
-    this.props.loadFavorites();
-  }
+  useEffect(() => {
+    loadFavorites();
+  }, []);
 
-  render() {
-    return <FavoritesPage {...this.props} />;
-  }
-}
+  return <FavoritesPage {...props} />;
+};
 
 FavoritesPageContainer.propTypes = {
   favorites: PropTypes.array,
