@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import RoomPage from './room-page';
 
-import {getOfferSelector, getOffersNearbyAdaptSelector, getStatusOfferSelector, getStatusOffersNearbySelector} from '../../../store/reducers/data/selectors';
+import {getOfferAdaptSelector, getOffersNearbyAdaptSelector, getStatusOfferSelector, getStatusOffersNearbySelector, getOffersCoordsSelector, getCityCoordsSelector} from '../../../store/reducers/data/selectors';
 import {fetchOffersNearbyList, fetchOffer} from '../../../store/api-actions';
 
 class RoomPageContainer extends Component {
@@ -29,6 +29,10 @@ class RoomPageContainer extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
+    if (this.props.isLoading) {
+      return this.props.isLoading !== nextProps.isLoading;
+    }
+
     return this.props.offer.id === nextProps.offer.id;
   }
 
@@ -45,7 +49,7 @@ RoomPageContainer.propTypes = {
     city: PropTypes.shape({
       name: PropTypes.string.isRequired
     })
-  }).isRequired,
+  }),
   offersNearby: PropTypes.array,
   loadOffer: PropTypes.func.isRequired,
   loadOffersNearby: PropTypes.func.isRequired,
@@ -54,9 +58,11 @@ RoomPageContainer.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offer: getOfferSelector(state),
+  offer: getOfferAdaptSelector(state),
   isLoading: getStatusOfferSelector(state) || getStatusOffersNearbySelector(state),
-  offersNearby: getOffersNearbyAdaptSelector(state)
+  offersNearby: getOffersNearbyAdaptSelector(state),
+  offersCoords: getOffersCoordsSelector(state),
+  cityCoords: getCityCoordsSelector(state)
 });
 
 const mapDispathToProps = (dispatch) => ({

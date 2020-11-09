@@ -8,7 +8,7 @@ import PlacesListMain from '../../places-list-main/places-list-main';
 import Map from '../../map/map';
 import Sorting from '../../sorting/sorting';
 
-import {withSpinner} from '../../../hocs/with-spinner';
+import {withSpinner} from '../../../hocs/with-spinner/with-spinner';
 
 const MainPage = (props) => {
   const {activeCard, onChangeActiveCard, onResetActiveCard, selectedCity, filteredOffers, offersCoords, cityCoords} = props;
@@ -67,4 +67,5 @@ MainPage.propTypes = {
   getOffers: PropTypes.func.isRequired,
 };
 
+export {MainPage};
 export default withSpinner(MainPage);

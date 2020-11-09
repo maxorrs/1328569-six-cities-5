@@ -6,38 +6,17 @@ import NearPlaces from '../../near-places/near-places';
 import RoomProperty from '../../room-property/room-property';
 import Map from '../../map/map';
 
-import {getOffersCoords, getOfferCoords} from '../../../utils/map';
-import {adaptOfferToClient} from '../../../utils/adapter';
-import {withSpinner} from '../../../hocs/with-spinner';
+import {withSpinner} from '../../../hocs/with-spinner/with-spinner';
 
-const MAX_COUNT_OFFERS_NEARBY = 3;
-
-const RoomPage = (props) => {
-  const {offersNearby, offer} = props;
-
-  const adaptOffer = adaptOfferToClient(offer);
-  const currentCity = adaptOffer.city.name;
-
-  const offersNearbyCoords = getOffersCoords(offersNearby)
-    .slice(0, MAX_COUNT_OFFERS_NEARBY);
-
-  const currentOfferCoords = getOfferCoords(adaptOffer);
-
-  const offersCoords = [...offersNearbyCoords, currentOfferCoords];
-  const cityCoords = {
-    city: currentCity,
-    location: [adaptOffer.location.latitude, adaptOffer.location.longitude],
-    zoom: adaptOffer.location.zoom
-  };
-
+const RoomPage = ({offersNearby, offer, offersCoords, cityCoords}) => {
   return (
     <div className="page">
       <Header />
-      <RoomProperty offer={adaptOffer}>
+      <RoomProperty offer={offer}>
         <Map
-          activeCard={adaptOffer.id}
+          activeCard={offer.id}
           offersCoords={offersCoords}
-          selectedCity={currentCity}
+          selectedCity={offer.city.name}
           cityCoords={cityCoords} />
       </RoomProperty>
       <NearPlaces offersNearby={offersNearby} />
@@ -56,7 +35,9 @@ RoomPage.propTypes = {
   loadOffer: PropTypes.func.isRequired,
   loadOffersNearby: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
-  idMatch: PropTypes.string.isRequired
+  idMatch: PropTypes.string.isRequired,
+  offersCoords: PropTypes.array.isRequired,
+  cityCoords: PropTypes.object.isRequired
 };
 
 export {RoomPage};

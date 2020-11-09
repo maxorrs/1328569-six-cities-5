@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {withInputLogin} from '../../../hocs/with-input-login';
+import {compose} from 'redux';
+import {withInputLogin} from '../../../hocs/with-input-login/with-input-login';
 
 import {login} from '../../../store/api-actions';
 import {getSelectedCitySelector} from '../../../store/reducers/data/selectors';
@@ -56,8 +57,8 @@ const SignInPage = (props) => {
 };
 
 SignInPage.propTypes = {
-  sendAuthData: PropTypes.func.isRequired,
-  clearError: PropTypes.func.isRequired,
+  onSendAuthData: PropTypes.func.isRequired,
+  onClearError: PropTypes.func.isRequired,
   onFocusClearError: PropTypes.func.isRequired,
   selectedCity: PropTypes.string.isRequired,
   authDataHasError: PropTypes.bool.isRequired,
@@ -73,13 +74,16 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  sendAuthData: (authData) => {
+  onSendAuthData: (authData) => {
     dispatch(login(authData));
   },
-  clearError: () => {
+  onClearError: () => {
     dispatch(UserActionCreator.authDataHasError(false));
   }
 });
 
 export {SignInPage};
-export default connect(mapStateToProps, mapDispatchToProps)(withInputLogin(SignInPage));
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withInputLogin
+)(SignInPage);

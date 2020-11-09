@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Host is rendered correctly Host is rendered correctly with pro status 1`] = `
+<div
+  className="property__host"
+>
+  <h2
+    className="property__host-title"
+  >
+    Meet the host
+  </h2>
+  <div
+    className="property__host-user user"
+  >
+    <div
+      className="property__avatar-wrapper user__avatar-wrapper property__avatar-wrapper--pro"
+    >
+      <img
+        alt="Host avatar"
+        className="property__avatar user__avatar"
+        height="74"
+        src="/1"
+        width="74"
+      />
+    </div>
+    <span
+      className="property__user-name"
+    >
+      A
+    </span>
+    <span
+      className="property__user-status"
+    >
+      Pro
+    </span>
+  </div>
+  <div
+    className="property__description"
+  >
+    <p
+      className="property__text"
+    >
+      123
+    </p>
+  </div>
+</div>
+`;
+
+exports[`Host is rendered correctly Host is rendered correctly without pro status 1`] = `
+<div
+  className="property__host"
+>
+  <h2
+    className="property__host-title"
+  >
+    Meet the host
+  </h2>
+  <div
+    className="property__host-user user"
+  >
+    <div
+      className="property__avatar-wrapper user__avatar-wrapper "
+    >
+      <img
+        alt="Host avatar"
+        className="property__avatar user__avatar"
+        height="74"
+        src="/1"
+        width="74"
+      />
+    </div>
+    <span
+      className="property__user-name"
+    >
+      A
+    </span>
+  </div>
+  <div
+    className="property__description"
+  >
+    <p
+      className="property__text"
+    >
+      123
+    </p>
+  </div>
+</div>
+`;

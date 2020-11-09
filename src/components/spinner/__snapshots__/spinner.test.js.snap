@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Spinner is rendered correctly 1`] = `
+<div
+  className="loadingio-spinner-rolling-iwj80ro4ny"
+>
+  <div
+    className="ldio-mhj2lepa3va"
+  >
+    <div />
+  </div>
+</div>
+`;

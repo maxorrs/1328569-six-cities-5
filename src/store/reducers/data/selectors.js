@@ -2,7 +2,9 @@ import {createSelector} from 'reselect';
 
 import {NameSpace} from '../root-reducer';
 import {filterOffers, getUniqueCities} from '../../../utils/common';
+import {getOfferCoords, getOffersCoords} from '../../../utils/map';
 import {adaptOfferToClient} from '../../../utils/adapter';
+import {MAX_COUNT_OFFERS_NEARBY} from '../../../consts';
 
 export const getSelectedCitySelector = (state) => state[NameSpace.APP_STATE].selectedCity;
 
@@ -56,3 +58,44 @@ export const getReviewsSelector = (state) => state[NameSpace.DATA].reviews;
 export const getSentReviewStatusSelector = (state) => state[NameSpace.DATA].sentReviewHasError;
 
 export const getStatusSendReviewSelector = (state) => state[NameSpace.DATA].statusSendReview;
+
+export const getOfferAdaptSelector = createSelector(
+    [getOfferSelector, getStatusOfferSelector],
+    (offer, status) => {
+      if (status) {
+        return {};
+      }
+
+      return adaptOfferToClient(offer);
+    }
+);
+
+export const getOffersCoordsSelector = createSelector(
+    [getOffersNearbySelector, getStatusOffersNearbySelector, getOfferSelector, getStatusOfferSelector],
+    (offersNearby, offersNearbyStatus, offer, offerStatus) => {
+      if (offersNearbyStatus || offerStatus) {
+        return [];
+      }
+
+      const offersNearbyCoords = getOffersCoords(offersNearby)
+        .slice(0, MAX_COUNT_OFFERS_NEARBY);
+      const offerCoords = getOfferCoords(offer);
+
+      return [...offersNearbyCoords, offerCoords];
+    }
+);
+
+export const getCityCoordsSelector = createSelector(
+    [getOfferSelector, getStatusOfferSelector],
+    (offer, offerStatus) => {
+      if (offerStatus) {
+        return {};
+      }
+
+      return {
+        city: offer.city.name,
+        location: [offer.location.latitude, offer.location.longitude],
+        zoom: offer.location.zoom
+      };
+    }
+);

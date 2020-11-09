@@ -49,5 +49,5 @@ const mapStateToProps = (state) => ({
 
 const HeaderMemo = memo(Header);
 
-export {HeaderMemo};
+export {Header};
 export default connect(mapStateToProps)(HeaderMemo);

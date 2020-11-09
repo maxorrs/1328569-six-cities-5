@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SortingList is rendered correctly Render SortingList with close menu 1`] = `
+<ul
+  className="places__options places__options--custom places__options "
+>
+  <li
+    className="places__option"
+    onClick={[Function]}
+    tabIndex="0"
+  >
+    Popular
+  </li>
+  <li
+    className="places__option"
+    onClick={[Function]}
+    tabIndex="0"
+  >
+    Price: low to high
+  </li>
+  <li
+    className="places__option"
+    onClick={[Function]}
+    tabIndex="0"
+  >
+    Price: high to low
+  </li>
+  <li
+    className="places__option"
+    onClick={[Function]}
+    tabIndex="0"
+  >
+    Top rated first
+  </li>
+</ul>
+`;
+
+exports[`SortingList is rendered correctly Render SortingList with open menu 1`] = `
+<ul
+  className="places__options places__options--custom places__options places__options--opened"
+>
+  <li
+    className="places__option"
+    onClick={[Function]}
+    tabIndex="0"
+  >
+    Popular
+  </li>
+  <li
+    className="places__option"
+    onClick={[Function]}
+    tabIndex="0"
+  >
+    Price: low to high
+  </li>
+  <li
+    className="places__option"
+    onClick={[Function]}
+    tabIndex="0"
+  >
+    Price: high to low
+  </li>
+  <li
+    className="places__option"
+    onClick={[Function]}
+    tabIndex="0"
+  >
+    Top rated first
+  </li>
+</ul>
+`;

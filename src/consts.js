@@ -12,6 +12,8 @@ export const housingTypes = [`Apartment`, `Room`, `House`, `Hotel`];
 
 export const fieldsType = [`entire`, `bedrooms`, `adults`];
 
+export const MAX_COUNT_OFFERS_NEARBY = 3;
+
 export const SortType = {
   POPULAR: `Popular`,
   PRICE_LOW_TO_HIGH: `Price: low to high`,

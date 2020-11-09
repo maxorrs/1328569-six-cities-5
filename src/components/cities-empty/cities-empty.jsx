@@ -20,7 +20,7 @@ const CitiesEmpty = ({selectedCity}) => {
 };
 
 CitiesEmpty.propTypes = {
-  selectedCity: PropTypes.oneOf([...cities.map(({city}) => city)])
+  selectedCity: PropTypes.oneOf([...cities.map((city) => city)])
 };
 
 export default CitiesEmpty;

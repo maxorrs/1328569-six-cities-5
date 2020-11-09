@@ -10,12 +10,12 @@ import {SortType} from '../../consts';
 import {getSortMenuStatusSelector} from '../../store/reducers/app-state/selectors';
 import {getSelectedSortTypeSelector} from '../../store/reducers/data/selectors';
 
-const Sorting = ({selectedSortType, isSortMenuOpen, onChangeSelectedSortType, handleToggledSortMenu}) => {
+const Sorting = ({selectedSortType, isSortMenuOpen, onChangeSelectedSortType, onToggledSortMenu}) => {
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
       <span
-        onClick={() => handleToggledSortMenu()}
+        onClick={() => onToggledSortMenu()}
         className="places__sorting-type"
         tabIndex="0">
         {selectedSortType}
@@ -34,7 +34,7 @@ Sorting.propTypes = {
   selectedSortType: PropTypes.oneOf([...Object.values(SortType)]).isRequired,
   isSortMenuOpen: PropTypes.bool.isRequired,
   onChangeSelectedSortType: PropTypes.func.isRequired,
-  handleToggledSortMenu: PropTypes.func.isRequired
+  onToggledSortMenu: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -47,7 +47,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(AppStateActionCreator.changeSelectedSortType(payload));
     dispatch(AppStateActionCreator.toggledSortMenu());
   },
-  handleToggledSortMenu: () => dispatch(AppStateActionCreator.toggledSortMenu())
+  onToggledSortMenu: () => dispatch(AppStateActionCreator.toggledSortMenu())
 });
 
 export {Sorting};

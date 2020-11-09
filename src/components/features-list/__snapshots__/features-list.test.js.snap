@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FeaturesList is rendered correctly 1`] = `
+<ul
+  className="property__features"
+>
+  <li
+    className="property__feature property__feature--entire"
+  >
+    a
+  </li>
+  <li
+    className="property__feature property__feature--bedrooms"
+  >
+    b
+  </li>
+  <li
+    className="property__feature property__feature--adults"
+  >
+    c
+  </li>
+</ul>
+`;

@@ -6,7 +6,7 @@ import ReviewForm from '../review-form/review-form';
 import ReviewsList from '../reviews-list/reviews-list';
 
 import {AppRoute, AuthorizationStatus} from '../../consts';
-import {withSpinner} from '../../hocs/with-spinner';
+import {withSpinner} from '../../hocs/with-spinner/with-spinner';
 
 const Reviews = (props) => {
   const {reviews, authorizationStatus, onSendReview, id} = props;

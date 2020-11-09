@@ -1,7 +1,7 @@
 import {AuthorizationStatus} from '../../../consts';
 import {extend} from '../../../utils/common';
 
-const initialState = {
+export const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   hasError: false,
   isDataChecked: false,

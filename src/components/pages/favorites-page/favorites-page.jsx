@@ -6,7 +6,7 @@ import Favorites from '../../favorites/favorites';
 import FavoritesEmpty from '../../favorites-empty/favorites-empty';
 import Footer from '../../footer/footer';
 
-import {withSpinner} from '../../../hocs/with-spinner';
+import {withSpinner} from '../../../hocs/with-spinner/with-spinner';
 
 const FavoritesPage = (props) => {
   const {favorites} = props;

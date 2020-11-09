@@ -2,6 +2,7 @@ import React from 'react';
 import {Router as BrowserRouter, Switch, Route} from 'react-router-dom';
 import browserHistory from '../../browser-history';
 import {connect} from 'react-redux';
+import {compose} from 'redux';
 
 import MainPage from '../pages/main-page/main-page-container';
 import SignInPage from '../pages/sign-in-page/sign-in-page';
@@ -10,7 +11,7 @@ import RoomPage from '../pages/room-page/room-page-container';
 import NotFoundPage from '../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 
-import {withSpinner} from '../../hocs/with-spinner';
+import {withSpinner} from '../../hocs/with-spinner/with-spinner';
 import {getLoadAuthStatusSelector} from '../../store/reducers/user/selectors';
 import {AppRoute} from '../../consts';
 
@@ -59,4 +60,7 @@ const mapStateToProp = (state) => ({
 });
 
 export {App};
-export default connect(mapStateToProp)(withSpinner(App));
+export default compose(
+    connect(mapStateToProp),
+    withSpinner
+)(App);

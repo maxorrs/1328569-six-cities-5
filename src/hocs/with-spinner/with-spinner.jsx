@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Spinner from '../components/spinner/spinner';
+import Spinner from '../../components/spinner/spinner';
 
 export const withSpinner = (Component) => {
   const WithSpinner = (props) => {
