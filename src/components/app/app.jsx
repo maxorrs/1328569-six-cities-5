@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Router as BrowserRouter, Switch, Route} from 'react-router-dom';
 import browserHistory from '../../browser-history';
 import {connect} from 'react-redux';
@@ -9,13 +10,16 @@ import SignInPage from '../pages/sign-in-page/sign-in-page';
 import FavoritesPage from '../pages/favorites-page/favorites-page-container';
 import RoomPage from '../pages/room-page/room-page-container';
 import NotFoundPage from '../pages/not-found-page/not-found-page';
-import PrivateRoute from '../private-route/private-route';
 
 import {withSpinner} from '../../hocs/with-spinner/with-spinner';
-import {getLoadAuthStatusSelector} from '../../store/reducers/user/selectors';
-import {AppRoute} from '../../consts';
+import {withPrivateRoute} from '../../hocs/with-private-route/with-private-route';
+import {getAuthorizationStatusSelector, getLoadAuthStatusSelector} from '../../store/reducers/user/selectors';
+import {AppRoute, AuthorizationStatus} from '../../consts';
 
-const App = () => {
+const App = ({isAuth}) => {
+  const SignInPagePrivate = withPrivateRoute(SignInPage, !isAuth);
+  const FavoritesPagePrivate = withPrivateRoute(FavoritesPage, isAuth, AppRoute.LOGIN);
+
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
@@ -28,17 +32,14 @@ const App = () => {
         <Route
           exact
           path={AppRoute.LOGIN}>
-          <SignInPage />
+          <SignInPagePrivate />
         </Route>
 
-        <PrivateRoute
+        <Route
           exact
-          path={AppRoute.FAVORITES}
-          render={() => {
-            return (
-              <FavoritesPage />
-            );
-          }} />
+          path={AppRoute.FAVORITES}>
+          <FavoritesPagePrivate />
+        </Route>
 
         <Route exact
           path={AppRoute.roomPage()}
@@ -55,8 +56,13 @@ const App = () => {
   );
 };
 
+App.propTypes = {
+  isAuth: PropTypes.bool.isRequired
+};
+
 const mapStateToProp = (state) => ({
-  isLoading: getLoadAuthStatusSelector(state)
+  isLoading: getLoadAuthStatusSelector(state),
+  isAuth: getAuthorizationStatusSelector(state) === AuthorizationStatus.AUTH
 });
 
 export {App};

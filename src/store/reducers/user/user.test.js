@@ -1,9 +1,8 @@
 import MockAdapter from 'axios-mock-adapter';
 import {createAPI} from '../../../services/api';
 import {user, UserActionType, UserActionCreator} from './user';
-import {AppStateActionType} from '../app-state/app-state';
 import {login, checkAuth} from '../../api-actions';
-import {APIRoute, AppRoute, AuthorizationStatus} from '../../../consts';
+import {APIRoute, AuthorizationStatus} from '../../../consts';
 
 const noop = () => {};
 
@@ -186,7 +185,7 @@ describe(`Async operation work correctly`, () => {
 
     return loginProcess(dispatch, noop, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(6);
+        expect(dispatch).toHaveBeenCalledTimes(5);
 
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: UserActionType.CHECKED_DATA,
@@ -211,11 +210,6 @@ describe(`Async operation work correctly`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(5, {
           type: UserActionType.REQUIRE_AUTHORIZATION,
           payload: AuthorizationStatus.AUTH
-        });
-
-        expect(dispatch).toHaveBeenNthCalledWith(6, {
-          type: AppStateActionType.REDIRECT_TO_ROUTE,
-          payload: AppRoute.ROOT
         });
       });
   });

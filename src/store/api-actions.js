@@ -1,7 +1,7 @@
 import {DataActionCreator} from './reducers/data/data';
 import {UserActionCreator} from './reducers/user/user';
-import {AppStateActionCreator} from './reducers/app-state/app-state';
 import {AuthorizationStatus, APIRoute, AppRoute} from '../consts';
+import browserHistory from '../browser-history';
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.OFFERS)
@@ -70,7 +70,6 @@ export const login = ({email, password}) => (dispatch, _getState, api) => {
       dispatch(UserActionCreator.checkedData(false));
       dispatch(UserActionCreator.setUserData(data));
       dispatch(UserActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
-      dispatch(AppStateActionCreator.redirectToRoute(AppRoute.ROOT));
     })
     .catch(() => {
       dispatch(UserActionCreator.authDataHasError(true));
@@ -78,9 +77,9 @@ export const login = ({email, password}) => (dispatch, _getState, api) => {
     });
 };
 
-export const changeBookmarkStatus = (id, status) => (dispatch, _getState, api) => (
+export const changeBookmarkStatus = (id, status) => (_dispatch, _getState, api) => (
   api.post(APIRoute.bookmark(id, status))
-    .catch(() => dispatch(AppStateActionCreator.redirectToRoute(AppRoute.LOGIN)))
+    .catch(() => browserHistory.push(AppRoute.LOGIN))
 );
 
 export const sendReview = (id, {review: comment, rating}) => (dispatch, _getState, api) => {

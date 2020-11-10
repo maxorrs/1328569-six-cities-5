@@ -2,7 +2,7 @@ import {extend} from '../../../utils/common';
 import {SortType} from '../../../consts';
 
 const DefaultValue = {
-  CITY: `Amsterdam`,
+  CITY: `Paris`,
   SORT_TYPE: SortType.POPULAR,
   ACTIVE_CARD: -1
 };
@@ -21,8 +21,7 @@ export const AppStateActionType = {
   TOGGLE_SORT_MENU: `TOGGLE_SORT_MENU`,
   CLOSE_SORT_MENU: `CLOSE_SORT_MENU`,
   CHANGE_SELECTED_SORT_TYPE: `CHANGE_SELECTED_SORT_TYPE`,
-  RESET_SORT_TYPE: `RESET_SORT_TYPE`,
-  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`
+  RESET_SORT_TYPE: `RESET_SORT_TYPE`
 };
 
 export const AppStateActionCreator = {
@@ -49,10 +48,6 @@ export const AppStateActionCreator = {
   }),
   closeSortMenu: () => ({
     type: AppStateActionType.CLOSE_SORT_MENU
-  }),
-  redirectToRoute: (payload) => ({
-    type: AppStateActionType.REDIRECT_TO_ROUTE,
-    payload
   })
 };
 

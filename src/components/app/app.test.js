@@ -138,7 +138,8 @@ it(`App is rendered correctly`, () => {
     .create(
         <Provider store={store}>
           <App
-            isLoading={false} />
+            isLoading={false}
+            isAuth={true} />
         </Provider>, {
           createNodeMock: () => document.createElement(`div`)
         }

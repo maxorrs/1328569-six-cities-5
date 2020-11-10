@@ -2,7 +2,7 @@ import React from 'react';
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
-import PlaceCard from './place-card';
+import {PlaceCard} from './place-card';
 
 configure({adapter: new Adapter()});
 
@@ -78,7 +78,9 @@ it(`PlaceCard mouse over with className CITIES`, () => {
         offer={offer}
         onChangeActiveCard={onChangeActiveCard}
         onMouseOutWithCard={noop}
-        className={className} />
+        className={className}
+        onToggleBookmark={noop}
+        isBookmark={false} />
   );
 
   wrapper.simulate(`mouseOver`);
@@ -94,9 +96,30 @@ it(`PlaceCard mouse out with className CITIES`, () => {
         offer={offer}
         onChangeActiveCard={noop}
         onMouseOutWithCard={onMouseOutWithCard}
-        className={className} />
+        className={className}
+        onToggleBookmark={noop}
+        isBookmark={false} />
   );
 
   wrapper.simulate(`mouseOut`);
   expect(onMouseOutWithCard).toHaveBeenCalledTimes(1);
+});
+
+it(`PlaceCard bookmark button click with className CITIES`, () => {
+  const onToggleBookmark = jest.fn();
+  const className = CardPlaceClassName.CITIES;
+
+  const wrapper = shallow(
+      <PlaceCard
+        offer={offer}
+        onChangeActiveCard={noop}
+        onMouseOutWithCard={noop}
+        className={className}
+        onToggleBookmark={onToggleBookmark}
+        isBookmark={false} />
+  );
+
+  const bookmarkButton = wrapper.find(`.place-card__bookmark-button`);
+  bookmarkButton.simulate(`click`);
+  expect(onToggleBookmark).toHaveBeenCalledTimes(1);
 });

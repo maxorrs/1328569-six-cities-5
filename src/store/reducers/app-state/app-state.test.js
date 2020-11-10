@@ -2,7 +2,7 @@ import {appState, AppStateActionType, AppStateActionCreator} from './app-state';
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(appState(void 0, {})).toEqual({
-    selectedCity: `Amsterdam`,
+    selectedCity: `Paris`,
     activeCard: -1,
     isSortMenuOpen: false,
     selectedSortType: `Popular`
@@ -47,14 +47,6 @@ describe(`Action creators work correctly`, () => {
       type: AppStateActionType.CLOSE_SORT_MENU
     });
   });
-
-  it(`Action creator for require redirect to route returns correct action`, () => {
-    expect(AppStateActionCreator.redirectToRoute(`/`)).toEqual({
-      type: AppStateActionType.REDIRECT_TO_ROUTE,
-      payload: `/`
-    });
-  });
-
 });
 
 describe(`Reducer should update is correctly`, () => {

@@ -1,10 +1,18 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import {Provider} from 'react-redux';
+import configureStore from 'redux-mock-store';
 import {BrowserRouter} from 'react-router-dom';
 
 import PlacesListNear from './places-list-near';
 
-const getOffersAdaptMock = (count) => {
+const NameSpace = {
+  APP_STATE: `APP_STATE`,
+  DATA: `DATA`,
+  USER: `USER`
+};
+
+const getOffersAdaptMock = (count, {isFavorite = false, isPremium = false} = {}) => {
   const templateOffers = Array(count)
     .fill(``)
     .map((_, index) => {
@@ -20,8 +28,8 @@ const getOffersAdaptMock = (count) => {
         'previewImage': `url`,
         'images': [`url1`, `url2`],
         'title': `Canal View Prinsengracht`,
-        'isFavorite': Boolean(Math.random()),
-        'isPremium': false,
+        'isFavorite': isFavorite,
+        'isPremium': isPremium,
         'rating': 4.7,
         'type': `Room`,
         'bedrooms': 1,
@@ -57,12 +65,82 @@ const getOffersAdaptMock = (count) => {
   return templateOffers;
 };
 
+const userDataMock = {
+  'avatar_url': `url`,
+  'email': `sad@a.ru`,
+  'id': 1,
+  'is_pro': false,
+  'name': `sad`
+};
+
+const reviewsMock = [
+  {
+    'comment': `Comment`,
+    'date': `2020-10-30T19:03:49.647Z`,
+    'id': 1,
+    'rating': 3,
+    'user': {
+      'avatar_url': `https://assets.htmlacademy.ru/intensives/javascript-3/avatar/4.jpg`,
+      'id': 13,
+      'is_pro': false,
+      'name': `Zak`,
+    }
+  },
+  {
+    'comment': `Comment2`,
+    'date': `2020-10-30T19:03:49.647Z`,
+    'id': 2,
+    'rating': 5,
+    'user': {
+      'avatar_url': `https://assets.htmlacademy.ru/intensives/javascript-3/avatar/5.jpg`,
+      'id': 12,
+      'is_pro': true,
+      'name': `Abc`,
+    }
+  }
+];
+
+const mockState = {
+  [NameSpace.DATA]: {
+    favorites: getOffersAdaptMock(3, {isFavorite: true}),
+    offers: getOffersAdaptMock(3),
+    reviews: reviewsMock,
+    offersNearby: getOffersAdaptMock(5),
+    offer: getOffersAdaptMock(1),
+    statusOffers: false,
+    statusOffer: false,
+    statusOffersNearby: false,
+    statusFavorites: false,
+    statusReviews: false,
+    statusSendReview: false,
+    sentReviewHasError: false
+  },
+  [NameSpace.APP_STATE]: {
+    selectedCity: `Amsterdam`,
+    activeCard: -1,
+    isSortMenuOpen: false,
+    selectedSortType: `Popular`
+  },
+  [NameSpace.USER]: {
+    authorizationStatus: `AUTH`,
+    userData: userDataMock,
+    hasError: false,
+    isDataChecked: false,
+    isLoadAuthStatus: false
+  }
+};
+
 it(`PlacesListNear is rendered correctly`, () => {
+  const mockStore = configureStore();
+  const store = mockStore(mockState);
+
   const tree = renderer
     .create(
-        <BrowserRouter>
-          <PlacesListNear offersNearby={getOffersAdaptMock(3)} />
-        </BrowserRouter>
+        <Provider store={store}>
+          <BrowserRouter>
+            <PlacesListNear offersNearby={getOffersAdaptMock(3)} />
+          </BrowserRouter>
+        </Provider>
     )
     .toJSON();
 

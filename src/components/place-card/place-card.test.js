@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import {BrowserRouter} from 'react-router-dom';
 
-import PlaceCard from './place-card';
+import {PlaceCard} from './place-card';
 
 const CardPlaceClassName = {
   CITIES: `cities`,
@@ -72,6 +72,8 @@ describe(`PlaceCard is rendered correctly`, () => {
       onChangeActiveCard: noop,
       onMouseOutWithCard: noop,
       className: CardPlaceClassName.CITIES,
+      onToggleBookmark: noop,
+      isBookmark: false
     };
 
     const tree = renderer
@@ -91,6 +93,8 @@ describe(`PlaceCard is rendered correctly`, () => {
       onChangeActiveCard: noop,
       onMouseOutWithCard: noop,
       className: CardPlaceClassName.CITIES,
+      onToggleBookmark: noop,
+      isBookmark: false
     };
 
     const tree = renderer
@@ -112,7 +116,9 @@ describe(`PlaceCard is rendered correctly`, () => {
           offer: className === CardPlaceClassName.FAVORITES ? getOffersAdaptMock(1, {isPremium: true}) : getOffersAdaptMock(1),
           onChangeActiveCard: noop,
           onMouseOutWithCard: noop,
-          className
+          onToggleBookmark: noop,
+          className,
+          isBookmark: false
         };
 
         const tree = renderer

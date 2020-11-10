@@ -350,22 +350,13 @@ exports[`ReviewForm is rendered correctly ReviewForm is rendered correctly with 
     className="reviews__button-wrapper"
   >
     <p
-      className="reviews__help"
+      style={
+        Object {
+          "color": "red",
+        }
+      }
     >
-      To submit review please make sure to set 
-      <span
-        className="reviews__star"
-      >
-        rating
-      </span>
-       and describe your stay with at least 
-      <b
-        className="reviews__text-amount"
-      >
-        50
-         characters
-      </b>
-      .
+      An error occurred when sending the review. Try again.
     </p>
     <button
       className="reviews__submit form__submit button"
@@ -375,15 +366,6 @@ exports[`ReviewForm is rendered correctly ReviewForm is rendered correctly with 
       Submit
     </button>
   </div>
-  <p
-    style={
-      Object {
-        "color": "red",
-      }
-    }
-  >
-    An error occurred when sending the review. Try again.
-  </p>
 </form>
 `;
 

@@ -10,7 +10,6 @@ import rootReducer from './store/reducers/root-reducer';
 import {createAPI} from './services/api';
 import {UserActionCreator} from './store/reducers/user/user';
 import {AuthorizationStatus} from './consts';
-import {redirect} from './store/middlewares/redirect';
 import {checkAuth} from './store/api-actions';
 
 import App from './components/app/app';
@@ -21,10 +20,7 @@ const api = createAPI(
 
 const store = createStore(
     rootReducer,
-    composeWithDevTools(
-        applyMiddleware(thunk.withExtraArgument(api)),
-        applyMiddleware(redirect)
-    )
+    composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api)))
 );
 
 store.dispatch(checkAuth());

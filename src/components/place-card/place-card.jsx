@@ -1,20 +1,25 @@
 import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
+import {compose} from 'redux';
+import {connect} from 'react-redux';
 
 import {getRatingAsPercentage} from '../../utils/common';
 import {housingTypes, CardPlaceClassName} from '../../consts';
+import {withBookmarkToggle} from '../../hocs/with-bookmark-toggle/with-bookmark-toggle';
+import {getAuthorizationStatusSelector} from '../../store/reducers/user/selectors';
+import {changeBookmarkStatus} from '../../store/api-actions';
 
 const PlaceCard = (props) => {
-  const {offer, onChangeActiveCard, onMouseOutWithCard, className} = props;
-  const {id, isPremium, title, type, price, isFavorite, rating, previewImage} = offer;
+  const {offer, onChangeActiveCard, onMouseOutWithCard, className, onToggleBookmark, isBookmark} = props;
+  const {id, isPremium, title, type, price, rating, previewImage} = offer;
 
   const premiumLabel = (isPremium &&
     <div className="place-card__mark">
       <span>Premium</span>
     </div>);
 
-  const classBookmarkButton = isFavorite ? `place-card__bookmark-button--active` : ``;
+  const classBookmarkButton = isBookmark ? `place-card__bookmark-button--active` : ``;
 
   const ratingAsPercentage = getRatingAsPercentage(rating);
 
@@ -41,6 +46,7 @@ const PlaceCard = (props) => {
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button
+            onClick={onToggleBookmark}
             className={`place-card__bookmark-button button ${classBookmarkButton}`}
             type="button">
 
@@ -78,14 +84,30 @@ PlaceCard.propTypes = {
     isPremium: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
     type: PropTypes.oneOf([...housingTypes]),
     previewImage: PropTypes.string.isRequired,
     reviews: PropTypes.array
   }).isRequired,
   className: PropTypes.oneOf([`cities`, `near-places`, `favorites`]),
   onChangeActiveCard: PropTypes.func,
-  onMouseOutWithCard: PropTypes.func
+  onMouseOutWithCard: PropTypes.func,
+  onToggleBookmark: PropTypes.func.isRequired,
+  isBookmark: PropTypes.bool.isRequired
 };
 
-export default memo(PlaceCard);
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatusSelector(state)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  toggleBookmarkStatus: (id, value) => {
+    dispatch(changeBookmarkStatus(id, value));
+  }
+});
+
+export {PlaceCard};
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withBookmarkToggle,
+    memo
+)(PlaceCard);

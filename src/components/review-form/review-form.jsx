@@ -18,7 +18,6 @@ const ReviewSetting = {
 
 const ReviewForm = (props) => {
   const {review, rating, onInputChange, onSubmit, sentReviewHasError, statusSendReview, onResetReviewError} = props;
-
   const submitDisabled = review.length < ReviewSetting.MIN_LENGTH
     || review.length > ReviewSetting.MAX_LENGTH
     || rating === `0` ? true : false
@@ -42,16 +41,15 @@ const ReviewForm = (props) => {
         onResetReviewError={onResetReviewError}
         disabledInput={statusSendReview} />
       <div className="reviews__button-wrapper">
-        <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{ReviewSetting.MIN_LENGTH} characters</b>.
-        </p>
+        {
+          sentReviewHasError
+            ? <p style={{color: `red`}}>An error occurred when sending the review. Try again.</p>
+            : <p className="reviews__help">To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{ReviewSetting.MIN_LENGTH} characters</b>.</p>
+        }
         <button className="reviews__submit form__submit button" type="submit" disabled={submitDisabled}>
           {statusSendReview ? `Sending...` : `Submit`}
         </button>
       </div>
-      {
-        sentReviewHasError && <p style={{color: `red`}}>An error occurred when sending the review. Try again.</p>
-      }
     </form>
   );
 };
