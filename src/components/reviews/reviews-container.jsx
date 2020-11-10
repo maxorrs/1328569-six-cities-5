@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
@@ -8,20 +8,15 @@ import {fetchReviews, sendReview} from '../../store/api-actions';
 import {getAuthorizationStatusSelector} from '../../store/reducers/user/selectors';
 import {getReviewsSelector, getStatusReviewsSelector} from '../../store/reducers/data/selectors';
 
-class ReviewsContainer extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
+const ReviewsContainer = (props) => {
+  const {id, loadReviews} = props;
 
-  componentDidMount() {
-    const {id, loadReviews} = this.props;
+  useEffect(() => {
     loadReviews(id);
-  }
+  }, [id]);
 
-  render() {
-    return <Reviews {...this.props} />;
-  }
-}
+  return <Reviews {...props} />;
+};
 
 ReviewsContainer.propTypes = {
   loadReviews: PropTypes.func.isRequired,

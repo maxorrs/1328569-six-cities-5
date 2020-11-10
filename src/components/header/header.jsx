@@ -2,6 +2,8 @@ import React, {memo} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import {compose} from 'redux';
+
 import {getAuthorizationStatusSelector, getAdaptUserDataSelector} from '../../store/reducers/user/selectors';
 
 import {AppRoute, AuthorizationStatus} from '../../consts';
@@ -47,7 +49,8 @@ const mapStateToProps = (state) => ({
   userData: getAdaptUserDataSelector(state)
 });
 
-const HeaderMemo = memo(Header);
-
 export {Header};
-export default connect(mapStateToProps)(HeaderMemo);
+export default compose(
+    connect(mapStateToProps),
+    memo
+)(Header);

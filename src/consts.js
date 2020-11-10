@@ -48,3 +48,11 @@ export const APIRoute = {
   reviews: (id) => `/comments/${id}`,
   bookmark: (id, status) => `/favorite/${id}/${status}`
 };
+
+export const MapSetting = {
+  ICON_SIZE: [30, 30],
+  ZOOM_CONTROL: false,
+  MARKER: true,
+  TITLE_LAYER: `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
+  ATTRIBUTION: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
+};

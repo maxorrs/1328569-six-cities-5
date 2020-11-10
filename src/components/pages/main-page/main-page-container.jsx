@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
@@ -10,23 +10,17 @@ import {AppStateActionCreator} from '../../../store/reducers/app-state/app-state
 import {getActiveCardSelector, getCityCoordsSelector, getOffersCoordsSelector} from '../../../store/reducers/app-state/selectors';
 import {getFilteredOffersSelector, getSelectedCitySelector, getStatusOffersSelector} from '../../../store/reducers/data/selectors';
 
-class MainPageContainer extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
+const MainPageContainer = (props) => {
+  const {getOffers, onResetActiveCard} = props;
 
-  componentDidMount() {
-    this.props.getOffers();
-  }
+  useEffect(() => {
+    getOffers();
 
-  componentWillUnmount() {
-    this.props.onResetActiveCard();
-  }
+    return () => onResetActiveCard();
+  }, []);
 
-  render() {
-    return <MainPage {...this.props} />;
-  }
-}
+  return <MainPage {...props} />;
+};
 
 MainPageContainer.propTypes = {
   activeCard: PropTypes.number.isRequired,
