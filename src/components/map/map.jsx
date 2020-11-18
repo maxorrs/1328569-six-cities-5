@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import 'leaflet/dist/leaflet.css';
 
 import {configuringLeaflet, launchingMap, setPinsOnMap} from '../../utils/map';
+import {cities} from '../../consts';
+import {cityCoordsPropTypes, offersCoordsPropTypes} from '../../utils/prop-types';
 
 const Map = (props) => {
   const {offersCoords, activeCard, cityCoords, selectedCity} = props;
@@ -32,10 +34,10 @@ const Map = (props) => {
 };
 
 Map.propTypes = {
-  offersCoords: PropTypes.array.isRequired,
+  offersCoords: offersCoordsPropTypes,
   activeCard: PropTypes.number.isRequired,
-  selectedCity: PropTypes.string.isRequired,
-  cityCoords: PropTypes.object.isRequired
+  selectedCity: PropTypes.oneOf([...cities]).isRequired,
+  cityCoords: cityCoordsPropTypes
 };
 
 export default Map;

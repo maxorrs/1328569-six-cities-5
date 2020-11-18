@@ -6,6 +6,8 @@ export const ratingInformation = [
   {title: `terribly`, value: `1`}
 ];
 
+export const MAX_COUNT_STARS = 5;
+
 export const cities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
 
 export const housingTypes = [`Apartment`, `Room`, `House`, `Hotel`];
@@ -32,19 +34,19 @@ export const AuthorizationStatus = {
   NO_AUTH: `NO_AUTH`,
 };
 
-export const AppRoute = {
-  LOGIN: `/login`,
-  FAVORITES: `/favorites`,
+export const getAppRoute = {
+  login: () => `/login`,
+  favorites: () => `/favorites`,
   roomPage: (id = `:id`) => `/offer/${id}`,
-  ROOT: `/`
+  root: () => `/`
 };
 
-export const APIRoute = {
-  LOGIN: `/login`,
-  OFFERS: `/hotels`,
+export const getApiRoute = {
+  login: () => `/login`,
+  offers: () => `/hotels`,
   offer: (id) => `/hotels/${id}`,
   nearby: (id) => `/hotels/${id}/nearby`,
-  FAVORITES: `/favorite`,
+  favorites: () => `/favorite`,
   reviews: (id) => `/comments/${id}`,
   bookmark: (id, status) => `/favorite/${id}/${status}`
 };

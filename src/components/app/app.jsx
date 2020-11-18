@@ -14,35 +14,35 @@ import NotFoundPage from '../pages/not-found-page/not-found-page';
 import {withSpinner} from '../../hocs/with-spinner/with-spinner';
 import {withPrivateRoute} from '../../hocs/with-private-route/with-private-route';
 import {getAuthorizationStatusSelector, getLoadAuthStatusSelector} from '../../store/reducers/user/selectors';
-import {AppRoute, AuthorizationStatus} from '../../consts';
+import {getAppRoute, AuthorizationStatus} from '../../consts';
 
 const App = ({isAuth}) => {
   const SignInPagePrivate = withPrivateRoute(SignInPage, !isAuth);
-  const FavoritesPagePrivate = withPrivateRoute(FavoritesPage, isAuth, AppRoute.LOGIN);
+  const FavoritesPagePrivate = withPrivateRoute(FavoritesPage, isAuth, getAppRoute.login());
 
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
         <Route
           exact
-          path={AppRoute.ROOT}>
+          path={getAppRoute.root()}>
           <MainPage />
         </Route>
 
         <Route
           exact
-          path={AppRoute.LOGIN}>
+          path={getAppRoute.login()}>
           <SignInPagePrivate />
         </Route>
 
         <Route
           exact
-          path={AppRoute.FAVORITES}>
+          path={getAppRoute.favorites()}>
           <FavoritesPagePrivate />
         </Route>
 
         <Route exact
-          path={AppRoute.roomPage()}
+          path={getAppRoute.roomPage()}
           render={({match}) => {
             const {id: idMatch} = match.params;
             return <RoomPage idMatch={idMatch} />;

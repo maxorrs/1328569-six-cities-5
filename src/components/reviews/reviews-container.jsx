@@ -7,23 +7,24 @@ import Reviews from './reviews';
 import {fetchReviews, sendReview} from '../../store/api-actions';
 import {getAuthorizationStatusSelector} from '../../store/reducers/user/selectors';
 import {getReviewsSelector, getStatusReviewsSelector} from '../../store/reducers/data/selectors';
+import {authorizationsStatusPropTypes, reviewPropTypes} from '../../utils/prop-types';
 
 const ReviewsContainer = (props) => {
-  const {id, loadReviews} = props;
+  const {id, onReviewsLoad} = props;
 
   useEffect(() => {
-    loadReviews(id);
+    onReviewsLoad(id);
   }, [id]);
 
   return <Reviews {...props} />;
 };
 
 ReviewsContainer.propTypes = {
-  loadReviews: PropTypes.func.isRequired,
+  onReviewsLoad: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
-  reviews: PropTypes.array,
+  reviews: PropTypes.arrayOf(reviewPropTypes),
   isLoading: PropTypes.bool.isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
+  authorizationStatus: authorizationsStatusPropTypes,
   onSendReview: PropTypes.func.isRequired
 };
 
@@ -34,7 +35,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadReviews: (id) => {
+  onReviewsLoad: (id) => {
     dispatch(fetchReviews(id));
   },
   onSendReview: (id, review) => {

@@ -6,11 +6,11 @@ import {AppStateActionCreator} from '../../store/reducers/app-state/app-state';
 
 import SortingList from '../sorting-list/sorting-list';
 
-import {SortType} from '../../consts';
-import {getSortMenuStatusSelector} from '../../store/reducers/app-state/selectors';
+import {SortType as SortTypeForPropTypes} from '../../consts';
+import {getSortMenuStatusSelector, getSortTypesSelector} from '../../store/reducers/app-state/selectors';
 import {getSelectedSortTypeSelector} from '../../store/reducers/data/selectors';
 
-const Sorting = ({selectedSortType, isSortMenuOpen, onChangeSelectedSortType, onToggledSortMenu}) => {
+const Sorting = ({selectedSortType, isSortMenuOpen, onChangeSelectedSortType, onToggledSortMenu, sortTypes}) => {
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
@@ -25,21 +25,24 @@ const Sorting = ({selectedSortType, isSortMenuOpen, onChangeSelectedSortType, on
       </span>
       <SortingList
         isSortMenuOpen={isSortMenuOpen}
-        onChangeSelectedSortType={onChangeSelectedSortType}/>
+        onChangeSelectedSortType={onChangeSelectedSortType}
+        sortTypes={sortTypes}/>
     </form>
   );
 };
 
 Sorting.propTypes = {
-  selectedSortType: PropTypes.oneOf([...Object.values(SortType)]).isRequired,
+  selectedSortType: PropTypes.oneOf([...Object.values(SortTypeForPropTypes)]).isRequired,
   isSortMenuOpen: PropTypes.bool.isRequired,
   onChangeSelectedSortType: PropTypes.func.isRequired,
-  onToggledSortMenu: PropTypes.func.isRequired
+  onToggledSortMenu: PropTypes.func.isRequired,
+  sortTypes: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => ({
   selectedSortType: getSelectedSortTypeSelector(state),
-  isSortMenuOpen: getSortMenuStatusSelector(state)
+  isSortMenuOpen: getSortMenuStatusSelector(state),
+  sortTypes: getSortTypesSelector()
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -14,6 +14,59 @@ const NameSpace = {
   USER: `USER`
 };
 
+const getOffersAdaptMock = (count, {isFavorite = false} = {}) => {
+  const templateOffers = Array(count)
+    .fill(``)
+    .map((_, index) => {
+      return {
+        'city': {
+          'name': `Amsterdam`,
+          'location': {
+            'latitude': 51.225402,
+            'longitude': 6.776314,
+            'zoom': 13
+          }
+        },
+        'previewImage': `url`,
+        'images': [`url1`, `url2`],
+        'title': `Canal View Prinsengracht`,
+        'isFavorite': isFavorite,
+        'isPremium': false,
+        'rating': 4.7,
+        'type': `Room`,
+        'bedrooms': 1,
+        'maxAdults': 3,
+        'features': [
+          {'field': `entire`, 'label': `Room`},
+          {'field': `bedrooms`, 'label': `1 Bedrooms`},
+          {'field': `adults`, 'label': `Max 3 adults`}
+        ],
+        'price': 298,
+        'goods': [`Laptop friendly workspace`, `Breakfast`, `Washer`],
+        'host': {
+          'id': 25,
+          'name': `Angelina`,
+          'isPro': true,
+          'avatarUrl': `img/avatar-angelina.jpg`
+        },
+        'description': `Description`,
+        'location': {
+          'latitude': 51.222402,
+          'longitude': 6.786314,
+          'zoom': 16
+        },
+        'id': index + 1
+      };
+    });
+
+  if (count === 1) {
+    const [oneOffer] = templateOffers;
+    return oneOffer;
+  }
+
+  return templateOffers;
+};
+
 const getOffersMock = (count) => {
   const templateOffers = Array(count)
     .fill(``)
@@ -30,7 +83,7 @@ const getOffersMock = (count) => {
         'preview_image': `url`,
         'images': [`url1`, `url2`],
         'title': `Canal View Prinsengracht`,
-        'is_favorite': Boolean(Math.random()),
+        'is_favorite': true,
         'is_premium': false,
         'rating': 4.7,
         'type': `room`,
@@ -137,8 +190,8 @@ it(`FavoritePageContainer is rendered correctly`, () => {
     id: 1,
     isPro: false,
     name: `sad`,
-    loadFavorites: noop,
-    favorites: getOffersMock(3),
+    onFavoritesLoad: noop,
+    favorites: getOffersAdaptMock(3, {isFavorite: true}),
     isLoading: false
   };
 

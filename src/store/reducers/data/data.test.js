@@ -2,7 +2,7 @@ import MockAdapter from 'axios-mock-adapter';
 import {createAPI} from '../../../services/api';
 import {data, DataActionType, DataActionCreator} from './data';
 import * as APIAction from '../../api-actions';
-import {APIRoute, AppRoute} from '../../../consts';
+import {getApiRoute, getAppRoute} from '../../../consts';
 import {AppStateActionType} from "../app-state/app-state";
 
 const noop = () => {};
@@ -349,7 +349,7 @@ describe(`Async operation work correctly`, () => {
     const loadOffers = APIAction.fetchOffersList();
 
     apiMock
-      .onGet(APIRoute.OFFERS)
+      .onGet(getApiRoute.offers())
       .reply(200, offers);
 
     return loadOffers(dispatch, noop, api)
@@ -380,7 +380,7 @@ describe(`Async operation work correctly`, () => {
     const loadOffer = APIAction.fetchOffer(id);
 
     apiMock
-      .onGet(APIRoute.offer(id))
+      .onGet(getApiRoute.offer(id))
       .reply(200, offer);
 
     return loadOffer(dispatch, noop, api)
@@ -411,7 +411,7 @@ describe(`Async operation work correctly`, () => {
     const loadOffersNearby = APIAction.fetchOffersNearbyList(id);
 
     apiMock
-      .onGet(APIRoute.nearby(id))
+      .onGet(getApiRoute.nearby(id))
       .reply(200, offers);
 
     return loadOffersNearby(dispatch, noop, api)
@@ -441,7 +441,7 @@ describe(`Async operation work correctly`, () => {
     const loadFavorites = APIAction.fetchFavoritesList();
 
     apiMock
-      .onGet(APIRoute.FAVORITES)
+      .onGet(getApiRoute.favorites())
       .reply(200, offers);
 
     return loadFavorites(dispatch, noop, api)
@@ -472,7 +472,7 @@ describe(`Async operation work correctly`, () => {
     const loadReviews = APIAction.fetchReviews(id);
 
     apiMock
-      .onGet(APIRoute.reviews(id))
+      .onGet(getApiRoute.reviews(id))
       .reply(200, reviews);
 
     return loadReviews(dispatch, noop, api)
@@ -504,7 +504,7 @@ describe(`Async operation work correctly`, () => {
     const changeBookmark = APIAction.changeBookmarkStatus(id, valueBookmark);
 
     apiMock
-      .onPost(APIRoute.bookmark(id, valueBookmark))
+      .onPost(getApiRoute.bookmark(id, valueBookmark))
       .reply(401);
 
     return changeBookmark(dispatch, noop, api)
@@ -513,8 +513,25 @@ describe(`Async operation work correctly`, () => {
 
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: AppStateActionType.REDIRECT_TO_ROUTE,
-          payload: AppRoute.LOGIN
+          payload: getAppRoute.login()
         });
+      });
+  });
+
+  it(`Should make a correct API call to /favorite/1/1 POST 200`, () => {
+    const apiMock = new MockAdapter(api);
+    const dispatch = jest.fn();
+    const id = 1;
+    const valueBookmark = 1;
+    const changeBookmark = APIAction.changeBookmarkStatus(id, valueBookmark);
+
+    apiMock
+      .onPost(getApiRoute.bookmark(id, valueBookmark))
+      .reply(200);
+
+    return changeBookmark(dispatch, noop, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
       });
   });
 
@@ -526,7 +543,7 @@ describe(`Async operation work correctly`, () => {
     const sendReviewProcess = APIAction.sendReview(id, review);
 
     apiMock
-      .onPost(APIRoute.reviews(id))
+      .onPost(getApiRoute.reviews(id))
       .reply(200, reviews);
 
     return sendReviewProcess(dispatch, noop, api)
@@ -563,7 +580,7 @@ describe(`Async operation work correctly`, () => {
     const sendReviewProcess = APIAction.sendReview(id, review);
 
     apiMock
-      .onPost(APIRoute.reviews(id))
+      .onPost(getApiRoute.reviews(id))
       .reply(400);
 
     return sendReviewProcess(dispatch, noop, api)

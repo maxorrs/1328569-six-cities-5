@@ -9,7 +9,8 @@ describe(`Host is rendered correctly`, () => {
       host: {
         isPro: true,
         avatarUrl: `1`,
-        name: `A`
+        name: `A`,
+        id: 1
       },
       description: `123`
     };
@@ -28,7 +29,8 @@ describe(`Host is rendered correctly`, () => {
       host: {
         isPro: false,
         avatarUrl: `1`,
-        name: `A`
+        name: `A`,
+        id: 1
       },
       description: `123`
     };

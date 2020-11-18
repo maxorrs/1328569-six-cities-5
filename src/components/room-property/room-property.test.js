@@ -156,7 +156,7 @@ it(`RoomProperty is rendered correctly`, () => {
             onToggleBookmark={noop}
             isBookmark={true}
             authorizationStatus={AuthorizationStatus.AUTH}
-            toggleBookmarkStatus={noop}>
+            onBookmarkStatusToggle={noop}>
             {childMock}
           </RoomProperty>
         </Provider>

@@ -1,7 +1,5 @@
 import React, {memo} from 'react';
-import PropTypes from 'prop-types';
-
-import {fieldsType} from '../../consts';
+import {featuresPropTypes} from '../../utils/prop-types';
 
 const FeaturesList = ({features}) => {
   return (
@@ -22,12 +20,7 @@ const FeaturesList = ({features}) => {
 };
 
 FeaturesList.propTypes = {
-  features: PropTypes.arrayOf(
-      PropTypes.shape({
-        field: PropTypes.oneOf([...fieldsType]),
-        label: PropTypes.string.isRequired
-      })
-  ).isRequired
+  features: featuresPropTypes
 };
 
 export default memo(FeaturesList);

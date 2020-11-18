@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card';
 
 import {CardPlaceClassName} from '../../consts';
+import {offerPropTypes} from '../../utils/prop-types';
 
 const PlacesListNear = ({offersNearby}) => {
   return (
@@ -23,7 +24,7 @@ const PlacesListNear = ({offersNearby}) => {
 };
 
 PlacesListNear.propTypes = {
-  offersNearby: PropTypes.array
+  offersNearby: PropTypes.arrayOf(offerPropTypes)
 };
 
 export default PlacesListNear;

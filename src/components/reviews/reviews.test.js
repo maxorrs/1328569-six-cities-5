@@ -139,7 +139,7 @@ it(`Reviews is rendered correctly`, () => {
     authorizationStatus: AuthorizationStatus.AUTH,
     id: 2,
     isLoading: false,
-    loadReviews: noop,
+    onReviewsLoad: noop,
     onSendReview: noop,
     reviews: reviewsMock
   };

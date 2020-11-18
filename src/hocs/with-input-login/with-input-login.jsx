@@ -11,18 +11,18 @@ export const withInputLogin = (Component) => {
         password: ``
       };
 
-      this.onSubmit = this.onSubmit.bind(this);
-      this.onInputChange = this.onInputChange.bind(this);
-      this.onFocusClearError = this.onFocusClearError.bind(this);
+      this._handleFormSubmit = this._handleFormSubmit.bind(this);
+      this._handleInputChange = this._handleInputChange.bind(this);
+      this._handleFocusClearError = this._handleFocusClearError.bind(this);
     }
 
-    onFocusClearError() {
+    _handleFocusClearError() {
       if (this.props.authDataHasError) {
         this.props.onClearError();
       }
     }
 
-    onSubmit(evt) {
+    _handleFormSubmit(evt) {
       evt.preventDefault();
       const {email, password} = this.state;
       this.props.onSendAuthData({email, password});
@@ -33,7 +33,7 @@ export const withInputLogin = (Component) => {
       });
     }
 
-    onInputChange(evt) {
+    _handleInputChange(evt) {
       const {name, value} = evt.target;
 
       this.setState({
@@ -47,9 +47,9 @@ export const withInputLogin = (Component) => {
       return (
         <Component
           {...this.props}
-          onSubmit={this.onSubmit}
-          onInputChange={this.onInputChange}
-          onFocusClearError={this.onFocusClearError}
+          onFormSubmit={this._handleFormSubmit}
+          onInputChange={this._handleInputChange}
+          onFocusClearError={this._handleFocusClearError}
           email={email}
           password={password} />
       );

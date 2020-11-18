@@ -70,7 +70,7 @@ const offer = getOffersAdaptMock(1);
 const noop = () => {};
 
 it(`PlaceCard mouse over with className CITIES`, () => {
-  const onChangeActiveCard = jest.fn();
+  const onChangeActiveCard = jest.fn((id) => id);
   const className = CardPlaceClassName.CITIES;
 
   const wrapper = shallow(
@@ -85,6 +85,7 @@ it(`PlaceCard mouse over with className CITIES`, () => {
 
   wrapper.simulate(`mouseOver`);
   expect(onChangeActiveCard).toHaveBeenCalledTimes(1);
+  expect(onChangeActiveCard).toHaveBeenCalledWith(offer.id);
 });
 
 it(`PlaceCard mouse out with className CITIES`, () => {

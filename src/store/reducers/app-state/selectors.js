@@ -4,6 +4,9 @@ import {getSelectedCitySelector, getOffersSelector, getFilteredOffersSelector} f
 
 import {NameSpace} from '../../reducers/root-reducer';
 import {getCityCoords, getOffersCoords} from '../../../utils/map';
+import {SortType} from '../../../consts';
+
+export const getSortTypesSelector = () => SortType;
 
 export const getActiveCardSelector = (state) => state[NameSpace.APP_STATE].activeCard;
 

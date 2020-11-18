@@ -5,6 +5,7 @@ import PlaceCard from '../place-card/place-card';
 
 import {CardPlaceClassName} from '../../consts';
 import {areEqualByOffersId} from '../../utils/memo';
+import {offerPropTypes} from '../../utils/prop-types';
 
 const PlacesListMain = ({offers, onChangeActiveCard, onMouseOutWithCard}) => {
   return (
@@ -26,7 +27,7 @@ const PlacesListMain = ({offers, onChangeActiveCard, onMouseOutWithCard}) => {
 };
 
 PlacesListMain.propTypes = {
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(offerPropTypes),
   onMouseOutWithCard: PropTypes.func.isRequired,
   onChangeActiveCard: PropTypes.func.isRequired
 };

@@ -156,7 +156,7 @@ it(`MainPageContainer is rendered correctly`, () => {
     onChangeActiveCard: noop,
     onResetActiveCard: noop,
     filteredOffers: getOffersAdaptMock(3),
-    getOffers: noop,
+    onOffersLoad: noop,
     isLoading: false
   };
 

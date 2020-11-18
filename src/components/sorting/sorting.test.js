@@ -5,7 +5,7 @@ import {Sorting} from './sorting';
 
 const noop = () => {};
 
-const SortType = {
+const sortTypes = {
   POPULAR: `Popular`,
   PRICE_LOW_TO_HIGH: `Price: low to high`,
   PRICE_HIGH_TO_LOW: `Price: high to low`,
@@ -15,10 +15,11 @@ const SortType = {
 describe(`Sorting is rendered correctly`, () => {
   it(`Render Sorting with open menu`, () => {
     const props = {
-      selectedSortType: SortType.POPULAR,
+      selectedSortType: sortTypes.POPULAR,
       isSortMenuOpen: true,
       onChangeSelectedSortType: noop,
-      onToggledSortMenu: noop
+      onToggledSortMenu: noop,
+      sortTypes
     };
 
     const tree = renderer
@@ -32,10 +33,11 @@ describe(`Sorting is rendered correctly`, () => {
 
   it(`Render Sorting with closed menu`, () => {
     const props = {
-      selectedSortType: SortType.POPULAR,
+      selectedSortType: sortTypes.POPULAR,
       isSortMenuOpen: false,
       onChangeSelectedSortType: noop,
-      onToggledSortMenu: noop
+      onToggledSortMenu: noop,
+      sortTypes
     };
 
     const tree = renderer
@@ -49,14 +51,15 @@ describe(`Sorting is rendered correctly`, () => {
 
 
   Object
-    .values(SortType)
+    .values(sortTypes)
     .map((type) => {
       it(`Render Sorting with sort type "${type}"`, () => {
         const props = {
           selectedSortType: type,
           isSortMenuOpen: false,
           onChangeSelectedSortType: noop,
-          onToggledSortMenu: noop
+          onToggledSortMenu: noop,
+          sortTypes
         };
 
         const tree = renderer

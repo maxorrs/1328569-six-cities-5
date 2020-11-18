@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 import PlacesListFavorite from '../places-list-favorite/places-list-favorite';
 import {getFavoritesAdaptSelector, getSelectedCitySelector, getUniqueCitiesSelector} from '../../store/reducers/data/selectors';
 import {getFavoritesByCity} from '../../utils/common';
+import {offerPropTypes} from '../../utils/prop-types';
+import {cities} from '../../consts';
 
 const FavoritesCitiesList = ({uniqueCities, favorites, selectedCity}) => {
   return (
@@ -37,9 +39,9 @@ const FavoritesCitiesList = ({uniqueCities, favorites, selectedCity}) => {
 };
 
 FavoritesCitiesList.propTypes = {
-  uniqueCities: PropTypes.array.isRequired,
-  favorites: PropTypes.array.isRequired,
-  selectedCity: PropTypes.string.isRequired
+  uniqueCities: PropTypes.arrayOf(PropTypes.string),
+  favorites: PropTypes.arrayOf(offerPropTypes),
+  selectedCity: PropTypes.oneOf([...cities])
 };
 
 const mapStateToProps = (state) => ({

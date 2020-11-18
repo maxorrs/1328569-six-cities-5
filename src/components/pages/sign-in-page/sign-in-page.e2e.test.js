@@ -10,11 +10,11 @@ configure({adapter: new Adapter()});
 const noop = () => {};
 
 it(`SignInPage form submit`, () => {
-  const onSubmit = jest.fn();
+  const onFormSubmit = jest.fn((data) => data);
 
   const wrapper = shallow(
       <SignInPage
-        onSubmit={onSubmit}
+        onFormSubmit={onFormSubmit}
         selectedCity={`Amsterdam`}
         onInputChange={noop}
         onFocusClearError={noop}
@@ -28,7 +28,7 @@ it(`SignInPage form submit`, () => {
 
   form.simulate(`submit`);
 
-  expect(onSubmit).toHaveBeenCalledTimes(1);
+  expect(onFormSubmit).toHaveBeenCalledTimes(1);
 });
 
 it(`SignInPage input focus`, () => {
@@ -36,7 +36,7 @@ it(`SignInPage input focus`, () => {
 
   const wrapper = shallow(
       <SignInPage
-        onSubmit={noop}
+        onFormSubmit={noop}
         selectedCity={`Amsterdam`}
         onInputChange={noop}
         onFocusClearError={onFocusClearError}
@@ -59,7 +59,7 @@ it(`SignInPage input change`, () => {
 
   const wrapper = shallow(
       <SignInPage
-        onSubmit={noop}
+        onFormSubmit={noop}
         selectedCity={`Amsterdam`}
         onInputChange={onInputChange}
         onFocusClearError={noop}

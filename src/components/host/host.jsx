@@ -1,5 +1,6 @@
 import React, {memo} from 'react';
 import PropTypes from 'prop-types';
+import {hostPropTypes} from '../../utils/prop-types';
 
 const Host = ({host, description}) => {
   const {isPro, avatarUrl, name} = host;
@@ -27,11 +28,7 @@ const Host = ({host, description}) => {
 };
 
 Host.propTypes = {
-  host: PropTypes.shape({
-    isPro: PropTypes.bool.isRequired,
-    avatarUrl: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
-  }).isRequired,
+  host: hostPropTypes,
   description: PropTypes.string
 };
 

@@ -9,12 +9,14 @@ import {fetchOffersList} from '../../../store/api-actions';
 import {AppStateActionCreator} from '../../../store/reducers/app-state/app-state';
 import {getActiveCardSelector, getCityCoordsSelector, getOffersCoordsSelector} from '../../../store/reducers/app-state/selectors';
 import {getFilteredOffersSelector, getSelectedCitySelector, getStatusOffersSelector} from '../../../store/reducers/data/selectors';
+import {cities} from '../../../consts';
+import {cityCoordsPropTypes, offerPropTypes, offersCoordsPropTypes} from '../../../utils/prop-types';
 
 const MainPageContainer = (props) => {
-  const {getOffers, onResetActiveCard} = props;
+  const {onOffersLoad, onResetActiveCard} = props;
 
   useEffect(() => {
-    getOffers();
+    onOffersLoad();
 
     return () => onResetActiveCard();
   }, []);
@@ -26,11 +28,11 @@ MainPageContainer.propTypes = {
   activeCard: PropTypes.number.isRequired,
   onChangeActiveCard: PropTypes.func.isRequired,
   onResetActiveCard: PropTypes.func.isRequired,
-  selectedCity: PropTypes.string.isRequired,
-  filteredOffers: PropTypes.array.isRequired,
-  offersCoords: PropTypes.array.isRequired,
-  cityCoords: PropTypes.object,
-  getOffers: PropTypes.func.isRequired,
+  selectedCity: PropTypes.oneOf([...cities]),
+  filteredOffers: PropTypes.arrayOf(offerPropTypes),
+  offersCoords: offersCoordsPropTypes,
+  cityCoords: cityCoordsPropTypes,
+  onOffersLoad: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired
 };
 
@@ -46,7 +48,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onChangeActiveCard: (payload) => dispatch(AppStateActionCreator.changeActiveCard(payload)),
   onResetActiveCard: () => dispatch(AppStateActionCreator.resetActiveCard()),
-  getOffers: () => dispatch(fetchOffersList())
+  onOffersLoad: () => dispatch(fetchOffersList())
 });
 
 export {MainPageContainer};

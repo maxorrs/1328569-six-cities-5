@@ -1,7 +1,7 @@
-import {SortType} from '../consts';
+import {SortType, MAX_COUNT_STARS} from '../consts';
 
 export const getRatingAsPercentage = (rating) => {
-  return `${Math.round(rating * 100 / 5)}%`;
+  return `${Math.round(rating * 100 / MAX_COUNT_STARS)}%`;
 };
 
 export const getFavoriteOffers = (offers) => {

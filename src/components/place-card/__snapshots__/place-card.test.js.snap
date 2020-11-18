@@ -73,7 +73,7 @@ exports[`PlaceCard is rendered correctly Render PlaceCard for cities 1`] = `
         <span
           style={
             Object {
-              "width": "94%",
+              "width": "100%",
             }
           }
         />
@@ -176,7 +176,7 @@ exports[`PlaceCard is rendered correctly Render PlaceCard for favorites 1`] = `
         <span
           style={
             Object {
-              "width": "94%",
+              "width": "100%",
             }
           }
         />
@@ -279,7 +279,7 @@ exports[`PlaceCard is rendered correctly Render PlaceCard for near-places 1`] = 
         <span
           style={
             Object {
-              "width": "94%",
+              "width": "100%",
             }
           }
         />
@@ -382,7 +382,7 @@ exports[`PlaceCard is rendered correctly Render PlaceCard with favorite offer 1`
         <span
           style={
             Object {
-              "width": "94%",
+              "width": "100%",
             }
           }
         />
@@ -492,7 +492,7 @@ exports[`PlaceCard is rendered correctly Render PlaceCard with premium offer 1`]
         <span
           style={
             Object {
-              "width": "94%",
+              "width": "100%",
             }
           }
         />

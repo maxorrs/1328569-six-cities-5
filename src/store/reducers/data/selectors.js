@@ -4,7 +4,9 @@ import {NameSpace} from '../root-reducer';
 import {filterOffers, getUniqueCities} from '../../../utils/common';
 import {getOfferCoords, getOffersCoords} from '../../../utils/map';
 import {adaptOfferToClient} from '../../../utils/adapter';
-import {MAX_COUNT_OFFERS_NEARBY} from '../../../consts';
+import {MAX_COUNT_OFFERS_NEARBY, cities} from '../../../consts';
+
+export const getCitiesListSelector = () => cities;
 
 export const getSelectedCitySelector = (state) => state[NameSpace.APP_STATE].selectedCity;
 

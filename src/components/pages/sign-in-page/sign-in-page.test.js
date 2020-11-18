@@ -142,7 +142,7 @@ it(`SignInPage is rendered correctly`, () => {
     isDataChecked: false,
     onFocusClearError: noop,
     onInputChange: noop,
-    onSubmit: noop,
+    onFormSubmit: noop,
     selectedCity: `Amsterdam`,
     onSendAuthData: noop
   };

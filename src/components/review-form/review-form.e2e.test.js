@@ -10,14 +10,14 @@ configure({adapter: new Adapter()});
 const noop = () => {};
 
 it(`ReviewForm on submit form`, () => {
-  const onSubmit = jest.fn();
+  const onFormSubmit = jest.fn();
 
   const wrapper = shallow(
       <ReviewForm
         review={`test`}
         rating={`3`}
         onInputChange={noop}
-        onSubmit={onSubmit}
+        onFormSubmit={onFormSubmit}
         sentReviewHasError={false}
         statusSendReview={false}
         onResetReviewError={noop} />
@@ -27,5 +27,5 @@ it(`ReviewForm on submit form`, () => {
 
   form.simulate(`submit`);
 
-  expect(onSubmit).toHaveBeenCalledTimes(1);
+  expect(onFormSubmit).toHaveBeenCalledTimes(1);
 });

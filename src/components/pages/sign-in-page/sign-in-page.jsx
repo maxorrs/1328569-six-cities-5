@@ -10,9 +10,10 @@ import {getAuthDataHasErrorSelector, getDataCheckedStatusSelector} from '../../.
 
 import Header from '../../header/header';
 import {UserActionCreator} from '../../../store/reducers/user/user';
+import {cities} from '../../../consts';
 
 const SignInPage = (props) => {
-  const {onSubmit, selectedCity, onInputChange, authDataHasError, isDataChecked, onFocusClearError} = props;
+  const {onFormSubmit, selectedCity, onInputChange, authDataHasError, isDataChecked, onFocusClearError} = props;
 
   return (
     <div className="page page--gray page--login">
@@ -26,7 +27,7 @@ const SignInPage = (props) => {
               className="login__form form"
               action="#"
               method="post"
-              onSubmit={onSubmit}>
+              onSubmit={onFormSubmit}>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input onFocus={onFocusClearError} onChange={onInputChange} className="login__input form__input" type="email" name="email" placeholder="Email" required="" />
@@ -60,10 +61,10 @@ SignInPage.propTypes = {
   onSendAuthData: PropTypes.func.isRequired,
   onClearError: PropTypes.func.isRequired,
   onFocusClearError: PropTypes.func.isRequired,
-  selectedCity: PropTypes.string.isRequired,
+  selectedCity: PropTypes.oneOf([...cities]),
   authDataHasError: PropTypes.bool.isRequired,
   isDataChecked: PropTypes.bool.isRequired,
-  onSubmit: PropTypes.func.isRequired,
+  onFormSubmit: PropTypes.func.isRequired,
   onInputChange: PropTypes.func.isRequired
 };
 

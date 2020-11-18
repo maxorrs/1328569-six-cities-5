@@ -8,6 +8,13 @@ configure({adapter: new Adapter()});
 
 const noop = () => {};
 
+const sortTypes = {
+  POPULAR: `Popular`,
+  PRICE_LOW_TO_HIGH: `Price: low to high`,
+  PRICE_HIGH_TO_LOW: `Price: high to low`,
+  TOP_RATED: `Top rated first`
+};
+
 it(`Should open sort menu after click`, () => {
   const onToggledSortMenu = jest.fn();
 
@@ -17,6 +24,7 @@ it(`Should open sort menu after click`, () => {
         isSortMenuOpen={false}
         onChangeSelectedSortType={noop}
         onToggledSortMenu={onToggledSortMenu}
+        sortTypes={sortTypes}
       />
   );
 

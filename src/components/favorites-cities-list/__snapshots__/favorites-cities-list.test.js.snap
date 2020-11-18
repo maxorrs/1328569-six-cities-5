@@ -98,7 +98,7 @@ exports[`FavoritesCitiesList is rendered correctly 1`] = `
               <span
                 style={
                   Object {
-                    "width": "94%",
+                    "width": "100%",
                   }
                 }
               />
@@ -198,7 +198,7 @@ exports[`FavoritesCitiesList is rendered correctly 1`] = `
               <span
                 style={
                   Object {
-                    "width": "94%",
+                    "width": "100%",
                   }
                 }
               />
@@ -298,7 +298,7 @@ exports[`FavoritesCitiesList is rendered correctly 1`] = `
               <span
                 style={
                   Object {
-                    "width": "94%",
+                    "width": "100%",
                   }
                 }
               />

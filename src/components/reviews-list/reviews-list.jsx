@@ -5,8 +5,9 @@ import ReviewItem from '../review-item/review-item';
 
 import {sortReviewsByTime} from '../../utils/date';
 import {adaptReviewToClient} from '../../utils/adapter';
+import {reviewPropTypes} from '../../utils/prop-types';
 
-const MAX_COUNT_REVIEWS = 3;
+const MAX_COUNT_REVIEWS = 10;
 
 const ReviewsList = ({reviews}) => {
   return (
@@ -27,11 +28,7 @@ const ReviewsList = ({reviews}) => {
 };
 
 ReviewsList.propTypes = {
-  reviews: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number
-      })
-  )
+  reviews: PropTypes.arrayOf(reviewPropTypes)
 };
 
 export default ReviewsList;

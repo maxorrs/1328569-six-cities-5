@@ -135,7 +135,7 @@ exports[`RoomPageContainer is rendered correctly 1`] = `
               <span
                 style={
                   Object {
-                    "width": "94%",
+                    "width": "100%",
                   }
                 }
               />
@@ -148,7 +148,7 @@ exports[`RoomPageContainer is rendered correctly 1`] = `
             <span
               className="property__rating-value rating__value"
             >
-              4.7
+              5
             </span>
           </div>
           <ul
@@ -675,7 +675,7 @@ exports[`RoomPageContainer is rendered correctly 1`] = `
                 <span
                   style={
                     Object {
-                      "width": "94%",
+                      "width": "100%",
                     }
                   }
                 />
@@ -775,7 +775,7 @@ exports[`RoomPageContainer is rendered correctly 1`] = `
                 <span
                   style={
                     Object {
-                      "width": "94%",
+                      "width": "100%",
                     }
                   }
                 />
@@ -875,7 +875,7 @@ exports[`RoomPageContainer is rendered correctly 1`] = `
                 <span
                   style={
                     Object {
-                      "width": "94%",
+                      "width": "100%",
                     }
                   }
                 />

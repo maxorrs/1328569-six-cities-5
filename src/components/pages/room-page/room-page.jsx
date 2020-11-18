@@ -7,6 +7,7 @@ import RoomProperty from '../../room-property/room-property';
 import Map from '../../map/map';
 
 import {withSpinner} from '../../../hocs/with-spinner/with-spinner';
+import {cityCoordsPropTypes, offerPropTypes, offersCoordsPropTypes} from '../../../utils/prop-types';
 
 const RoomPage = ({offersNearby, offer, offersCoords, cityCoords}) => {
   return (
@@ -25,19 +26,14 @@ const RoomPage = ({offersNearby, offer, offersCoords, cityCoords}) => {
 };
 
 RoomPage.propTypes = {
-  offer: PropTypes.shape({
-    id: PropTypes.number,
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired
-    })
-  }).isRequired,
-  offersNearby: PropTypes.array,
-  loadOffer: PropTypes.func.isRequired,
-  loadOffersNearby: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool,
+  offer: offerPropTypes,
+  offersNearby: PropTypes.arrayOf(offerPropTypes),
+  onOfferLoad: PropTypes.func.isRequired,
+  onNearbyOffersLoad: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   idMatch: PropTypes.string.isRequired,
-  offersCoords: PropTypes.array.isRequired,
-  cityCoords: PropTypes.object.isRequired
+  offersCoords: offersCoordsPropTypes,
+  cityCoords: cityCoordsPropTypes
 };
 
 export {RoomPage};

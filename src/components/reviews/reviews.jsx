@@ -5,8 +5,9 @@ import {Link} from 'react-router-dom';
 import ReviewForm from '../review-form/review-form';
 import ReviewsList from '../reviews-list/reviews-list';
 
-import {AppRoute, AuthorizationStatus} from '../../consts';
+import {getAppRoute, AuthorizationStatus} from '../../consts';
 import {withSpinner} from '../../hocs/with-spinner/with-spinner';
+import {authorizationsStatusPropTypes, reviewPropTypes} from '../../utils/prop-types';
 
 const Reviews = (props) => {
   const {reviews, authorizationStatus, onSendReview, id} = props;
@@ -31,7 +32,7 @@ const Reviews = (props) => {
             onSendReview={onSendReview} />
           : <p style={{textAlign: `center`}}>
             <Link
-              to={AppRoute.LOGIN}
+              to={getAppRoute.login()}
               style={{fontWeight: `bold`, cursor: `pointer`, textDecoration: `underline`}}>
                 Sign in
             </Link> to leave a comment
@@ -42,10 +43,10 @@ const Reviews = (props) => {
 };
 
 Reviews.propTypes = {
-  loadReviews: PropTypes.func.isRequired,
+  onReviewsLoad: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
-  reviews: PropTypes.array,
-  authorizationStatus: PropTypes.string.isRequired,
+  reviews: PropTypes.arrayOf(reviewPropTypes),
+  authorizationStatus: authorizationsStatusPropTypes,
   onSendReview: PropTypes.func.isRequired
 };
 

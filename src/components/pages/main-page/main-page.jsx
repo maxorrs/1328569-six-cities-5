@@ -9,6 +9,8 @@ import Map from '../../map/map';
 import Sorting from '../../sorting/sorting';
 
 import {withSpinner} from '../../../hocs/with-spinner/with-spinner';
+import {cityCoordsPropTypes, offerPropTypes, offersCoordsPropTypes} from '../../../utils/prop-types';
+import {cities} from '../../../consts';
 
 const MainPage = (props) => {
   const {activeCard, onChangeActiveCard, onResetActiveCard, selectedCity, filteredOffers, offersCoords, cityCoords} = props;
@@ -60,11 +62,11 @@ MainPage.propTypes = {
   activeCard: PropTypes.number.isRequired,
   onChangeActiveCard: PropTypes.func.isRequired,
   onResetActiveCard: PropTypes.func.isRequired,
-  selectedCity: PropTypes.string.isRequired,
-  filteredOffers: PropTypes.array.isRequired,
-  offersCoords: PropTypes.array.isRequired,
-  cityCoords: PropTypes.object,
-  getOffers: PropTypes.func.isRequired,
+  selectedCity: PropTypes.oneOf([...cities]),
+  filteredOffers: PropTypes.arrayOf(offerPropTypes),
+  offersCoords: offersCoordsPropTypes,
+  onOffersLoad: PropTypes.func.isRequired,
+  cityCoords: cityCoordsPropTypes
 };
 
 export {MainPage};

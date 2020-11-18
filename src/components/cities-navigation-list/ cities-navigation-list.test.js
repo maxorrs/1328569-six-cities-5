@@ -6,13 +6,16 @@ import {CitiesNavigationList} from './cities-navigation-list';
 
 const noop = () => {};
 
+const cities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
+
 it(`CitiesNavigationList is rendered correctly`, () => {
   const tree = renderer
     .create(
         <BrowserRouter>
           <CitiesNavigationList
             onChangeSelectedCity={noop}
-            selectedCity={`Amsterdam`} />
+            selectedCity={`Amsterdam`}
+            cities={cities} />
         </BrowserRouter>
     )
     .toJSON();

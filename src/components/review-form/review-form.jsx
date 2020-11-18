@@ -17,7 +17,7 @@ const ReviewSetting = {
 };
 
 const ReviewForm = (props) => {
-  const {review, rating, onInputChange, onSubmit, sentReviewHasError, statusSendReview, onResetReviewError} = props;
+  const {review, rating, onInputChange, onFormSubmit, sentReviewHasError, statusSendReview, onResetReviewError} = props;
   const submitDisabled = review.length < ReviewSetting.MIN_LENGTH
     || review.length > ReviewSetting.MAX_LENGTH
     || rating === `0` ? true : false
@@ -28,7 +28,7 @@ const ReviewForm = (props) => {
       className="reviews__form form"
       action="#"
       method="post"
-      onSubmit={onSubmit}>
+      onSubmit={onFormSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <RatingProperty
         rating={rating}
@@ -58,7 +58,7 @@ ReviewForm.propTypes = {
   review: PropTypes.string.isRequired,
   rating: PropTypes.string.isRequired,
   onInputChange: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
+  onFormSubmit: PropTypes.func.isRequired,
   sentReviewHasError: PropTypes.bool.isRequired,
   statusSendReview: PropTypes.bool.isRequired,
   onResetReviewError: PropTypes.func.isRequired

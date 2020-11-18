@@ -7,6 +7,7 @@ import FavoritesEmpty from '../../favorites-empty/favorites-empty';
 import Footer from '../../footer/footer';
 
 import {withSpinner} from '../../../hocs/with-spinner/with-spinner';
+import {offerPropTypes} from '../../../utils/prop-types';
 
 const FavoritesPage = ({favorites}) => {
   const favoritesCount = favorites.length;
@@ -26,9 +27,9 @@ const FavoritesPage = ({favorites}) => {
 };
 
 FavoritesPage.propTypes = {
-  favorites: PropTypes.array,
-  loadFavorites: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool
+  favorites: PropTypes.arrayOf(offerPropTypes),
+  onFavoritesLoad: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired
 };
 
 export {FavoritesPage};

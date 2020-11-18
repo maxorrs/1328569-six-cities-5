@@ -5,14 +5,16 @@ import {compose} from 'redux';
 import {connect} from 'react-redux';
 
 import {getRatingAsPercentage} from '../../utils/common';
-import {housingTypes, CardPlaceClassName} from '../../consts';
+import {CardPlaceClassName} from '../../consts';
 import {withBookmarkToggle} from '../../hocs/with-bookmark-toggle/with-bookmark-toggle';
 import {getAuthorizationStatusSelector} from '../../store/reducers/user/selectors';
 import {changeBookmarkStatus} from '../../store/api-actions';
+import {offerPropTypes} from '../../utils/prop-types';
 
 const PlaceCard = (props) => {
   const {offer, onChangeActiveCard, onMouseOutWithCard, className, onToggleBookmark, isBookmark} = props;
   const {id, isPremium, title, type, price, rating, previewImage} = offer;
+  const roundRating = Math.round(rating);
 
   const premiumLabel = (isPremium &&
     <div className="place-card__mark">
@@ -21,7 +23,7 @@ const PlaceCard = (props) => {
 
   const classBookmarkButton = isBookmark ? `place-card__bookmark-button--active` : ``;
 
-  const ratingAsPercentage = getRatingAsPercentage(rating);
+  const ratingAsPercentage = getRatingAsPercentage(roundRating);
 
   const imageWidth = className === CardPlaceClassName.FAVORITES ? `150` : `260`;
   const imageHeight = className === CardPlaceClassName.FAVORITES ? `110` : `200`;
@@ -77,17 +79,7 @@ PlaceCard.defaultProps = {
 };
 
 PlaceCard.propTypes = {
-  offer: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    price: PropTypes.number.isRequired,
-    images: PropTypes.array.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    title: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    type: PropTypes.oneOf([...housingTypes]),
-    previewImage: PropTypes.string.isRequired,
-    reviews: PropTypes.array
-  }).isRequired,
+  offer: offerPropTypes,
   className: PropTypes.oneOf([`cities`, `near-places`, `favorites`]),
   onChangeActiveCard: PropTypes.func,
   onMouseOutWithCard: PropTypes.func,
@@ -100,7 +92,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleBookmarkStatus: (id, value) => {
+  onBookmarkStatusToggle: (id, value) => {
     dispatch(changeBookmarkStatus(id, value));
   }
 });

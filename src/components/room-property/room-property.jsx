@@ -14,12 +14,13 @@ import {areEqualByOfferId} from '../../utils/memo';
 import {changeBookmarkStatus} from '../../store/api-actions';
 import {withBookmarkToggle} from '../../hocs/with-bookmark-toggle/with-bookmark-toggle';
 import {getAuthorizationStatusSelector} from '../../store/reducers/user/selectors';
+import {offerPropTypes} from '../../utils/prop-types';
 
 const RoomProperty = (props) => {
   const {offer, children, onToggleBookmark, isBookmark} = props;
   const {id, description, images, isPremium, title, features, price, goods, host, rating} = offer;
-
-  const ratingAsPercentage = getRatingAsPercentage(rating);
+  const roundRating = Math.round(rating);
+  const ratingAsPercentage = getRatingAsPercentage(roundRating);
 
   const classBookmarkButton = isBookmark ? `property__bookmark-button--active` : ``;
 
@@ -54,7 +55,7 @@ const RoomProperty = (props) => {
                 <span style={{width: `${ratingAsPercentage}`}}></span>
                 <span className="visually-hidden">Rating</span>
               </div>
-              <span className="property__rating-value rating__value">{rating}</span>
+              <span className="property__rating-value rating__value">{roundRating}</span>
             </div>
             <FeaturesList
               features={features} />
@@ -79,7 +80,7 @@ const RoomProperty = (props) => {
 };
 
 RoomProperty.propTypes = {
-  offer: PropTypes.object.isRequired,
+  offer: offerPropTypes,
   children: PropTypes.element.isRequired,
   onToggleBookmark: PropTypes.func.isRequired,
   isBookmark: PropTypes.bool.isRequired
@@ -90,7 +91,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  toggleBookmarkStatus: (id, value) => {
+  onBookmarkStatusToggle: (id, value) => {
     dispatch(changeBookmarkStatus(id, value));
   }
 });

@@ -24,7 +24,7 @@ const InsideList = ({goods}) => {
 };
 
 InsideList.propTypes = {
-  goods: PropTypes.array.isRequired
+  goods: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export default memo(InsideList);

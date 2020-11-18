@@ -5,31 +5,32 @@ import {connect} from 'react-redux';
 import FavoritesPage from './favorites-page';
 
 import {fetchFavoritesList} from '../../../store/api-actions';
-import {getFavoritesSelector, getStatusFavoritesSelector} from '../../../store/reducers/data/selectors';
+import {getFavoritesAdaptSelector, getStatusFavoritesSelector} from '../../../store/reducers/data/selectors';
+import {offerPropTypes} from '../../../utils/prop-types';
 
 const FavoritesPageContainer = (props) => {
-  const {loadFavorites} = props;
+  const {onFavoritesLoad} = props;
 
   useEffect(() => {
-    loadFavorites();
+    onFavoritesLoad();
   }, []);
 
   return <FavoritesPage {...props} />;
 };
 
 FavoritesPageContainer.propTypes = {
-  favorites: PropTypes.array,
-  loadFavorites: PropTypes.func.isRequired,
+  favorites: PropTypes.arrayOf(offerPropTypes),
+  onFavoritesLoad: PropTypes.func.isRequired,
   isLoading: PropTypes.bool
 };
 
 const mapStateToProps = (state) => ({
-  favorites: getFavoritesSelector(state),
+  favorites: getFavoritesAdaptSelector(state),
   isLoading: getStatusFavoritesSelector(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadFavorites: () => {
+  onFavoritesLoad: () => {
     dispatch(fetchFavoritesList());
   }
 });

@@ -7,30 +7,25 @@ import RoomPage from './room-page';
 
 import {getOfferAdaptSelector, getOffersNearbyAdaptSelector, getStatusOfferSelector, getStatusOffersNearbySelector, getOffersCoordsSelector, getCityCoordsSelector} from '../../../store/reducers/data/selectors';
 import {fetchOffersNearbyList, fetchOffer} from '../../../store/api-actions';
+import {offerPropTypes} from '../../../utils/prop-types';
 
 const RoomPageContainer = (props) => {
-  const {idMatch, loadOffersNearby, loadOffer} = props;
+  const {idMatch, onNearbyOffersLoad, onOfferLoad} = props;
 
   useEffect(() => {
-    loadOffer(idMatch);
-    loadOffersNearby(idMatch);
+    onOfferLoad(idMatch);
+    onNearbyOffersLoad(idMatch);
   }, [idMatch]);
 
   return <RoomPage {...props} />;
 };
 
 RoomPageContainer.propTypes = {
-  offer: PropTypes.shape({
-    id: PropTypes.number,
-    city: PropTypes.shape({
-      name: PropTypes.string.isRequired
-    })
-  }),
-  offersNearby: PropTypes.array,
-  loadOffer: PropTypes.func.isRequired,
-  loadOffersNearby: PropTypes.func.isRequired,
+  offersNearby: PropTypes.arrayOf(offerPropTypes),
+  onOfferLoad: PropTypes.func.isRequired,
+  onNearbyOffersLoad: PropTypes.func.isRequired,
   idMatch: PropTypes.string.isRequired,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -42,10 +37,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispathToProps = (dispatch) => ({
-  loadOffer: (id) => {
+  onOfferLoad: (id) => {
     dispatch(fetchOffer(id));
   },
-  loadOffersNearby: (id) => {
+  onNearbyOffersLoad: (id) => {
     dispatch(fetchOffersNearbyList(id));
   }
 });

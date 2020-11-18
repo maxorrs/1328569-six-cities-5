@@ -26,7 +26,7 @@ const ImagesList = ({images}) => {
 };
 
 ImagesList.propTypes = {
-  images: PropTypes.array.isRequired
+  images: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 export default memo(ImagesList);

@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import {getRatingAsPercentage} from '../../utils/common';
 import {formatDateForReview, formatDateForReviewAttr} from '../../utils/date';
+import {reviewPropTypes} from '../../utils/prop-types';
 
 const ReviewItem = ({review}) => {
   const {user, comment, rating, date} = review;
@@ -35,15 +35,7 @@ const ReviewItem = ({review}) => {
 };
 
 ReviewItem.propTypes = {
-  review: PropTypes.shape({
-    comment: PropTypes.string,
-    date: PropTypes.string,
-    rating: PropTypes.number,
-    user: PropTypes.shape({
-      avatarUrl: PropTypes.string,
-      name: PropTypes.string
-    })
-  })
+  review: reviewPropTypes
 };
 
 export default ReviewItem;

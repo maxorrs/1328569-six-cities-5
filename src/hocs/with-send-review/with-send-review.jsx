@@ -11,26 +11,32 @@ export const withSendReview = (Component) => {
         review: ``
       };
 
-      this.onSubmit = this.onSubmit.bind(this);
-      this.onInputChange = this.onInputChange.bind(this);
+      this._handleFormSubmit = this._handleFormSubmit.bind(this);
+      this._handleInputChange = this._handleInputChange.bind(this);
     }
 
-    onSubmit(evt) {
+    componentDidUpdate(prevProps) {
+      if (prevProps.statusSendReview) {
+        if (this.props.sentReviewHasError) {
+          return false;
+        }
+
+        this.setState({rating: `0`, review: ``});
+
+        return false;
+      }
+      return true;
+    }
+
+    _handleFormSubmit(evt) {
       evt.preventDefault();
-      const {onSendReview, id, sentReviewHasError, statusSendReview} = this.props;
+      const {onSendReview, id} = this.props;
       const {rating, review} = this.state;
 
       onSendReview(id, {review, rating});
-
-      if (!sentReviewHasError || !statusSendReview) {
-        this.setState({
-          rating: `0`,
-          review: ``
-        });
-      }
     }
 
-    onInputChange(evt) {
+    _handleInputChange(evt) {
       const {name, value} = evt.target;
 
       this.setState({
@@ -44,8 +50,8 @@ export const withSendReview = (Component) => {
       return (
         <Component
           {...this.props}
-          onSubmit={this.onSubmit}
-          onInputChange={this.onInputChange}
+          onFormSubmit={this._handleFormSubmit}
+          onInputChange={this._handleInputChange}
           review={review}
           rating={rating} />
       );

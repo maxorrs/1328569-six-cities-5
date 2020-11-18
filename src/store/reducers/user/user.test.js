@@ -2,7 +2,7 @@ import MockAdapter from 'axios-mock-adapter';
 import {createAPI} from '../../../services/api';
 import {user, UserActionType, UserActionCreator} from './user';
 import {login, checkAuth} from '../../api-actions';
-import {APIRoute, AuthorizationStatus} from '../../../consts';
+import {getApiRoute, AuthorizationStatus} from '../../../consts';
 
 const noop = () => {};
 
@@ -119,7 +119,7 @@ describe(`Async operation work correctly`, () => {
     const checkAuthorization = checkAuth();
 
     apiMock
-      .onGet(APIRoute.LOGIN)
+      .onGet(getApiRoute.login())
       .reply(200, {fake: true});
 
     return checkAuthorization(dispatch, noop, api)
@@ -154,7 +154,7 @@ describe(`Async operation work correctly`, () => {
     const checkAuthorization = checkAuth();
 
     apiMock
-      .onGet(APIRoute.LOGIN)
+      .onGet(getApiRoute.login())
       .reply(401);
 
     return checkAuthorization(dispatch, noop, api)
@@ -180,7 +180,7 @@ describe(`Async operation work correctly`, () => {
     const loginProcess = login(fakeUser);
 
     apiMock
-      .onPost(APIRoute.LOGIN)
+      .onPost(getApiRoute.login())
       .reply(200, {fake: true});
 
     return loginProcess(dispatch, noop, api)
@@ -221,7 +221,7 @@ describe(`Async operation work correctly`, () => {
     const loginProcess = login(fakeUser);
 
     apiMock
-      .onPost(APIRoute.LOGIN)
+      .onPost(getApiRoute.login())
       .reply(400);
 
     return loginProcess(dispatch, noop, api)

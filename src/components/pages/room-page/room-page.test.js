@@ -157,8 +157,8 @@ it(`RoomPageContainer is rendered correctly`, () => {
   const props = {
     idMatch: `2`,
     isLoading: false,
-    loadOffer: noop,
-    loadOffersNearby: noop,
+    onOfferLoad: noop,
+    onNearbyOffersLoad: noop,
     offer: getOffersAdaptMock(1),
     offersNearby: getOffersAdaptMock(3),
     offersCoords: offersCoordsMock,

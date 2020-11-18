@@ -74,7 +74,7 @@ Array [
           <span
             style={
               Object {
-                "width": "94%",
+                "width": "100%",
               }
             }
           />
@@ -174,7 +174,7 @@ Array [
           <span
             style={
               Object {
-                "width": "94%",
+                "width": "100%",
               }
             }
           />
@@ -274,7 +274,7 @@ Array [
           <span
             style={
               Object {
-                "width": "94%",
+                "width": "100%",
               }
             }
           />

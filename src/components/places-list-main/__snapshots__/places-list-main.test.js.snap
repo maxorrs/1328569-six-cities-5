@@ -76,7 +76,7 @@ exports[`PlacesListMain is rendered correctly 1`] = `
           <span
             style={
               Object {
-                "width": "94%",
+                "width": "100%",
               }
             }
           />
@@ -176,7 +176,7 @@ exports[`PlacesListMain is rendered correctly 1`] = `
           <span
             style={
               Object {
-                "width": "94%",
+                "width": "100%",
               }
             }
           />
@@ -276,7 +276,7 @@ exports[`PlacesListMain is rendered correctly 1`] = `
           <span
             style={
               Object {
-                "width": "94%",
+                "width": "100%",
               }
             }
           />
