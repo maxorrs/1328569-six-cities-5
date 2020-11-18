@@ -36,7 +36,7 @@ const CitiesNavigationList = ({onChangeSelectedCity, selectedCity, cities}) => {
 CitiesNavigationList.propTypes = {
   onChangeSelectedCity: PropTypes.func.isRequired,
   selectedCity: PropTypes.oneOf([...citiesForPropTypes]),
-  cities: PropTypes.array.isRequired
+  cities: PropTypes.arrayOf(PropTypes.string)
 };
 
 const mapStateToProps = (state) => ({
