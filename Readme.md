@@ -6,6 +6,7 @@
 * React.js
 * Redux, React-Redux
 * Axios
+* Reselect
 * Jest, Enzyme
 
 [Сертификат](https://assets.htmlacademy.ru/certificates/intensive/171/1328569.pdf)
